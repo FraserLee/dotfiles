@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $(dirname $0)
+
 # symlinks all files and dirs starting with 'DOT_' into the home directory
 for item in $(ls | grep ^DOT_); do 
 	src=$(pwd)/$item
