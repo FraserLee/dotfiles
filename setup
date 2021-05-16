@@ -1,10 +1,12 @@
 #!/bin/bash
-for item in $(ls | grep ^DOT_); do
+
+# symlinks all files and dirs starting with 'DOT_' into the home directory
+for item in $(ls | grep ^DOT_); do 
 	src=$(pwd)/$item
 	dest=~/.$(echo $item | cut -c5-)
-	if [[ -L $dest ]]; then
+	if [[ -L $dest ]]; then # delete $dest if it's already a symlink to somewhere
 		rm $dest
 	fi
 	echo linking $item...
-	ln -s $src $dest 
+	ln -s $src $dest # this'll fail if $dest already exists 
 done
