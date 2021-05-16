@@ -1,0 +1,10 @@
+#!/bin/bash
+for item in $(ls | grep ^DOT_); do
+	src=$(pwd)/$item
+	dest=~/.$(echo $item | cut -c5-)
+	if [[ -L $dest ]]; then
+		rm $dest
+	fi
+	echo linking $item...
+	ln -s $src $dest 
+done
