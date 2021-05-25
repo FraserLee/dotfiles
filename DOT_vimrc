@@ -10,6 +10,7 @@ Plugin 'preservim/nerdtree'
 Plugin 'jdonaldson/vaxe'
 Plugin 'kana/vim-submode'
 Plugin 'preservim/nerdcommenter'
+Plugin 'rust-lang/rust.vim'
 "--------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
