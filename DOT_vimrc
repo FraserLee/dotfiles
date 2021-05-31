@@ -36,6 +36,10 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 let g:vaxe_enable_ycm_defaults = 1
 let g:vaxe_cache_server_autostart = 1
 
+"search stuff
+set incsearch
+set hlsearch
+
 "--------------------COLOUR------------------------
 "Sets the colour theme and turns on spelling highlighting to underscore
 "whenever entering vim. If I don't do these two in one call, stuff resets
