@@ -11,6 +11,7 @@ Plugin 'jdonaldson/vaxe'
 Plugin 'kana/vim-submode'
 Plugin 'preservim/nerdcommenter'
 Plugin 'rust-lang/rust.vim'
+Plugin 'tikhomirov/vim-glsl'
 "--------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
