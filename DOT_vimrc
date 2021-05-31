@@ -17,11 +17,12 @@ filetype plugin indent on    " required
 filetype plugin on
 
 "------------------BASIC SETUP---------------------
-"Turn on line numbers, set up tabs to how I like them, turn on syntax highlighting
+"Turn on line numbers, set up tabs to how I like them, turn on syntax highlighting, other misc stuff
 se nu
 "se rnu
 autocmd BufEnter * ++nested se noexpandtab tabstop=4
 syntax on
+set scrolloff=8
 
 "Fix backspace to work more rationally
 set backspace=indent,eol,start
