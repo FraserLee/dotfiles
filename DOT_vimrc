@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 "--------------------------
 Plug 'arecarn/vim-crunch'
 Plug 'arecarn/vim-selection'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jdonaldson/vaxe'
 Plug 'kana/vim-submode'
 Plug 'mg979/vim-visual-multi'
@@ -26,6 +27,7 @@ se nu
 autocmd BufEnter * ++nested se noexpandtab tabstop=4
 syntax on
 set scrolloff=8
+let g:mkdp_command_for_global = 1
 
 "Fix backspace to work more rationally
 set backspace=indent,eol,start
