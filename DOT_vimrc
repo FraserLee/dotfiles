@@ -28,6 +28,10 @@ autocmd BufEnter * ++nested se noexpandtab tabstop=4
 syntax on
 set scrolloff=8
 
+"Line-wrapping (without splitting words over lines)
+se bri
+se lbr
+
 "Let :MarkdownPreview work on any file type 
 let g:mkdp_command_for_global = 1
 
@@ -73,9 +77,21 @@ noremap l s
 noremap S L
 noremap L S
 
-"Space to <leader> for super convinient combos
+"Space to <leader> for super convenient combos
 nnoremap <SPACE> <Nop>
 let mapleader=" "
+
+"Better navigation on wrapped lines
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
 
 "----------------BASIC SHORTCUTS-------------------
 
