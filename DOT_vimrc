@@ -27,13 +27,15 @@ se nu
 autocmd BufEnter * ++nested se noexpandtab tabstop=4
 syntax on
 set scrolloff=8
+
+"Let :MarkdownPreview work on any file type 
 let g:mkdp_command_for_global = 1
 
 "Fix backspace to work more rationally
 set backspace=indent,eol,start
 
 "Set spelling language
-set spell spelllang=en_ca
+set spell spelllang=en_ca,ru
 
 "enable folds from indent, auto-open all when entering a file
 autocmd BufEnter * ++nested se fdm=indent foldlevel=100
