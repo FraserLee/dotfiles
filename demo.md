@@ -8,6 +8,7 @@ Reminder to future self - `cmd + shift + f` on chrome will toggle view for tabs 
 
 ## Smaller features
 
+A checklist:
 - [ ] an unchecked item
 - [x] a checked item
 
