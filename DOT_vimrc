@@ -8,16 +8,13 @@ call plug#begin('~/.vim/plugged')
 "--------------------------
 Plug 'arecarn/vim-crunch'
 Plug 'arecarn/vim-selection'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'jdonaldson/vaxe'
 Plug 'kana/vim-submode'
 Plug 'mg979/vim-visual-multi'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
-Plug 'rust-lang/rust.vim'
-Plug 'tikhomirov/vim-glsl'
+Plug 'sheerun/vim-polyglot'
 Plug 'valloric/youcompleteme'
 "--------------------------
 call plug#end()
