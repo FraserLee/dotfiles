@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 "--------------------------
 Plug 'arecarn/vim-crunch'
 Plug 'arecarn/vim-selection'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jdonaldson/vaxe'
 Plug 'kana/vim-submode'
