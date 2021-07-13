@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 "--------------------------
 Plug 'arecarn/vim-crunch'
 Plug 'arecarn/vim-selection'
+Plug 'godlygeek/tabular'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'kana/vim-submode'
 Plug 'mg979/vim-visual-multi'
@@ -84,16 +85,16 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 "Better navigation on wrapped lines
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+nnoremap j            gj
+nnoremap k            gk
+vnoremap j            gj
+vnoremap k            gk
+nnoremap <Down>       gj
+nnoremap <Up>         gk
+vnoremap <Down>       gj
+vnoremap <Up>         gk
+inoremap <Down> <C-o> gj
+inoremap <Up>   <C-o> gk
 
 "----------------BASIC SHORTCUTS-------------------
 
@@ -123,36 +124,36 @@ let g:submode_keep_leaving_key = 1
 
 "g+ and g- (undo & redo) let you repeat hit + and -
 "(also = works as + so you don't need to hit shift)
-call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')
-call submode#enter_with('undo/redo', 'n', '', 'g+', 'g+')
-call submode#enter_with('undo/redo', 'n', '', 'g/', 'g+')
-call submode#map('undo/redo', 'n', '', '-', 'g-')
-call submode#map('undo/redo', 'n', '', '+', 'g+')
-call submode#map('undo/redo', 'n', '', '=', 'g+')
-call submode#map('undo/redo', 'n', '', '/', 'g+')
+call submode#enter_with ( 'undo/redo', 'n', '', 'g-', 'g-' )
+call submode#enter_with ( 'undo/redo', 'n', '', 'g+', 'g+' )
+call submode#enter_with ( 'undo/redo', 'n', '', 'g/', 'g+' )
+call submode#map        ( 'undo/redo', 'n', '', '-', 'g-'  )
+call submode#map        ( 'undo/redo', 'n', '', '+', 'g+'  )
+call submode#map        ( 'undo/redo', 'n', '', '=', 'g+'  )
+call submode#map        ( 'undo/redo', 'n', '', '/', 'g+'  )
 
 "<leader> plus a direction massively changes window size. Subsequent taps to
 "that a direction change it by 1 (though space can be re-pressed for another
 "large increment)
-
-"s is also used in place of l
-call submode#enter_with('window_resize', 'n', '', '<leader>h', ':exe "vertical resize " . (winwidth(0) * 4/3)<CR>')
-call submode#enter_with('window_resize', 'n', '', '<leader>s', ':exe "vertical resize " . (winwidth(0) * 3/4)<CR>')
-call submode#map('window_resize', 'n', '', 'h', '<C-w>>')
-call submode#map('window_resize', 'n', '', 's', '<C-w><')
-call submode#enter_with('window_resize', 'n', '', '<leader>j', ':exe "resize " . (winheight(0) * 4/3)<CR>')
-call submode#enter_with('window_resize', 'n', '', '<leader>k', ':exe "resize " . (winheight(0) * 3/4)<CR>')
-call submode#map('window_resize', 'n', '', 'j', '<C-w>+')
-call submode#map('window_resize', 'n', '', 'k', '<C-w>-')
+"
+" s is also used in place of l
+call submode#enter_with('window_resize', 'n', '', '<leader>h', ':exe "vertical resize " . (winwidth (0) * 4/3)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>s', ':exe "vertical resize " . (winwidth (0) * 3/4)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>j', ':exe          "resize " . (winheight(0) * 4/3)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>k', ':exe          "resize " . (winheight(0) * 3/4)<CR>')
+call submode#map       ('window_resize', 'n', '', 'h', '<C-w>>')
+call submode#map       ('window_resize', 'n', '', 's', '<C-w><')
+call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
+call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 
 "-------------------COMMENTING----------------------
 "A whole whack of default settings
 let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-let g:NERDToggleCheckAllLines = 1
+let g:NERDSpaceDelims           = 1
+let g:NERDCompactSexyComs       = 1
+let g:NERDDefaultAlign          = 'left'
+let g:NERDCommentEmptyLines     = 1
+let g:NERDToggleCheckAllLines   = 1
 
 
 "-----------BASIC COMPILATION SHORTCUTS-------------
