@@ -149,3 +149,17 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDToggleCheckAllLines = 1
+
+
+"-----------BASIC COMPILATION SHORTCUTS-------------
+"compiles the current file (if it's a compiled kinda thing) to a binary of the
+"same same, then runs that. I might add support for multi-files project with
+"auto-search for makefiles or build scripts later, but for now this is mainly
+"just to work with LeetCode practice.
+"
+"modified from https://stackoverflow.com/a/18296266/
+tnoremap <Esc> <C-\><C-n>
+autocmd filetype python nnoremap <F4> :w <bar> :vert term ++shell python %:p<CR>
+autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc   "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
