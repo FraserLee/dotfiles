@@ -53,6 +53,10 @@ set hlsearch
 "Evaluate math expressions (with g=)
 let g:crunch_result_type_append = 0
 
+"command completion with <tab>
+set wildmenu
+set wildmode=longest:full,full
+
 "--------------------COLOUR------------------------
 "Sets the colour theme and turns on spelling highlighting to underscore
 "whenever entering vim. If I don't do these two in one call, stuff resets
