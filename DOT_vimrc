@@ -158,7 +158,7 @@ let g:NERDToggleCheckAllLines   = 1
 
 "-----------BASIC COMPILATION SHORTCUTS-------------
 "compiles the current file (if it's a compiled kinda thing) to a binary of the
-"same same, then runs that. I might add support for multi-files project with
+"same name, then runs that. I might add support for multi-files project with
 "auto-search for makefiles or build scripts later, but for now this is mainly
 "just to work with LeetCode practice.
 "
