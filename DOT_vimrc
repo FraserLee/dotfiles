@@ -157,14 +157,21 @@ let g:NERDToggleCheckAllLines   = 1
 
 
 "-----------BASIC COMPILATION SHORTCUTS-------------
-"compiles the current file (if it's a compiled kinda thing) to a binary of the
-"same name, then runs that. I might add support for multi-files project with
-"auto-search for makefiles or build scripts later, but for now this is mainly
-"just to work with LeetCode practice.
+"<F4> runs the current file assuming it's standalone, <F5> assumes there's
+"some language-specific makefile equivalent.
 "
-"modified from https://stackoverflow.com/a/18296266/
+"TODO: add more language type supports
+"TODO: replace current terminal window instead of creating a new one if one
+"exists
+"TODO: auto-shift focus back away from terminal-window if input isn't required
+"
+"modified majorly from https://stackoverflow.com/a/18296266/
+"terminal easier use
 tnoremap <Esc> <C-\><C-n>
+"<F4>
 autocmd filetype python nnoremap <F4> :w <bar> :vert term ++shell python %:p<CR>
 autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o "%:p:r" && "%:p:r"<CR>
 autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
+"<F5>
+autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
