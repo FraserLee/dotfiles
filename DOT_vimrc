@@ -6,6 +6,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 "--------------------------
+Plug 'alvan/vim-closetag'
 Plug 'arecarn/vim-crunch'
 Plug 'arecarn/vim-selection'
 Plug 'godlygeek/tabular'
