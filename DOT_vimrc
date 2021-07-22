@@ -61,6 +61,11 @@ let g:crunch_result_type_append = 0
 set wildmenu
 set wildmode=longest:full,full
 
+"re-open files at the same line as closed
+"make sure to mkdir ~/.vim/view/ if it doesn't already exist
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
 "--------------------COLOUR------------------------
 "Sets the colour theme and turns on spelling highlighting to underscore
 "whenever entering vim. If I don't do these two in one call, stuff resets
