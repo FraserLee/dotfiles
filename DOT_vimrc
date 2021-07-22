@@ -16,6 +16,9 @@ Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
 "--------------------------
 call plug#end()
