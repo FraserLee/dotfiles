@@ -1,3 +1,9 @@
+# README
+
+A repo containing my .vimrc, a script to easily sync it with a symlink (along with future dot-files), and the remainder of this file (a reminder on what features markdown has, along with hopefully just enough to test out a new renderer and terminal's compatibility to the extent I'd need it). I'm really just keeping this public for a friend, but if you want to have a look around be my guest :)
+
+---
+
 # Demonstration markdown file 
 
 [toc]
