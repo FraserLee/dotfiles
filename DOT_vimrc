@@ -20,6 +20,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
+Plug 'lervag/vimtex'
 "--------------------------
 call plug#end()
 "------------------BASIC SETUP---------------------
@@ -183,3 +184,6 @@ autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o
 autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
 "<F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
+"----------------LATEX SETUP------------------------
+set conceallevel=1
+let g:tex_conceal='abdmg'
