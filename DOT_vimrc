@@ -122,6 +122,8 @@ map <leader>? <plug>NERDCommenterSexy
 let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]   = '<C-j>'
 let g:VM_maps["Add Cursor Up"]     = '<C-k>'
+"allow ctrl-z in insert mode to correct the most recent spelling mistake
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 "---------------COMPLEX SHORTCUTS-------------------
 "----------(all done through submodes)--------------
              
