@@ -66,6 +66,10 @@ set wildmode=longest:full,full
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 
+" Markdown settings
+" au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
+let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css')
+
 "--------------------COLOUR------------------------
 "Sets the colour theme and turns on spelling highlighting to underscore
 "whenever entering vim. If I don't do these two in one call, stuff resets
