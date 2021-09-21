@@ -17,6 +17,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'tommcdo/vim-exchange'
+Plug 'harenome/vim-mipssyntax'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'valloric/youcompleteme'
@@ -81,6 +82,10 @@ function SetColourStuff()
 	hi SpellBad cterm=underline
 endfunction
 call SetColourStuff()
+
+"Filetypes not associating correctly by default
+au BufRead,BufNewFile *.asm set ft=mips
+
 
 "-----------------MAPPING STUFF--------------------
 
