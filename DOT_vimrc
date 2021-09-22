@@ -113,6 +113,10 @@ vnoremap <Up>         gk
 inoremap <Down> <C-o> gj
 inoremap <Up>   <C-o> gk
 
+"Unmap some keys I accidentally hit too much because of dvorak 
+nnoremap <S-q> <Nop> 
+nnoremap <C-z> <Nop> 
+
 "----------------BASIC SHORTCUTS-------------------
 
 "toggle nerdtree
