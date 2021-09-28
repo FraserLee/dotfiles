@@ -27,7 +27,7 @@ call plug#end()
 "Turn on line numbers, set up tabs to how I like them, turn on syntax highlighting, other misc stuff
 se nu
 "se rnu
-autocmd BufEnter * ++nested se noexpandtab tabstop=4
+autocmd BufEnter * ++nested se expandtab tabstop=4 shiftwidth=4
 syntax on
 set scrolloff=8
 
@@ -153,7 +153,7 @@ call submode#enter_with ( 'undo/redo', 'n', '', 'g/', 'g+' )
 call submode#map        ( 'undo/redo', 'n', '', '-', 'g-'  )
 call submode#map        ( 'undo/redo', 'n', '', '+', 'g+'  )
 call submode#map        ( 'undo/redo', 'n', '', '=', 'g+'  )
-call submode#map        ( 'undo/redo', 'n', '', '/', 'g+'  )
+call submode#map        ( 'undo/redo', 'n', '', '/', 'u+'  )
 
 "<leader> plus a direction massively changes window size. Subsequent taps to
 "that a direction change it by 1 (though space can be re-pressed for another
