@@ -60,6 +60,10 @@ autocmd FileType * se formatoptions-=ro
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
+" Unmap some keys I accidentally hit too much because of dvorak 
+nnoremap <s-q> <Nop>
+nnoremap <C-z> <Nop>
+
 " Make up and down work within wrapped lines
 nnoremap j           gj
 nnoremap k           gk
@@ -154,9 +158,6 @@ map <leader>? <plug>NERDCommenterSexy
 " noremap S L
 " noremap L S
 " 
-" "Unmap some keys I accidentally hit too much because of dvorak 
-" nnoremap <S-q> <Nop> 
-" nnoremap <C-z> <Nop> 
 " 
 " "----------------BASIC SHORTCUTS-------------------
 " 
