@@ -10,7 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
 Plug 'morhetz/gruvbox'        " colourscheme
-" --------------------------------------------------------------------------
+Plug 'preservim/nerdcommenter'
+" ----------------------------------------------------------------------------
 call plug#end()
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -55,6 +56,10 @@ autocmd FileType * se formatoptions-=ro
 
 " ---------------------------- MAPPINGS --------------------------------------
 
+" Space to <leader> for super convenient combos
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
 " Make up and down work within wrapped lines
 nnoremap j           gj
 nnoremap k           gk
@@ -88,6 +93,19 @@ hi ColorColumn ctermbg=234
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
 
+" ------------------------- COMMENTING ---------------------------------------
+"A whole whack of default settings
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims           = 1
+let g:NERDCompactSexyComs       = 1
+let g:NERDCommentEmptyLines     = 1
+let g:NERDToggleCheckAllLines   = 1
+
+" toggle normal comment
+map <leader>/ <plug>NERDCommenterToggle 
+" fancy comment (whatever that means given language and context)
+map <leader>? <plug>NERDCommenterSexy 
+
 " "--------------------------
 " Plug 'arecarn/vim-crunch'
 " Plug 'arecarn/vim-selection'
@@ -95,7 +113,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
 " Plug 'mg979/vim-visual-multi'
-" Plug 'preservim/nerdcommenter'
 " Plug 'preservim/nerdtree'
 " Plug 'tommcdo/vim-exchange'
 " Plug 'tpope/vim-repeat'
@@ -137,11 +154,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " noremap S L
 " noremap L S
 " 
-" "Space to <leader> for super convenient combos
-" nnoremap <SPACE> <Nop>
-" let mapleader=" "
-" 
-" 
 " "Unmap some keys I accidentally hit too much because of dvorak 
 " nnoremap <S-q> <Nop> 
 " nnoremap <C-z> <Nop> 
@@ -156,10 +168,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " nnoremap <leader>t :YcmCompleter GoTo<CR>
 " "fix easy errors
 " nnoremap <leader>n :YcmCompleter FixIt<CR>
-" "toggle normal comment
-" map <leader>/ <plug>NERDCommenterToggle 
-" "fancy comment
-" map <leader>? <plug>NERDCommenterSexy 
 " "multi-cursor re-binds for mac, C-n n n n to select a bunch of the same word.
 " let g:VM_maps = {}
 " let g:VM_maps["Add Cursor Down"]   = '<C-j>'
@@ -198,14 +206,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
 " call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 " 
-" "-------------------COMMENTING----------------------
-" "A whole whack of default settings
-" let g:NERDCreateDefaultMappings = 0
-" let g:NERDSpaceDelims           = 1
-" let g:NERDCompactSexyComs       = 1
-" let g:NERDDefaultAlign          = 'left'
-" let g:NERDCommentEmptyLines     = 1
-" let g:NERDToggleCheckAllLines   = 1
 " 
 " 
 " "-----------BASIC COMPILATION SHORTCUTS-------------
