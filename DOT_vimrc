@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ----------------------------------
+Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
 Plug 'morhetz/gruvbox' " colourscheme
 " --------------------------------------------------------------------------
@@ -51,8 +52,6 @@ se wildmode=longest:full,full " First <tab> fills the longest common string, fur
 " Plug 'mg979/vim-visual-multi'
 " Plug 'preservim/nerdcommenter'
 " Plug 'preservim/nerdtree'
-" "Plug 'sheerun/vim-polyglot'
-" Plug 'FraserLee/vim-polyglot'
 " Plug 'tommcdo/vim-exchange'
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
