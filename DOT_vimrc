@@ -6,22 +6,41 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" ------------------------------- plugins ----------------------------------
+" ------------------------------- PLUGINS ----------------------------------
 Plug 'github/copilot.vim'
-Plug 'morhetz/gruvbox' " colorscheme
+Plug 'morhetz/gruvbox' " colourscheme
 " --------------------------------------------------------------------------
 call plug#end()
-" ---------------------------- basic setup ---------------------------------
+" ---------------------------- BASIC SETUP ---------------------------------
 
-se nu           " turn on line numbers
-se scrolloff=12 " keep 12 lines of context around cursor
+se nu           " Turn on line numbers
+se scrolloff=12 " Keep 12 lines of context around cursor
+syntax on       " Turn on syntax highlighting (default in nvim)
 
-syntax on       " turn on syntax highlighting (default in nvim)
 
-se expandtab tabstop=4 shiftwidth=4 " Set tabs to 4 spaces
+" Fix backspace to work more rationally (crikey that's a strange default)
+se backspace=indent,eol,start
 
-se bri lbr " wrap lines at current indent level, don't split words
+" Set tabs to 4 spaces
+se expandtab tabstop=4 shiftwidth=4 
 
+" Wrap lines at current indent level, don't split words
+se bri lbr 
+
+" Search settings
+se incsearch  " Display partial matches while searching
+se ignorecase " Ignore case when searching...
+se smartcase  " ...unless the search contains an uppercase letter (use /search\C to search case-sensitively)
+se hlsearch   " Highlight search matches
+
+" Turn on spellcheck, set languages
+se spell spelllang=en_ca,ru 
+
+" Command completion with <tab>
+se wildmenu
+se wildmode=longest:full,full " First <tab> fills the longest common string, further <tab>s cycle through matches
+
+" -------------------------- COLOUR SCHEME ---------------------------------
 
 " "--------------------------
 " Plug 'arecarn/vim-crunch'
@@ -44,11 +63,7 @@ se bri lbr " wrap lines at current indent level, don't split words
 " "Let :MarkdownPreview work on any file type 
 " let g:mkdp_command_for_global = 1
 " 
-" "Fix backspace to work more rationally
-" set backspace=indent,eol,start
 " 
-" "Set spelling language
-" set spell spelllang=en_ca,ru
 " 
 " "enable folds from indent, auto-open all when entering a file
 " autocmd BufEnter * ++nested se fdm=indent foldlevel=100
@@ -57,16 +72,9 @@ se bri lbr " wrap lines at current indent level, don't split words
 " let g:vaxe_enable_ycm_defaults = 1
 " let g:vaxe_cache_server_autostart = 1
 " 
-" "search stuff
-" set incsearch
-" set hlsearch
-" 
 " "Evaluate math expressions (with g=)
 " let g:crunch_result_type_append = 0
 " 
-" "command completion with <tab>
-" set wildmenu
-" set wildmode=longest:full,full
 " 
 " "re-open files at the same line as closed
 " "make sure to mkdir ~/.vim/view/ if it doesn't already exist
