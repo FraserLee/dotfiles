@@ -28,6 +28,9 @@ se expandtab tabstop=4 shiftwidth=4
 " Wrap lines at current indent level, don't split words
 se bri lbr 
 
+" Set the colour-column to 80
+se colorcolumn=80
+
 " Search settings
 se incsearch  " Display partial matches while searching
 se ignorecase " Ignore case when searching...
@@ -41,18 +44,22 @@ se spell spelllang=en_ca,ru
 se wildmenu
 se wildmode=longest:full,full " First <tab> fills the longest common string, further <tab>s cycle through matches
 
-" -------------------------- COLOUR SCHEME ---------------------------------
+
+" -------------------------- COLOUR SCHEME -----------------------------------
 colorscheme gruvbox 
 set background=dark
 
 " set spelling highlighting to underscore
 hi SpellBad cterm=underline 
 
-" The default copilot colour is identical to comments,
-" both 6 and 7 look alright in gruvbox
-highlight CopilotSuggestion ctermfg=7 
+" The default copilot colour is identical to comments in gruvbox,
+" both 6 and 7 look alright in reduced modes
+hi CopilotSuggestion ctermfg=102 
 
-" -------------------------- FILETYPES -------------------------------------
+" slightly darker than the background, 236 is good for slightly lighter
+hi ColorColumn ctermbg=234
+
+" -------------------------- FILETYPES ---------------------------------------
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
 
