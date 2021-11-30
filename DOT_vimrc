@@ -13,6 +13,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'kana/vim-submode'
 Plug 'mg979/vim-visual-multi'
 Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'rakr/vim-one'
+Plug 'rakr/vim-colors-rakr'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 "Plug 'sheerun/vim-polyglot'
@@ -78,8 +81,12 @@ let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css')
 "weird.
 autocmd vimenter * ++nested call SetColourStuff()
 function SetColourStuff()
-	colorscheme gruvbox 
-	set background=dark
+    colorscheme gruvbox 
+    set background=dark
+    " colorscheme PaperColor 
+    " colorscheme one 
+    " set background=light
+    " colorscheme rakr 
 	hi SpellBad cterm=underline
 endfunction
 call SetColourStuff()
