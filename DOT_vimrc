@@ -54,6 +54,11 @@ se wildmode=longest:full,full " First <tab> fills the longest common string,
 " (something in ftplugin is resetting this, needs to be bodged with an autocmd)
 autocmd FileType * se formatoptions-=ro
 
+"re-open files at the same line as closed
+"(mkdir ~/.vim/view/ if it doesn't already exist)
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent! loadview 
+
 " ---------------------------- MAPPINGS --------------------------------------
 
 " Space to <leader> for super convenient combos
@@ -130,7 +135,6 @@ map <leader>? <plug>NERDCommenterSexy
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
 " Plug 'mg979/vim-visual-multi'
-" Plug 'preservim/nerdtree'
 " Plug 'tommcdo/vim-exchange'
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
@@ -152,36 +156,12 @@ map <leader>? <plug>NERDCommenterSexy
 " let g:crunch_result_type_append = 0
 " 
 " 
-" "re-open files at the same line as closed
-" "make sure to mkdir ~/.vim/view/ if it doesn't already exist
-" autocmd BufWinLeave *.* mkview
-" autocmd BufWinEnter *.* silent loadview 
 " 
 " " Markdown settings
 " " au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
 " let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css')
 " 
-" "-----------------MAPPING STUFF--------------------
-" 
-" "Swaps s and l to make dvorak work a wee bit better. For some reason a langmap
-" "messes with submodes, so I just remap em instead.
-" ""set langmap=sl,ls,SL,LS
-" noremap s l
-" noremap l s
-" noremap S L
-" noremap L S
-" 
-" 
 " "----------------BASIC SHORTCUTS-------------------
-" 
-" "toggle nerdtree
-" nnoremap <leader>g :NERDTreeToggle<CR>
-" "open nerdtree on current file
-" nnoremap <leader>f :NERDTreeFind<CR>
-" "jump to definition
-" nnoremap <leader>t :YcmCompleter GoTo<CR>
-" "fix easy errors
-" nnoremap <leader>n :YcmCompleter FixIt<CR>
 " "multi-cursor re-binds for mac, C-n n n n to select a bunch of the same word.
 " let g:VM_maps = {}
 " let g:VM_maps["Add Cursor Down"]   = '<C-j>'
