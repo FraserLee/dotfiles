@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ----------------------------------
 Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
-Plug 'morhetz/gruvbox' " colourscheme
+Plug 'morhetz/gruvbox'        " colourscheme
 " --------------------------------------------------------------------------
 call plug#end()
 " ---------------------------- BASIC SETUP ---------------------------------
@@ -42,6 +42,19 @@ se wildmenu
 se wildmode=longest:full,full " First <tab> fills the longest common string, further <tab>s cycle through matches
 
 " -------------------------- COLOUR SCHEME ---------------------------------
+colorscheme gruvbox 
+set background=dark
+
+" set spelling highlighting to underscore
+hi SpellBad cterm=underline 
+
+" The default copilot colour is identical to comments,
+" both 6 and 7 look alright in gruvbox
+highlight CopilotSuggestion ctermfg=7 
+
+" -------------------------- FILETYPES -------------------------------------
+" Fix not associating correctly by default
+au BufRead,BufNewFile *.asm set ft=mips
 
 " "--------------------------
 " Plug 'arecarn/vim-crunch'
@@ -83,26 +96,6 @@ se wildmode=longest:full,full " First <tab> fills the longest common string, fur
 " " Markdown settings
 " " au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
 " let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css')
-" 
-" "--------------------COLOUR------------------------
-" "Sets the colour theme and turns on spelling highlighting to underscore
-" "whenever entering vim. If I don't do these two in one call, stuff resets
-" "weird.
-" autocmd vimenter * ++nested call SetColourStuff()
-" function SetColourStuff()
-"     colorscheme gruvbox 
-"     set background=dark
-"     " colorscheme PaperColor 
-"     " colorscheme one 
-"     " set background=light
-"     " colorscheme rakr 
-"     hi SpellBad cterm=underline
-" endfunction
-" call SetColourStuff()
-" 
-" "Filetypes not associating correctly by default
-" au BufRead,BufNewFile *.asm set ft=mips
-" 
 " 
 " "-----------------MAPPING STUFF--------------------
 " 
