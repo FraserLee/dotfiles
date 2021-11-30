@@ -6,13 +6,13 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" ------------------------------- PLUGINS ----------------------------------
+" ------------------------------- PLUGINS ------------------------------------
 Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
 Plug 'morhetz/gruvbox'        " colourscheme
 " --------------------------------------------------------------------------
 call plug#end()
-" ---------------------------- BASIC SETUP ---------------------------------
+" ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
 se scrolloff=12 " Keep 12 lines of context around cursor
@@ -31,23 +31,48 @@ se bri lbr
 " Set the colour-column to 80
 se colorcolumn=80
 
+" Don't wrap text when writing
+se textwidth=0
+
 " Search settings
+se hlsearch   " Highlight search matches
 se incsearch  " Display partial matches while searching
 se ignorecase " Ignore case when searching...
-se smartcase  " ...unless the search contains an uppercase letter (use /search\C to search case-sensitively)
-se hlsearch   " Highlight search matches
+se smartcase  " ...unless the search contains an uppercase letter 
+              " (use /search\C to search case-sensitively)
 
 " Turn on spellcheck, set languages
 se spell spelllang=en_ca,ru 
 
 " Command completion with <tab>
 se wildmenu
-se wildmode=longest:full,full " First <tab> fills the longest common string, further <tab>s cycle through matches
+se wildmode=longest:full,full " First <tab> fills the longest common string, 
+                              " further <tab>s cycle through matches 
 
+" Don't automatically continue comments on <return> or with o/O
+" (something in ftplugin is resetting this, needs to be bodged with an autocmd)
+autocmd FileType * se formatoptions-=ro
+
+" ---------------------------- MAPPINGS --------------------------------------
+
+" Make up and down work within wrapped lines
+nnoremap j           gj
+nnoremap k           gk
+vnoremap j           gj
+vnoremap k           gk
+nnoremap <Down>      gj
+nnoremap <Up>        gk
+vnoremap <Down>      gj
+vnoremap <Up>        gk
+inoremap <Down> <C-o>gj
+inoremap <Up>   <C-o>gk
+
+" A long line to test navigation within wrapping:
+" lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 colorscheme gruvbox 
-set background=dark
+se background=dark
 
 " set spelling highlighting to underscore
 hi SpellBad cterm=underline 
@@ -81,8 +106,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " 
 " "Let :MarkdownPreview work on any file type 
 " let g:mkdp_command_for_global = 1
-" 
-" 
 " 
 " "enable folds from indent, auto-open all when entering a file
 " autocmd BufEnter * ++nested se fdm=indent foldlevel=100
@@ -118,17 +141,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " nnoremap <SPACE> <Nop>
 " let mapleader=" "
 " 
-" "Better navigation on wrapped lines
-" nnoremap j            gj
-" nnoremap k            gk
-" vnoremap j            gj
-" vnoremap k            gk
-" nnoremap <Down>       gj
-" nnoremap <Up>         gk
-" vnoremap <Down>       gj
-" vnoremap <Up>         gk
-" inoremap <Down> <C-o> gj
-" inoremap <Up>   <C-o> gk
 " 
 " "Unmap some keys I accidentally hit too much because of dvorak 
 " nnoremap <S-q> <Nop> 
