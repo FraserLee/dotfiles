@@ -30,6 +30,7 @@ se nu
 autocmd BufEnter * ++nested se expandtab tabstop=4 shiftwidth=4
 syntax on
 set scrolloff=8
+set guicursor=i:block
 
 "Line-wrapping (without splitting words over lines)
 se bri
