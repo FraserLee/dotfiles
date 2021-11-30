@@ -8,11 +8,21 @@ endif
 call plug#begin('~/.vim/plugged')
 " ------------------------------- plugins ----------------------------------
 Plug 'github/copilot.vim'
+Plug 'morhetz/gruvbox' " colorscheme
 " --------------------------------------------------------------------------
 call plug#end()
+" ---------------------------- basic setup ---------------------------------
+
+se nu           " turn on line numbers
+se scrolloff=12 " keep 12 lines of context around cursor
+
+syntax on       " turn on syntax highlighting (default in nvim)
+
+se expandtab tabstop=4 shiftwidth=4 " Set tabs to 4 spaces
+
+se bri lbr " wrap lines at current indent level, don't split words
 
 
-" call plug#begin('~/.vim/plugged')
 " "--------------------------
 " Plug 'arecarn/vim-crunch'
 " Plug 'arecarn/vim-selection'
@@ -20,10 +30,6 @@ call plug#end()
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
 " Plug 'mg979/vim-visual-multi'
-" Plug 'morhetz/gruvbox'
-" Plug 'NLKNguyen/papercolor-theme'
-" Plug 'rakr/vim-one'
-" Plug 'rakr/vim-colors-rakr'
 " Plug 'preservim/nerdcommenter'
 " Plug 'preservim/nerdtree'
 " "Plug 'sheerun/vim-polyglot'
@@ -33,19 +39,7 @@ call plug#end()
 " Plug 'tpope/vim-surround'
 " Plug 'valloric/youcompleteme'
 " "--------------------------
-" call plug#end()
 " "------------------BASIC SETUP---------------------
-" "Turn on line numbers, set up tabs to how I like them, turn on syntax highlighting, other misc stuff
-" se nu
-" "se rnu
-" autocmd BufEnter * ++nested se expandtab tabstop=4 shiftwidth=4
-" syntax on
-" set scrolloff=8
-" set guicursor=i:block
-" 
-" "Line-wrapping (without splitting words over lines)
-" se bri
-" se lbr
 " 
 " "Let :MarkdownPreview work on any file type 
 " let g:mkdp_command_for_global = 1
