@@ -7,11 +7,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- plugins ----------------------------------
-
+Plug 'github/copilot.vim'
 " --------------------------------------------------------------------------
 call plug#end()
-
-
 
 
 " call plug#begin('~/.vim/plugged')
