@@ -61,8 +61,18 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 " Unmap some keys I accidentally hit too much because of dvorak 
-nnoremap <s-q> <Nop>
+nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
+
+" Swap S and L to make dvorak easier
+nnoremap s l
+vnoremap s l
+nnoremap S L
+vnoremap S L
+nnoremap l s
+vnoremap l s
+nnoremap L S
+vnoremap L S
 
 " Make up and down work within wrapped lines
 nnoremap j           gj
@@ -75,6 +85,9 @@ vnoremap <Down>      gj
 vnoremap <Up>        gk
 inoremap <Down> <C-o>gj
 inoremap <Up>   <C-o>gk
+
+" sort with <leader>s
+xnoremap <leader>s :sort i<CR>
 
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
