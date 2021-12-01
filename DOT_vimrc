@@ -7,6 +7,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
+Plug 'arecarn/vim-crunch'
 Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
 Plug 'godlygeek/tabular'
@@ -98,13 +99,16 @@ inoremap <Up>   <C-o>gk
 " remap U to redo
 nnoremap U g+
 
-" ------------------------- BASIC SHORTCUTS ----------------------------------
+" ------------------- BASIC SHORTCUTS AND CONFIGURATION ----------------------
+
+" allow ctrl-z in insert mode to correct the most recent spelling mistake
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " sort lines (case insensitive) with <leader>s
 xnoremap <leader>s :sort i<CR>
 
-" allow ctrl-z in insert mode to correct the most recent spelling mistake
-inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
+" Evaluate math expressions with g={motion}
+let g:crunch_result_type_append = 0
 
 function! TabAlign()
     " get the character under the cursor
@@ -148,7 +152,6 @@ map <leader>/ <plug>NERDCommenterToggle
 map <leader>? <plug>NERDCommenterSexy 
 
 " "--------------------------
-" Plug 'arecarn/vim-crunch'
 " Plug 'arecarn/vim-selection'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
@@ -165,8 +168,6 @@ map <leader>? <plug>NERDCommenterSexy
 " "enable folds from indent, auto-open all when entering a file
 " autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 "
-" "Evaluate math expressions (with g=)
-" let g:crunch_result_type_append = 0
 " 
 " " Markdown settings
 " " au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
@@ -198,7 +199,6 @@ map <leader>? <plug>NERDCommenterSexy
 " call submode#map       ('window_resize', 'n', '', 's', '<C-w><')
 " call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
 " call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
-" 
 " 
 " 
 " "-----------BASIC COMPILATION SHORTCUTS-------------
