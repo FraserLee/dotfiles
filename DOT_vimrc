@@ -13,6 +13,7 @@ Plug 'FraserLee/vim-polyglot'  " languages, swap back to 'sheerun/vim-polyglot' 
 Plug 'github/copilot.vim'      " vim-copilot
 Plug 'godlygeek/tabular'       " align stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
 Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
 Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
@@ -121,6 +122,9 @@ se wildmenu
 se wildmode=longest:full,full " First <tab> fills the longest common string, 
                               " further <tab>s cycle through matches 
 
+" escape terminal with <esc>
+tnoremap <Esc> <C-\><C-n>
+
 " Don't automatically continue comments on <return> or with o/O
 " (something in ftplugin is resetting this, needs to be bodged with an autocmd)
 autocmd FileType * se formatoptions-=ro
@@ -132,6 +136,9 @@ autocmd BufWinEnter *.* silent! loadview
 
 " create folds based on indent-level, auto-open all when entering a file
 autocmd BufEnter * ++nested se fdm=indent foldlevel=100
+    " as an example, press 
+    " "zc" over these lines 
+    " to close, "zo" to open
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
@@ -166,54 +173,47 @@ hi CopilotSuggestion ctermfg=102
 " slightly darker than the background, 236 is good for slightly lighter
 hi ColorColumn ctermbg=234
 
+" -------------------------- SUBMODES ----------------------------------------
+             
+let g:submode_timeout = 1 " timeout after 2 seconds
+let g:submode_timeoutlen = 2000
+" don't consume submode-leaving key
+let g:submode_keep_leaving_key = 1
+
+" <leader> plus a direction massively changes window size. Subsequent taps to
+" that a direction change it by 1 (though space can be re-pressed for another
+" large increment).
+"
+" s is also used in place of l
+call submode#enter_with('window_resize', 'n', '', '<leader>h', ':exe "vertical resize " . (winwidth (0) * 4/3)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>s', ':exe "vertical resize " . (winwidth (0) * 3/4)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>j', ':exe          "resize " . (winheight(0) * 4/3)<CR>')
+call submode#enter_with('window_resize', 'n', '', '<leader>k', ':exe          "resize " . (winheight(0) * 3/4)<CR>')
+call submode#map       ('window_resize', 'n', '', 'h', '<C-w>>')
+call submode#map       ('window_resize', 'n', '', 's', '<C-w><')
+call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
+call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
+
 " ------------------------- FILETYPE JUNK ------------------------------------
 
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
 
-
-" "--------------------------
-" Plug 'kana/vim-submode'
-" "--------------------------
-" "--------------- SUBMODES -------------------
-" "----------(all done through submodes)--------------
-"              
-" let g:submode_timeout = 1
-" let g:submode_timeoutlen = 2000
-" " don't consume submode-leaving key
-" let g:submode_keep_leaving_key = 1
+" --------------- BASIC COMPILATION SHORTCUTS -------------------------------
+" --------------------- *very much WIP* ------------------------------------
+" <F4> runs the current file assuming it's standalone, <F5> assumes there's
+" some language-specific makefile equivalent.
 " 
-" "<leader> plus a direction massively changes window size. Subsequent taps to
-" "that a direction change it by 1 (though space can be re-pressed for another
-" "large increment)
-" "
-" " s is also used in place of l
-" call submode#enter_with('window_resize', 'n', '', '<leader>h', ':exe "vertical resize " . (winwidth (0) * 4/3)<CR>')
-" call submode#enter_with('window_resize', 'n', '', '<leader>s', ':exe "vertical resize " . (winwidth (0) * 3/4)<CR>')
-" call submode#enter_with('window_resize', 'n', '', '<leader>j', ':exe          "resize " . (winheight(0) * 4/3)<CR>')
-" call submode#enter_with('window_resize', 'n', '', '<leader>k', ':exe          "resize " . (winheight(0) * 3/4)<CR>')
-" call submode#map       ('window_resize', 'n', '', 'h', '<C-w>>')
-" call submode#map       ('window_resize', 'n', '', 's', '<C-w><')
-" call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
-" call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
+" TODO: add more language type supports
+" TODO: replace current terminal window instead of creating a new one if one
+" exists
+" TODO: auto-shift focus back away from terminal-window if input isn't required
 " 
-" 
-" "-----------BASIC COMPILATION SHORTCUTS-------------
-" "<F4> runs the current file assuming it's standalone, <F5> assumes there's
-" "some language-specific makefile equivalent.
-" "
-" "TODO: add more language type supports
-" "TODO: replace current terminal window instead of creating a new one if one
-" "exists
-" "TODO: auto-shift focus back away from terminal-window if input isn't required
-" "
-" "modified majorly from https://stackoverflow.com/a/18296266/
-" "terminal easier use
-" tnoremap <Esc> <C-\><C-n>
-" "<F4>
-" autocmd filetype python nnoremap <F4> :w <bar> :vert term ++shell python3 %:p<CR>
-" autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc   "%:p" -o "%:p:r" && "%:p:r"<CR>
-" autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o "%:p:r" && "%:p:r"<CR>
-" autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
-" "<F5>
-" autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
+" modified majorly from https://stackoverflow.com/a/18296266/
+" <F4>
+autocmd filetype python nnoremap <F4> :w <bar> :vert term ++shell python3 %:p<CR>
+autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc   "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
+" <F5>
+autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
