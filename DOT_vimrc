@@ -124,6 +124,9 @@ autocmd FileType * se formatoptions-=ro
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
+" create folds based on indent-level, auto-open all when entering a file
+autocmd BufEnter * ++nested se fdm=indent foldlevel=100
+
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
 " Markdown settings
@@ -165,14 +168,6 @@ au BufRead,BufNewFile *.asm set ft=mips
 " "--------------------------
 " Plug 'kana/vim-submode'
 " "--------------------------
-" "------------------BASIC SETUP---------------------
-" 
-" 
-" "enable folds from indent, auto-open all when entering a file
-" autocmd BufEnter * ++nested se fdm=indent foldlevel=100
-"
-" 
-" 
 " "----------------BASIC SHORTCUTS-------------------
 " "multi-cursor re-binds for mac, C-n n n n to select a bunch of the same word.
 " let g:VM_maps = {}
