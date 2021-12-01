@@ -216,9 +216,9 @@ au BufRead,BufNewFile *.asm set ft=mips
 " 
 " modified majorly from https://stackoverflow.com/a/18296266/
 " <F4>
-autocmd filetype python nnoremap <F4> :w <bar> :vert term ++shell python3 %:p<CR>
-autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc   "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++   "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype python nnoremap <F4> :w <bar> :vs <bar> te python3 "%:p"<CR>
+autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc     "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++     "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
