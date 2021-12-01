@@ -95,6 +95,9 @@ inoremap <Up>   <C-o>gk
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+" remap U to redo
+nnoremap U g+
+
 " ------------------------- BASIC SHORTCUTS ----------------------------------
 
 " sort lines (case insensitive) with <leader>s
@@ -102,7 +105,6 @@ xnoremap <leader>s :sort i<CR>
 
 " allow ctrl-z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
-
 
 function! TabAlign()
     " get the character under the cursor
@@ -182,16 +184,6 @@ map <leader>? <plug>NERDCommenterSexy
 " let g:submode_timeoutlen = 2000
 " " don't consume submode-leaving key
 " let g:submode_keep_leaving_key = 1
-" 
-" "g+ and g- (undo & redo) let you repeat hit + and -
-" "(also = works as + so you don't need to hit shift)
-" call submode#enter_with ( 'undo/redo', 'n', '', 'g-', 'g-' )
-" call submode#enter_with ( 'undo/redo', 'n', '', 'g+', 'g+' )
-" call submode#enter_with ( 'undo/redo', 'n', '', 'g/', 'g+' )
-" call submode#map        ( 'undo/redo', 'n', '', '-', 'g-'  )
-" call submode#map        ( 'undo/redo', 'n', '', '+', 'g+'  )
-" call submode#map        ( 'undo/redo', 'n', '', '=', 'g+'  )
-" call submode#map        ( 'undo/redo', 'n', '', '/', 'u+'  )
 " 
 " "<leader> plus a direction massively changes window size. Subsequent taps to
 " "that a direction change it by 1 (though space can be re-pressed for another
