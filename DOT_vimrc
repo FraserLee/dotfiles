@@ -70,6 +70,12 @@ map <leader>/ <plug>NERDCommenterToggle
 " fancy comment (whatever that means given language and context)
 map <leader>? <plug>NERDCommenterSexy 
 
+" multi-cursor binds (for mac), <ctrl-j/k> to create up and down cursors
+" C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
+let g:VM_maps = {} 
+let g:VM_maps["Add Cursor Down"]   = '<C-j>'
+let g:VM_maps["Add Cursor Up"]     = '<C-k>'
+
 function! TabAlign()
     " get the character under the cursor
     let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
@@ -144,6 +150,7 @@ let g:NERDCompactSexyComs       = 1
 let g:NERDCommentEmptyLines     = 1
 let g:NERDToggleCheckAllLines   = 1
 
+
 " -------------------------- COLOUR SCHEME -----------------------------------
 
 colorscheme gruvbox 
@@ -168,12 +175,7 @@ au BufRead,BufNewFile *.asm set ft=mips
 " "--------------------------
 " Plug 'kana/vim-submode'
 " "--------------------------
-" "----------------BASIC SHORTCUTS-------------------
-" "multi-cursor re-binds for mac, C-n n n n to select a bunch of the same word.
-" let g:VM_maps = {}
-" let g:VM_maps["Add Cursor Down"]   = '<C-j>'
-" let g:VM_maps["Add Cursor Up"]     = '<C-k>'
-" "---------------COMPLEX SHORTCUTS-------------------
+" "--------------- SUBMODES -------------------
 " "----------(all done through submodes)--------------
 "              
 " let g:submode_timeout = 1
