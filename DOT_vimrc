@@ -18,8 +18,13 @@ Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
 Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " ----------------------------------------------------------------------------
 call plug#end()
+
+lua << EOF
+require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
+EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
 " Space to <leader> for super convenient combos
