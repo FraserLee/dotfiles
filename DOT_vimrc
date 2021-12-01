@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
 Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'
+Plug 'godlygeek/tabular'
 Plug 'morhetz/gruvbox'        " colourscheme
 Plug 'preservim/nerdcommenter'
 " ----------------------------------------------------------------------------
@@ -54,8 +55,8 @@ se wildmode=longest:full,full " First <tab> fills the longest common string,
 " (something in ftplugin is resetting this, needs to be bodged with an autocmd)
 autocmd FileType * se formatoptions-=ro
 
-"re-open files at the same line as closed
-"(mkdir ~/.vim/view/ if it doesn't already exist)
+" re-open files at the same line as closed
+" (mkdir ~/.vim/view/ if it doesn't already exist)
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
@@ -91,11 +92,27 @@ vnoremap <Up>        gk
 inoremap <Down> <C-o>gj
 inoremap <Up>   <C-o>gk
 
-" sort with <leader>s
-xnoremap <leader>s :sort i<CR>
-
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+" ------------------------- BASIC SHORTCUTS ----------------------------------
+
+" sort lines (case insensitive) with <leader>s
+xnoremap <leader>s :sort i<CR>
+
+" allow ctrl-z in insert mode to correct the most recent spelling mistake
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+
+function! TabAlign()
+    " get the character under the cursor
+    let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
+    let pos = getpos(".") " save the position of the cursor
+    :execute ":Tab /" . c " Tabularize with that character
+    call setpos('.', pos) " Restore the cursor position
+endfunction
+
+noremap <leader>t :call TabAlign()<cr>
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 colorscheme gruvbox 
@@ -131,14 +148,12 @@ map <leader>? <plug>NERDCommenterSexy
 " "--------------------------
 " Plug 'arecarn/vim-crunch'
 " Plug 'arecarn/vim-selection'
-" Plug 'godlygeek/tabular'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
 " Plug 'mg979/vim-visual-multi'
 " Plug 'tommcdo/vim-exchange'
 " Plug 'tpope/vim-repeat'
 " Plug 'tpope/vim-surround'
-" Plug 'valloric/youcompleteme'
 " "--------------------------
 " "------------------BASIC SETUP---------------------
 " 
@@ -147,15 +162,9 @@ map <leader>? <plug>NERDCommenterSexy
 " 
 " "enable folds from indent, auto-open all when entering a file
 " autocmd BufEnter * ++nested se fdm=indent foldlevel=100
-" 
-" "Make ycm work a bit better with haxe
-" let g:vaxe_enable_ycm_defaults = 1
-" let g:vaxe_cache_server_autostart = 1
-" 
+"
 " "Evaluate math expressions (with g=)
 " let g:crunch_result_type_append = 0
-" 
-" 
 " 
 " " Markdown settings
 " " au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
@@ -166,8 +175,6 @@ map <leader>? <plug>NERDCommenterSexy
 " let g:VM_maps = {}
 " let g:VM_maps["Add Cursor Down"]   = '<C-j>'
 " let g:VM_maps["Add Cursor Up"]     = '<C-k>'
-" "allow ctrl-z in insert mode to correct the most recent spelling mistake
-" inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 " "---------------COMPLEX SHORTCUTS-------------------
 " "----------(all done through submodes)--------------
 "              
