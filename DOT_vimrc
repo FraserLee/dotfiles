@@ -11,13 +11,74 @@ Plug 'arecarn/vim-crunch'      " compute math expressions with g={motion}
 Plug 'arecarn/vim-selection'   " required for vim-crunch
 Plug 'FraserLee/vim-polyglot'  " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
 Plug 'github/copilot.vim'      " vim-copilot
-Plug 'godlygeek/tabular'       " Align stuff
+Plug 'godlygeek/tabular'       " align stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
 Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 " ----------------------------------------------------------------------------
 call plug#end()
+" ---------------------------- MAPPINGS --------------------------------------
+
+" Space to <leader> for super convenient combos
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+" Unmap some keys I accidentally hit too much because of dvorak 
+nnoremap <S-q> <Nop>
+nnoremap <C-z> <Nop>
+
+" Swap S and L to make dvorak easier
+nnoremap s l
+vnoremap s l
+nnoremap S L
+vnoremap S L
+nnoremap l s
+vnoremap l s
+nnoremap L S
+vnoremap L S
+
+" Make up and down work within wrapped lines
+nnoremap j           gj
+nnoremap k           gk
+vnoremap j           gj
+vnoremap k           gk
+nnoremap <Down>      gj
+nnoremap <Up>        gk
+vnoremap <Down>      gj
+vnoremap <Up>        gk
+inoremap <Down> <C-o>gj
+inoremap <Up>   <C-o>gk
+
+" A long line to test navigation within wrapping:
+" lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+" remap U to redo
+nnoremap U g+
+
+" ------------------------- BASIC SHORTCUTS ---------------------------------
+
+" allow ctrl-z in insert mode to correct the most recent spelling mistake
+inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
+
+" sort lines (case insensitive) with <leader>s
+xnoremap <leader>s :sort i<CR>
+
+" toggle normal comment
+map <leader>/ <plug>NERDCommenterToggle 
+" fancy comment (whatever that means given language and context)
+map <leader>? <plug>NERDCommenterSexy 
+
+function! TabAlign()
+    " get the character under the cursor
+    let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
+    let pos = getpos(".") " save the position of the cursor
+    :execute ":Tab /" . c " Tabularize with that character
+    call setpos('.', pos) " Restore the cursor position
+endfunction
+noremap <leader>t :call TabAlign()<cr>
+
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
@@ -80,67 +141,8 @@ let g:NERDCompactSexyComs       = 1
 let g:NERDCommentEmptyLines     = 1
 let g:NERDToggleCheckAllLines   = 1
 
-" ---------------------------- MAPPINGS --------------------------------------
-
-" Space to <leader> for super convenient combos
-nnoremap <SPACE> <Nop>
-let mapleader=" "
-
-" Unmap some keys I accidentally hit too much because of dvorak 
-nnoremap <S-q> <Nop>
-nnoremap <C-z> <Nop>
-
-" Swap S and L to make dvorak easier
-nnoremap s l
-vnoremap s l
-nnoremap S L
-vnoremap S L
-nnoremap l s
-vnoremap l s
-nnoremap L S
-vnoremap L S
-
-" Make up and down work within wrapped lines
-nnoremap j           gj
-nnoremap k           gk
-vnoremap j           gj
-vnoremap k           gk
-nnoremap <Down>      gj
-nnoremap <Up>        gk
-vnoremap <Down>      gj
-vnoremap <Up>        gk
-inoremap <Down> <C-o>gj
-inoremap <Up>   <C-o>gk
-
-" A long line to test navigation within wrapping:
-" lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-" remap U to redo
-nnoremap U g+
-
-" ------------------------- BASIC SHORTCUTS ---------------------------------
-
-" allow ctrl-z in insert mode to correct the most recent spelling mistake
-inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-" sort lines (case insensitive) with <leader>s
-xnoremap <leader>s :sort i<CR>
-
-" toggle normal comment
-map <leader>/ <plug>NERDCommenterToggle 
-" fancy comment (whatever that means given language and context)
-map <leader>? <plug>NERDCommenterSexy 
-
-function! TabAlign()
-    " get the character under the cursor
-    let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
-    let pos = getpos(".") " save the position of the cursor
-    :execute ":Tab /" . c " Tabularize with that character
-    call setpos('.', pos) " Restore the cursor position
-endfunction
-noremap <leader>t :call TabAlign()<cr>
-
 " -------------------------- COLOUR SCHEME -----------------------------------
+
 colorscheme gruvbox 
 se background=dark
 
@@ -154,15 +156,14 @@ hi CopilotSuggestion ctermfg=102
 " slightly darker than the background, 236 is good for slightly lighter
 hi ColorColumn ctermbg=234
 
-" -------------------------- FILETYPES ---------------------------------------
+" ------------------------- FILETYPE JUNK ------------------------------------
+
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
 
-" ------------------------- COMMENTING ---------------------------------------
 
 " "--------------------------
 " Plug 'kana/vim-submode'
-" Plug 'mg979/vim-visual-multi'
 " "--------------------------
 " "------------------BASIC SETUP---------------------
 " 
