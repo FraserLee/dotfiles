@@ -7,12 +7,15 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
-Plug 'arecarn/vim-crunch'
-Plug 'FraserLee/vim-polyglot' " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
-Plug 'github/copilot.vim'
-Plug 'godlygeek/tabular'
-Plug 'morhetz/gruvbox'        " colourscheme
-Plug 'preservim/nerdcommenter'
+Plug 'arecarn/vim-crunch'      " compute math expressions with g={motion}
+Plug 'arecarn/vim-selection'   " required for vim-crunch
+Plug 'FraserLee/vim-polyglot'  " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
+Plug 'github/copilot.vim'      " vim-copilot
+Plug 'godlygeek/tabular'       " Align stuff
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'morhetz/gruvbox'         " colourscheme
+Plug 'preservim/nerdcommenter' " comment and uncomment
+Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 " ----------------------------------------------------------------------------
 call plug#end()
 " ---------------------------- BASIC SETUP -----------------------------------
@@ -20,7 +23,6 @@ call plug#end()
 se nu           " Turn on line numbers
 se scrolloff=12 " Keep 12 lines of context around cursor
 syntax on       " Turn on syntax highlighting (default in nvim)
-
 
 " Fix backspace to work more rationally (crikey that's a strange default)
 se backspace=indent,eol,start
@@ -61,6 +63,23 @@ autocmd FileType * se formatoptions-=ro
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
+" ---------------------- PLUGIN CONFIGURATION --------------------------------
+
+" Markdown settings
+let g:mkdp_command_for_global = 1 " Let :MarkdownPreview work on any file type 
+let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css') 
+                                    " use my own CSS file
+
+" Evaluate math expressions with g={motion}
+let g:crunch_result_type_append = 0
+
+"A whole whack of default commenting settings
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims           = 1
+let g:NERDCompactSexyComs       = 1
+let g:NERDCommentEmptyLines     = 1
+let g:NERDToggleCheckAllLines   = 1
+
 " ---------------------------- MAPPINGS --------------------------------------
 
 " Space to <leader> for super convenient combos
@@ -99,7 +118,7 @@ inoremap <Up>   <C-o>gk
 " remap U to redo
 nnoremap U g+
 
-" ------------------- BASIC SHORTCUTS AND CONFIGURATION ----------------------
+" ------------------------- BASIC SHORTCUTS ---------------------------------
 
 " allow ctrl-z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
@@ -107,8 +126,10 @@ inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 " sort lines (case insensitive) with <leader>s
 xnoremap <leader>s :sort i<CR>
 
-" Evaluate math expressions with g={motion}
-let g:crunch_result_type_append = 0
+" toggle normal comment
+map <leader>/ <plug>NERDCommenterToggle 
+" fancy comment (whatever that means given language and context)
+map <leader>? <plug>NERDCommenterSexy 
 
 function! TabAlign()
     " get the character under the cursor
@@ -117,7 +138,6 @@ function! TabAlign()
     :execute ":Tab /" . c " Tabularize with that character
     call setpos('.', pos) " Restore the cursor position
 endfunction
-
 noremap <leader>t :call TabAlign()<cr>
 
 " -------------------------- COLOUR SCHEME -----------------------------------
@@ -139,39 +159,18 @@ hi ColorColumn ctermbg=234
 au BufRead,BufNewFile *.asm set ft=mips
 
 " ------------------------- COMMENTING ---------------------------------------
-"A whole whack of default settings
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims           = 1
-let g:NERDCompactSexyComs       = 1
-let g:NERDCommentEmptyLines     = 1
-let g:NERDToggleCheckAllLines   = 1
-
-" toggle normal comment
-map <leader>/ <plug>NERDCommenterToggle 
-" fancy comment (whatever that means given language and context)
-map <leader>? <plug>NERDCommenterSexy 
 
 " "--------------------------
-" Plug 'arecarn/vim-selection'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'kana/vim-submode'
 " Plug 'mg979/vim-visual-multi'
-" Plug 'tommcdo/vim-exchange'
-" Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-surround'
 " "--------------------------
 " "------------------BASIC SETUP---------------------
 " 
-" "Let :MarkdownPreview work on any file type 
-" let g:mkdp_command_for_global = 1
 " 
 " "enable folds from indent, auto-open all when entering a file
 " autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 "
 " 
-" " Markdown settings
-" " au BufReadPost,BufNewFile *.md <Plug>MarkdownPreview
-" let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css')
 " 
 " "----------------BASIC SHORTCUTS-------------------
 " "multi-cursor re-binds for mac, C-n n n n to select a bunch of the same word.
