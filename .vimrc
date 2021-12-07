@@ -15,6 +15,8 @@ Plug 'godlygeek/tabular'       " align stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
 Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
+Plug 'tpope/vim-fugitive'      " git integration with :Git replacing !git
+Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
@@ -162,6 +164,8 @@ let g:NERDCompactSexyComs       = 1
 let g:NERDCommentEmptyLines     = 1
 let g:NERDToggleCheckAllLines   = 1
 
+" disable start-screen cow
+let g:startify_custom_header    = []
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 

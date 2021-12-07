@@ -2,10 +2,10 @@
 
 cd $(dirname $0)
 
-# symlinks all files and dirs starting with 'DOT_' into the home directory
-for item in $(ls | grep ^DOT_); do 
+# symlinks all files and dirs starting with '.' into the home directory
+for item in $(ls -a | grep '^\.' | grep -x -v '.\|..\|.DS_Store\|.git\|.gitignore'); do 
 	src=$(pwd)/$item
-	dest=~/.$(echo $item | cut -c5-)
+	dest=~/$(echo $item)
 	if [[ -L $dest ]]; then # delete $dest if it's already a symlink to somewhere
 		rm $dest
 	fi
