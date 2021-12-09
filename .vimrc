@@ -21,11 +21,15 @@ Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'davepinto/virtual-column.nvim'
 " ----------------------------------------------------------------------------
 call plug#end()
 
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
+require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
+    vert_char = '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
+}
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
@@ -169,7 +173,9 @@ let g:startify_custom_header    = []
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
+
 colorscheme gruvbox 
+let g:gruvbox_contrast_dark = 'hard'
 se background=dark
 
 " set spelling highlighting to underscore
@@ -179,8 +185,9 @@ hi SpellBad cterm=underline
 " both 6 and 7 look alright in reduced modes
 hi CopilotSuggestion ctermfg=102 
 
-" slightly darker than the background, 236 is good for slightly lighter
+" move these two up and down to make them match the terminal background
 hi ColorColumn ctermbg=234
+hi ColorColumn ctermfg=233
 
 " -------------------------- SUBMODES ----------------------------------------
              
