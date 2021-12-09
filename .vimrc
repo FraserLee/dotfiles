@@ -182,12 +182,13 @@ se background=dark
 hi SpellBad cterm=underline 
 
 " The default copilot colour is identical to comments in gruvbox,
-" both 6 and 7 look alright in reduced modes
-hi CopilotSuggestion ctermfg=102 
+" both 6 and 7 look alright in reduced modes, 102 is decent in full
+" hi CopilotSuggestion ctermfg=6
 
-" move these two up and down to make them match the terminal background
-hi ColorColumn ctermbg=234
-hi ColorColumn ctermfg=233
+" Set the colourcolumn background to the background colour, foreground to some grey
+execute "hi ColorColumn ctermbg=" . 
+            \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+hi ColorColumn ctermfg=239
 
 " -------------------------- SUBMODES ----------------------------------------
              
