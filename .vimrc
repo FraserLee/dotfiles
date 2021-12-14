@@ -88,14 +88,25 @@ let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]   = '<C-j>'
 let g:VM_maps["Add Cursor Up"]     = '<C-k>'
 
-function! TabAlign()
+function! TabAlign(zs)
     " get the character under the cursor
     let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
     let pos = getpos(".") " save the position of the cursor
-    :execute ":Tab /" . c " Tabularize with that character
+    " Tabularize with that character
+    if a:zs | :execute ":Tab /" . c . "\\zs"
+    else    | :execute ":Tab /" . c
+    endif
     call setpos('.', pos) " Restore the cursor position
 endfunction
-noremap <leader>t :call TabAlign()<cr>
+
+" <leader>t will align stuff like
+" aaaaaa | aaa | aaaaaa
+" b      | b   | b
+" while <leader>T will align stuff like
+" aaaaaa,  aaa,  aaaaaa
+" b,       b,    b
+noremap <leader>t :call TabAlign(0)<cr>
+noremap <leader>T :call TabAlign(1)<cr>
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -183,7 +194,7 @@ hi SpellBad cterm=underline
 
 " The default copilot colour is identical to comments in gruvbox,
 " both 6 and 7 look alright in reduced modes, 102 is decent in full
-" hi CopilotSuggestion ctermfg=6
+hi CopilotSuggestion ctermfg=6
 
 " Set the colourcolumn background to the background colour, foreground to some grey
 execute "hi ColorColumn ctermbg=" . 
