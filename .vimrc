@@ -93,8 +93,8 @@ function! TabAlign(zs)
     let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
     let pos = getpos(".") " save the position of the cursor
     " Tabularize with that character
-    if a:zs | :execute ":Tab /" . c . "\\zs"
-    else    | :execute ":Tab /" . c
+    if a:zs | :execute ":Tabularize /" . c . "\\zs"
+    else    | :execute ":Tabularize /" . c
     endif
     call setpos('.', pos) " Restore the cursor position
 endfunction
