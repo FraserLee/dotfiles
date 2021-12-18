@@ -28,7 +28,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 " ----------------------------------------------------------------------------
 call plug#end()
 
-lua << EOF -- setup tree-sitter, virtual column
+" setup tree-sitter, virtual column
+lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
 require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
     vert_char = '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
