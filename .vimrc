@@ -21,11 +21,14 @@ Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'davepinto/virtual-column.nvim'
+Plug 'davepinto/virtual-column.nvim' " thinner colour column
+Plug 'OmniSharp/omnisharp-vim'       " c# error/warning integration
+Plug 'dense-analysis/ale'            " asynchronous linting
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 " ----------------------------------------------------------------------------
 call plug#end()
 
-lua << EOF
+lua << EOF -- setup tree-sitter, virtual column
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
 require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
     vert_char = '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
@@ -226,6 +229,27 @@ call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
+
+" ------------- LINTING, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF --------------
+
+hi ALEError   ctermfg=Red  cterm=none
+hi ALEWarning ctermfg=172  cterm=italic
+
+let g:OmniSharp_highlighting = 0
+let g:OmniSharp_server_use_mono = 1
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+
+" trigger completion in insert mode with '.'
+" TODO: disable dot only limitation when copilot is offline
+call coc#config('suggest', {
+\ 'autoTrigger': 'trigger'
+\})
+
+call coc#config('coc.source.OmniSharp', {
+\ 'triggerCharacters': '.',
+\})
 
 " --------------- BASIC COMPILATION SHORTCUTS -------------------------------
 " --------------------- *very much WIP* ------------------------------------
