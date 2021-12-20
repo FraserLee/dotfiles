@@ -15,8 +15,7 @@ Plug 'godlygeek/tabular'       " align stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
 Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
-Plug 'tpope/vim-fugitive'      " git integration with :Git replacing !git
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'      " list recently used when starting vim without a file
 Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
@@ -25,6 +24,9 @@ Plug 'davepinto/virtual-column.nvim' " thinner colour column
 Plug 'OmniSharp/omnisharp-vim'       " c# error/warning integration
 Plug 'dense-analysis/ale'            " asynchronous linting
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
+Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
+Plug 'ThePrimeagen/harpoon'          " recently used files
+Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -32,7 +34,7 @@ call plug#end()
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
 require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
-    vert_char = '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
+    vert_char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
 }
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
@@ -112,6 +114,14 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
+" <space>ff to search file-names, <space>fg to search file-content
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>gg <cmd>Telescope live_grep<cr>
+
+" <space>ya to add the current file to a list, <space>yy to view the list
+nnoremap <leader>ya <cmd>lua require('harpoon.mark').add_file()<cr>
+nnoremap <leader>yy <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
+
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
@@ -185,6 +195,10 @@ let g:NERDToggleCheckAllLines   = 1
 
 " disable start-screen cow
 let g:startify_custom_header    = []
+
+" integrate harpoon with telescope
+lua require('telescope').load_extension('harpoon')
+
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
