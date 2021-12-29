@@ -253,7 +253,8 @@ hi ALEWarning ctermfg=172  cterm=italic
 let g:OmniSharp_highlighting = 0
 let g:OmniSharp_server_use_mono = 1
 let g:ale_linters = {
-\ 'cs': ['OmniSharp']
+\ 'cs': ['OmniSharp'],
+\ 'rust' : ['analyzer'],
 \}
 
 " trigger completion in insert mode with '.'
@@ -263,6 +264,10 @@ call coc#config('suggest', {
 \})
 
 call coc#config('coc.source.OmniSharp', {
+\ 'triggerCharacters': '.',
+\})
+
+call coc#config('coc.source.rust-analyzer', {
 \ 'triggerCharacters': '.',
 \})
 
