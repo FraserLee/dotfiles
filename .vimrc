@@ -259,23 +259,17 @@ let g:ale_linters = {
 
 " trigger completion in insert mode with '.'
 " TODO: disable dot only limitation when copilot is offline
-call coc#config('suggest', {
-\ 'autoTrigger': 'trigger'
-\})
+call coc#config('suggest', { 'autoTrigger': 'trigger' })
 
-call coc#config('coc.source.OmniSharp', {
-\ 'triggerCharacters': '.',
-\})
-
-call coc#config('coc.source.rust-analyzer', {
-\ 'triggerCharacters': '.',
-\})
+call coc#config('coc.source.OmniSharp',     {'triggerCharacters': '.'})
+call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.'})
 
 " --------------- BASIC COMPILATION SHORTCUTS -------------------------------
 " --------------------- *very much WIP* ------------------------------------
 " <F4> runs the current file assuming it's standalone, <F5> assumes there's
 " some language-specific makefile equivalent.
 " 
+" TODO: Fix to work with nvim 
 " TODO: add more language type supports
 " TODO: replace current terminal window instead of creating a new one if one
 " exists
@@ -288,4 +282,4 @@ autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc     "%:p" 
 autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++     "%:p" -o "%:p:r" && "%:p:r"<CR>
 autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
-autocmd filetype rust   nnoremap <F5> :w <bar> :vert term ++shell cargo run<CR>
+autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
