@@ -262,7 +262,11 @@ let g:ale_linters = {
 call coc#config('suggest', { 'autoTrigger': 'trigger' })
 
 call coc#config('coc.source.OmniSharp',     {'triggerCharacters': '.'})
-call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.'})
+call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.:'})
+
+" currently not working, possibly swap to a non-coc plugin since this one's so
+" finicky
+call coc#config('signature', {'enable': 0})
 
 " --------------- BASIC COMPILATION SHORTCUTS -------------------------------
 " --------------------- *very much WIP* ------------------------------------
