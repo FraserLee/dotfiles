@@ -27,6 +27,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
 Plug 'ThePrimeagen/harpoon'          " recently used files
 Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
+Plug 'lervag/vimtex'
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -198,6 +199,19 @@ let g:startify_custom_header    = []
 
 " integrate harpoon with telescope
 lua require('telescope').load_extension('harpoon')
+
+" setup latex stuff
+let g:vimtex_view_method = 'skim'
+
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \    '-shell-escape',
+    \    '-verbose',
+    \    '-file-line-error',
+    \    '-synctex=1',
+    \    '-interaction=nonstopmode',
+    \ ],
+\}
 
 
 " -------------------------- COLOUR SCHEME -----------------------------------
