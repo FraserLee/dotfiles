@@ -27,7 +27,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
 Plug 'ThePrimeagen/harpoon'          " recently used files
 Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
-Plug 'lervag/vimtex'
+Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 " ----------------------------------------------------------------------------
 call plug#end()
 
