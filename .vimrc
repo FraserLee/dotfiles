@@ -28,6 +28,7 @@ Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
 Plug 'ThePrimeagen/harpoon'          " recently used files
 Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
+Plug 'ChesleyTan/wordCount.vim'
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -222,6 +223,11 @@ let g:vimtex_compiler_latexmk = {
     \ ],
 \}
 
+" word count
+let g:wc_conservative_update = 1
+
+" copilot
+let g:copilot_filetypes = { 'markdown': v:true }
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
@@ -268,6 +274,19 @@ call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 " Fix not associating correctly by default
 au BufRead,BufNewFile *.asm set ft=mips
 
+" ------------------------ STATUS LINE ---------------------------------------
+" modified from https://unix.stackexchange.com/a/243667
+" start of default statusline
+set statusline=%f\ %h%w%m%r\ 
+
+" set statusline+=%#lite#\ %o/%{wordcount().bytes}
+
+set statusline+=%=%{wordCount#WordCount()}\ words
+set statusline+=\ 
+
+" end of default statusline (with ruler)
+" set statusline+=%(%l,%c%V\ %=\ %P%)
+
 " ------------- LINTING, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF --------------
 
 hi ALEError   ctermfg=Red  cterm=none
@@ -282,10 +301,12 @@ let g:ale_linters = {
 
 " trigger completion in insert mode with '.'
 " TODO: disable dot only limitation when copilot is offline
+" TODO: swap to something better than coc
 call coc#config('suggest', { 'autoTrigger': 'trigger' })
 
 call coc#config('coc.source.OmniSharp',     {'triggerCharacters': '.'})
 call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.:'})
+call coc#config('coc.source.pyright',       {'triggerCharacters': '.'})
 
 " currently not working, possibly swap to a non-coc plugin since this one's so
 " finicky
