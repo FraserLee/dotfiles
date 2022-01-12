@@ -28,6 +28,7 @@ Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
 Plug 'ThePrimeagen/harpoon'          " recently used files
 Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
+Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
 " ----------------------------------------------------------------------------
 call plug#end()
@@ -317,7 +318,6 @@ call coc#config('signature', {'enable': 0})
 " <F4> runs the current file assuming it's standalone, <F5> assumes there's
 " some language-specific makefile equivalent.
 " 
-" TODO: Fix to work with nvim 
 " TODO: add more language type supports
 " TODO: replace current terminal window instead of creating a new one if one
 " exists
@@ -326,8 +326,8 @@ call coc#config('signature', {'enable': 0})
 " modified majorly from https://stackoverflow.com/a/18296266/
 " <F4>
 autocmd filetype python nnoremap <F4> :w <bar> :vs <bar> te python3 "%:p"<CR>
-autocmd filetype c      nnoremap <F4> :w <bar> :vert term ++shell gcc     "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype cpp    nnoremap <F4> :w <bar> :vert term ++shell g++     "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype rust   nnoremap <F4> :w <bar> :vert term ++shell rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype c      nnoremap <F4> :w <bar> :vs <bar> te gcc     "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
