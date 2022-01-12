@@ -89,6 +89,15 @@ map <leader>/ <plug>NERDCommenterToggle
 " fancy comment (whatever that means given language and context)
 map <leader>? <plug>NERDCommenterSexy 
 
+" <leader>y to yank to clipboard, <leader>p to paste from clipboard
+nnoremap <leader>y "*y
+nnoremap <leader>p "*p
+
+" <leader>p to reformat the current paragraph, concatenating and splitting
+" lines as necessary to fit 80 characters. <leader>l for the current line.
+nnoremap <leader>m gqip
+nnoremap <leader>w gqq
+
 " multi-cursor binds (for mac), <ctrl-j/k> to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
 let g:VM_maps = {} 
@@ -115,13 +124,13 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
-" <space>ff to search file-names, <space>fg to search file-content
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" <space>gf to search file-names, <space>gg to search file-content
+nnoremap <leader>gf <cmd>Telescope find_files<cr>
 nnoremap <leader>gg <cmd>Telescope live_grep<cr>
 
-" <space>ya to add the current file to a list, <space>yy to view the list
-nnoremap <leader>ya <cmd>lua require('harpoon.mark').add_file()<cr>
-nnoremap <leader>yy <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
+" <space>fa to add the current file to a list, <space>ff to view the list
+nnoremap <leader>ff <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
+nnoremap <leader>fa <cmd>lua require('harpoon.mark').add_file()<cr>
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
