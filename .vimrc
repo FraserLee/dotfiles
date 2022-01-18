@@ -25,6 +25,7 @@ Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after insta
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
+Plug 'ycm-core/YouCompleteMe'  " run cd `~/.vim/bundle/YouCompleteMe; ./install.py --all` after install
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -273,7 +274,8 @@ set statusline+=\
 " set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
-
+imap <silent><script><expr> <tab><tab> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
 
 " --------------- BASIC COMPILATION SHORTCUTS --------------------------------
