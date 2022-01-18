@@ -20,8 +20,8 @@ Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'davepinto/virtual-column.nvim' " thinner colour column
-Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
+Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
+Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
@@ -31,8 +31,8 @@ call plug#end()
 " setup tree-sitter, virtual column
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
-require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
-    vert_char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
+require('virt-column').setup{
+    char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
 }
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
@@ -231,7 +231,7 @@ hi CopilotSuggestion ctermfg=6
 " Set the colourcolumn background to the background colour, foreground to some grey
 execute "hi ColorColumn ctermbg=" . 
             \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
-hi ColorColumn ctermfg=239
+hi VirtColumn ctermfg=239
 
 " -------------------------- SUBMODES ----------------------------------------
              
