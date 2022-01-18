@@ -327,7 +327,7 @@ call coc#config('signature', {'enable': 0})
 " <F4>
 autocmd filetype python nnoremap <F4> :w <bar> :vs <bar> te python3 "%:p"<CR>
 autocmd filetype c      nnoremap <F4> :w <bar> :vs <bar> te gcc     "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -o "%:p:r" && "%:p:r"<CR>
+autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -std=c++17 -o "%:p:r" && "%:p:r"<CR>
 autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
