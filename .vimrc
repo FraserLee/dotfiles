@@ -25,7 +25,7 @@ Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after insta
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
-Plug 'ycm-core/YouCompleteMe'  " run cd `~/.vim/bundle/YouCompleteMe; ./install.py --all` after install
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -176,6 +176,10 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
     " "zc" over these lines 
     " to close, "zo" to open
 
+" <space>gf to search file-names, <space>gg to search file-content
+nnoremap <leader>gf <cmd>Telescope find_files<cr>
+nnoremap <leader>gg <cmd>Telescope live_grep<cr>
+
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
 " Markdown settings
@@ -216,7 +220,6 @@ let g:wc_conservative_update = 1
 let g:copilot_filetypes = { 'markdown': v:true }
 
 " -------------------------- COLOUR SCHEME -----------------------------------
-
 
 colorscheme gruvbox 
 let g:gruvbox_contrast_dark = 'hard'
@@ -274,9 +277,36 @@ set statusline+=\
 " set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
-imap <silent><script><expr> <tab><tab> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 
+let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd',
+ \ 'coc-discord', 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 'coc-godot',
+ \ 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 'coc-jedi',
+ \ 'coc-json', 'coc-markdownlint', 'coc-omnisharp', 'coc-rust-analyzer',
+ \ 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 'coc-toml',
+ \ 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
+
+" call coc#config('languageserver.clangd', {
+    " \ 'command': 'clangd',
+    " \ 'rootPatterns' : ["compile_flags.txt", "compile_commands.json"],
+    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp']
+" \})
+
+" following code works
+" call coc#config('languageserver.ccls', {
+    " \ 'command': 'ccls',
+    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp'],
+    " \ 'rootPatterns' : ['.ccls', '.compile_commands.json', '.git/', '.hg/'],
+    " \ 'initializationOptions': {
+        " \ 'cache': {
+            " \ 'directory': '/tmp/ccls'
+        " \ }
+    " \ }
+" \})
+
+" trigger completion in insert mode with '.'
+" TODO: disable dot only limitation when copilot is offline
+call coc#config('suggest', { 'autoTrigger': 'trigger' })
+call coc#config('signature', {'enable': 0})
 
 " --------------- BASIC COMPILATION SHORTCUTS --------------------------------
 " --------------------- *very much WIP* --------------------------------------
