@@ -92,8 +92,8 @@ map <leader>/ <plug>NERDCommenterToggle
 map <leader>? <plug>NERDCommenterSexy 
 
 " <leader>y to yank to clipboard, <leader>p to paste from clipboard
-nnoremap <leader>y "*y
-nnoremap <leader>p "*p
+noremap <leader>y "*y
+noremap <leader>p "*p
 
 " <leader>p to reformat the current paragraph, concatenating and splitting
 " lines as necessary to fit 80 characters. <leader>l for the current line.
