@@ -21,11 +21,6 @@ Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'davepinto/virtual-column.nvim' " thinner colour column
-Plug 'OmniSharp/omnisharp-vim'       " c# error/warning integration
-Plug 'dense-analysis/ale'            " asynchronous linting
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
-Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
-Plug 'ThePrimeagen/harpoon'          " recently used files
 Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
@@ -126,14 +121,6 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
-" <space>gf to search file-names, <space>gg to search file-content
-nnoremap <leader>gf <cmd>Telescope find_files<cr>
-nnoremap <leader>gg <cmd>Telescope live_grep<cr>
-
-" <space>fa to add the current file to a list, <space>ff to view the list
-nnoremap <leader>ff <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
-nnoremap <leader>fa <cmd>lua require('harpoon.mark').add_file()<cr>
-
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
@@ -207,9 +194,6 @@ let g:NERDToggleCheckAllLines   = 1
 
 " disable start-screen cow
 let g:startify_custom_header    = []
-
-" integrate harpoon with telescope
-lua require('telescope').load_extension('harpoon')
 
 " setup latex stuff
 let g:vimtex_view_method = 'skim'
@@ -288,33 +272,12 @@ set statusline+=\
 " end of default statusline (with ruler)
 " set statusline+=%(%l,%c%V\ %=\ %P%)
 
-" ------------- LINTING, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF --------------
+" -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
-hi ALEError   ctermfg=Red  cterm=none
-hi ALEWarning ctermfg=172  cterm=italic
 
-let g:OmniSharp_highlighting = 0
-let g:OmniSharp_server_use_mono = 1
-let g:ale_linters = {
-\ 'cs': ['OmniSharp'],
-\ 'rust' : ['analyzer'],
-\}
 
-" trigger completion in insert mode with '.'
-" TODO: disable dot only limitation when copilot is offline
-" TODO: swap to something better than coc
-call coc#config('suggest', { 'autoTrigger': 'trigger' })
-
-call coc#config('coc.source.OmniSharp',     {'triggerCharacters': '.'})
-call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.:'})
-call coc#config('coc.source.pyright',       {'triggerCharacters': '.'})
-
-" currently not working, possibly swap to a non-coc plugin since this one's so
-" finicky
-call coc#config('signature', {'enable': 0})
-
-" --------------- BASIC COMPILATION SHORTCUTS -------------------------------
-" --------------------- *very much WIP* ------------------------------------
+" --------------- BASIC COMPILATION SHORTCUTS --------------------------------
+" --------------------- *very much WIP* --------------------------------------
 " <F4> runs the current file assuming it's standalone, <F5> assumes there's
 " some language-specific makefile equivalent.
 " 
@@ -331,3 +294,4 @@ autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -std=c
 autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
+
