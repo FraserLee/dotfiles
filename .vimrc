@@ -20,24 +20,20 @@ Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'davepinto/virtual-column.nvim' " thinner colour column
-Plug 'OmniSharp/omnisharp-vim'       " c# error/warning integration
-Plug 'dense-analysis/ale'            " asynchronous linting
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
-Plug 'nvim-lua/plenary.nvim'         " needed for harpoon
-Plug 'ThePrimeagen/harpoon'          " recently used files
-Plug 'nvim-telescope/telescope.nvim' " run `:checkhealth telescope` after install
+Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
+Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
 " ----------------------------------------------------------------------------
 call plug#end()
 
 " setup tree-sitter, virtual column
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
-require('virtual-column').init{column_number = 79, overlay=false, enabled=true,
-    vert_char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
+require('virt-column').setup{
+    char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
 }
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
@@ -126,14 +122,6 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
-" <space>gf to search file-names, <space>gg to search file-content
-nnoremap <leader>gf <cmd>Telescope find_files<cr>
-nnoremap <leader>gg <cmd>Telescope live_grep<cr>
-
-" <space>fa to add the current file to a list, <space>ff to view the list
-nnoremap <leader>ff <cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>
-nnoremap <leader>fa <cmd>lua require('harpoon.mark').add_file()<cr>
-
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
@@ -188,6 +176,10 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
     " "zc" over these lines 
     " to close, "zo" to open
 
+" <space>gf to search file-names, <space>gg to search file-content
+nnoremap <leader>gf <cmd>Telescope find_files<cr>
+nnoremap <leader>gg <cmd>Telescope live_grep<cr>
+
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
 " Markdown settings
@@ -207,9 +199,6 @@ let g:NERDToggleCheckAllLines   = 1
 
 " disable start-screen cow
 let g:startify_custom_header    = []
-
-" integrate harpoon with telescope
-lua require('telescope').load_extension('harpoon')
 
 " setup latex stuff
 let g:vimtex_view_method = 'skim'
@@ -232,7 +221,6 @@ let g:copilot_filetypes = { 'markdown': v:true }
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
-
 colorscheme gruvbox 
 let g:gruvbox_contrast_dark = 'hard'
 se background=dark
@@ -247,7 +235,7 @@ hi CopilotSuggestion ctermfg=6
 " Set the colourcolumn background to the background colour, foreground to some grey
 execute "hi ColorColumn ctermbg=" . 
             \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
-hi ColorColumn ctermfg=239
+hi VirtColumn ctermfg=239
 
 " -------------------------- SUBMODES ----------------------------------------
              
@@ -288,33 +276,40 @@ set statusline+=\
 " end of default statusline (with ruler)
 " set statusline+=%(%l,%c%V\ %=\ %P%)
 
-" ------------- LINTING, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF --------------
+" -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
-hi ALEError   ctermfg=Red  cterm=none
-hi ALEWarning ctermfg=172  cterm=italic
+let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd',
+ \ 'coc-discord', 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 'coc-godot',
+ \ 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 'coc-jedi',
+ \ 'coc-json', 'coc-markdownlint', 'coc-omnisharp', 'coc-rust-analyzer',
+ \ 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 'coc-toml',
+ \ 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
 
-let g:OmniSharp_highlighting = 0
-let g:OmniSharp_server_use_mono = 1
-let g:ale_linters = {
-\ 'cs': ['OmniSharp'],
-\ 'rust' : ['analyzer'],
-\}
+" call coc#config('languageserver.clangd', {
+    " \ 'command': 'clangd',
+    " \ 'rootPatterns' : ["compile_flags.txt", "compile_commands.json"],
+    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp']
+" \})
+
+" following code works
+" call coc#config('languageserver.ccls', {
+    " \ 'command': 'ccls',
+    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp'],
+    " \ 'rootPatterns' : ['.ccls', '.compile_commands.json', '.git/', '.hg/'],
+    " \ 'initializationOptions': {
+        " \ 'cache': {
+            " \ 'directory': '/tmp/ccls'
+        " \ }
+    " \ }
+" \})
 
 " trigger completion in insert mode with '.'
 " TODO: disable dot only limitation when copilot is offline
-" TODO: swap to something better than coc
 call coc#config('suggest', { 'autoTrigger': 'trigger' })
-
-call coc#config('coc.source.OmniSharp',     {'triggerCharacters': '.'})
-call coc#config('coc.source.rust-analyzer', {'triggerCharacters': '.:'})
-call coc#config('coc.source.pyright',       {'triggerCharacters': '.'})
-
-" currently not working, possibly swap to a non-coc plugin since this one's so
-" finicky
 call coc#config('signature', {'enable': 0})
 
-" --------------- BASIC COMPILATION SHORTCUTS -------------------------------
-" --------------------- *very much WIP* ------------------------------------
+" --------------- BASIC COMPILATION SHORTCUTS --------------------------------
+" --------------------- *very much WIP* --------------------------------------
 " <F4> runs the current file assuming it's standalone, <F5> assumes there's
 " some language-specific makefile equivalent.
 " 
@@ -331,3 +326,4 @@ autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -std=c
 autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
+
