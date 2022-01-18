@@ -122,6 +122,10 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
+" <space>gf to search file-names, <space>gg to search file-content
+nnoremap <leader>gf <cmd>Telescope find_files<cr>
+nnoremap <leader>gg <cmd>Telescope live_grep<cr>
+
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
@@ -175,10 +179,6 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
     " as an example, press 
     " "zc" over these lines 
     " to close, "zo" to open
-
-" <space>gf to search file-names, <space>gg to search file-content
-nnoremap <leader>gf <cmd>Telescope find_files<cr>
-nnoremap <leader>gg <cmd>Telescope live_grep<cr>
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
