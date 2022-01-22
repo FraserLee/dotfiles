@@ -39,7 +39,7 @@ EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
 " Space to <leader> for super convenient combos
-nnoremap <SPACE> <Nop>
+noremap <SPACE> <Nop>
 let mapleader=" "
 
 " Unmap some keys I accidentally hit too much because of dvorak 
