@@ -26,6 +26,7 @@ Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
+Plug 'vimsence/vimsence'
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -219,6 +220,12 @@ let g:wc_conservative_update = 1
 " copilot
 let g:copilot_filetypes = { 'markdown': v:true }
 
+" discord stuff. This is very dumb, but I really like it.
+let g:vimsence_small_text = 'NeoVim'
+let g:vimsence_small_image = 'neovim'
+let g:vimsence_editing_details = 'Kinda neat that this'
+let g:vimsence_editing_state   = 'is in discord, eh?'
+
 " -------------------------- COLOUR SCHEME -----------------------------------
 
 colorscheme gruvbox 
@@ -278,12 +285,12 @@ set statusline+=\
 
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
-let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd',
- \ 'coc-discord', 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 'coc-godot',
- \ 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 'coc-jedi',
- \ 'coc-json', 'coc-markdownlint', 'coc-omnisharp', 'coc-rust-analyzer',
- \ 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 'coc-toml',
- \ 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
+let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd', 
+ \ 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 
+ \ 'coc-godot', 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 
+ \ 'coc-jedi', 'coc-json', 'coc-omnisharp', 
+ \ 'coc-rust-analyzer', 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 
+ \ 'coc-toml', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
 
 " call coc#config('languageserver.clangd', {
     " \ 'command': 'clangd',
