@@ -268,7 +268,7 @@ call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 " ------------------------- FILETYPE JUNK ------------------------------------
 
 " Fix not associating correctly by default
-au BufRead,BufNewFile *.asm set ft=mips
+au BufRead,BufNewFile *.asm set ft=asm "mips
 
 " ------------------------ STATUS LINE ---------------------------------------
 " modified from https://unix.stackexchange.com/a/243667
@@ -288,9 +288,11 @@ set statusline+=\
 let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd', 
  \ 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 
  \ 'coc-godot', 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 
- \ 'coc-jedi', 'coc-json', 'coc-omnisharp', 
+ \ 'coc-jedi', 'coc-json', 
  \ 'coc-rust-analyzer', 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 
  \ 'coc-toml', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
+
+" disabled: 'coc-omnisharp', 
 
 " call coc#config('languageserver.clangd', {
     " \ 'command': 'clangd',
