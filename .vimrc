@@ -25,7 +25,7 @@ Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after insta
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
 Plug 'ChesleyTan/wordCount.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete (used sparingly)
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do' : ':CocUpdate'} " autocomplete (used sparingly)
 Plug 'vimsence/vimsence'
 " ----------------------------------------------------------------------------
 call plug#end()
