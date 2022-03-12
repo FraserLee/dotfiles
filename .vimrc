@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
 Plug 'arecarn/vim-crunch'      " compute math expressions with g={motion}
 Plug 'arecarn/vim-selection'   " required for vim-crunch
-Plug 'FraserLee/vim-polyglot'  " languages, swap back to 'sheerun/vim-polyglot' if my PR is accepted
+Plug 'sheerun/vim-polyglot'    " languages
 Plug 'github/copilot.vim'      " vim-copilot
 Plug 'godlygeek/tabular'       " align stuff
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -20,7 +20,6 @@ Plug 'morhetz/gruvbox'         " colourscheme
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after install
 Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
 Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
@@ -30,12 +29,9 @@ Plug 'vimsence/vimsence'
 " ----------------------------------------------------------------------------
 call plug#end()
 
-" setup tree-sitter, virtual column
+" setup tree-sitter
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
-require('virt-column').setup{
-    char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
-}
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
@@ -239,10 +235,8 @@ hi SpellBad cterm=underline
 " both 6 and 7 look alright in reduced modes, 102 is decent in full
 hi CopilotSuggestion ctermfg=6
 
-" Set the colourcolumn background to the background colour, foreground to some grey
-execute "hi ColorColumn ctermbg=" . 
-            \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
-hi VirtColumn ctermfg=239
+" Set the colourcolumn
+hi ColorColumn ctermbg=239
 
 " -------------------------- SUBMODES ----------------------------------------
              
@@ -267,21 +261,22 @@ call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 
 " ------------------------- FILETYPE JUNK ------------------------------------
 
-" Fix not associating correctly by default
-au BufRead,BufNewFile *.asm set ft=asm "mips
+" Toggle depending on if I'm working more with x86 or mips
+" au BufRead,BufNewFile *.asm set ft=mips
 
 " ------------------------ STATUS LINE ---------------------------------------
 " modified from https://unix.stackexchange.com/a/243667
-" start of default statusline
+" start of default statusline (trailing space)
 set statusline=%f\ %h%w%m%r\ 
 
+" current byte / bytes in file
 " set statusline+=%#lite#\ %o/%{wordcount().bytes}
 
-set statusline+=%=%{wordCount#WordCount()}\ words
-set statusline+=\ 
+" word count (trailing space)
+set statusline+=%=%{wordCount#WordCount()}\ words\ \ 
 
-" end of default statusline (with ruler)
-" set statusline+=%(%l,%c%V\ %=\ %P%)
+" end of default statusline (row, col, percentage)
+set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
