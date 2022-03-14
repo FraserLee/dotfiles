@@ -15,6 +15,10 @@ alias la='ls -A'
 alias 777='chmod -R 777'
 alias 755='chmod -R 755'
 alias v='nvim'
+alias mkdir='mkdir -p'
+mkdircd() { mkdir $1 ; cd $1 }
+alias mkcd='mkdircd'
+
 # make alias echo what it's aliasing
 a_echo() {
     echo "alias $1='$2'"
