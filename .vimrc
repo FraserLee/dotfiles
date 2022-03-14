@@ -262,6 +262,7 @@ call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
 " ------------------------- FILETYPE JUNK ------------------------------------
 
 " Toggle depending on if I'm working more with x86 or mips
+au BufRead,BufNewFile *.asm set ft=asm
 " au BufRead,BufNewFile *.asm set ft=mips
 
 " ------------------------ STATUS LINE ---------------------------------------
