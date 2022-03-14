@@ -181,8 +181,6 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 
 " Markdown settings
 let g:mkdp_command_for_global = 1 " Let :MarkdownPreview work on any file type 
-let g:mkdp_markdown_css = expand('~/vimrc/markdown_style.css') 
-                                    " use my own CSS file
 
 " Evaluate math expressions with g={motion}
 let g:crunch_result_type_append = 0
