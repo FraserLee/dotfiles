@@ -17,6 +17,7 @@ Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
 Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'      " list recently used when starting vim without a file
 Plug 'morhetz/gruvbox'         " colourscheme
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'preservim/nerdcommenter' " comment and uncomment
 Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -26,12 +27,17 @@ Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work
 Plug 'ChesleyTan/wordCount.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do' : ':CocUpdate'} " autocomplete (used sparingly)
 Plug 'vimsence/vimsence'
+Plug '~/ScratchPad'            " Plug 'fraserlee/ScratchPad'
+Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 " ----------------------------------------------------------------------------
 call plug#end()
 
-" setup tree-sitter
+" setup tree-sitter, virtual column
 lua << EOF
 require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
+    require('virt-column').setup{
+        char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
+    }
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
@@ -119,9 +125,8 @@ endfunction
 noremap <leader>t :call TabAlign(0)<cr>
 noremap <leader>T :call TabAlign(1)<cr>
 
-" <space>gf to search file-names, <space>gg to search file-content
-nnoremap <leader>gf <cmd>Telescope find_files<cr>
-nnoremap <leader>gg <cmd>Telescope live_grep<cr>
+" <space>cc to centre the current buffer with 80 width by opening a scratchpad
+nnoremap <leader>cc <cmd>ScratchPad<cr>
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -212,13 +217,14 @@ let g:vimtex_compiler_latexmk = {
 let g:wc_conservative_update = 1
 
 " copilot
-let g:copilot_filetypes = { 'markdown': v:true }
+let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1 }
 
 " discord stuff. This is very dumb, but I really like it.
 let g:vimsence_small_text = 'NeoVim'
 let g:vimsence_small_image = 'neovim'
 let g:vimsence_editing_details = 'Kinda neat that this'
 let g:vimsence_editing_state   = 'is in discord, eh?'
+
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
@@ -233,8 +239,11 @@ hi SpellBad cterm=underline
 " both 6 and 7 look alright in reduced modes, 102 is decent in full
 hi CopilotSuggestion ctermfg=6
 
-" Set the colourcolumn
-hi ColorColumn ctermbg=239
+" Set the colourcolumn background to the background colour, foreground to
+" the same as the window split colour
+execute "hi ColorColumn ctermbg=" . 
+            \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+hi! link VirtColumn VertSplit
 
 " -------------------------- SUBMODES ----------------------------------------
              
