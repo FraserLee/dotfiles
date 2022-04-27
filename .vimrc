@@ -286,25 +286,8 @@ let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd',
  \ 'coc-rust-analyzer', 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 
  \ 'coc-toml', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
 
-" disabled: 'coc-omnisharp', 
+call coc#config('sumneko-lua.enableNvimLuaDev', 1)
 
-" call coc#config('languageserver.clangd', {
-    " \ 'command': 'clangd',
-    " \ 'rootPatterns' : ["compile_flags.txt", "compile_commands.json"],
-    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp']
-" \})
-
-" following code works
-" call coc#config('languageserver.ccls', {
-    " \ 'command': 'ccls',
-    " \ 'filetypes' : ['c', 'cc', 'cpp', 'c++', 'objc', 'objcpp'],
-    " \ 'rootPatterns' : ['.ccls', '.compile_commands.json', '.git/', '.hg/'],
-    " \ 'initializationOptions': {
-        " \ 'cache': {
-            " \ 'directory': '/tmp/ccls'
-        " \ }
-    " \ }
-" \})
 
 " trigger completion in insert mode with '.'
 " TODO: disable dot only limitation when copilot is offline
@@ -329,4 +312,5 @@ autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -std=c
 autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
+
 
