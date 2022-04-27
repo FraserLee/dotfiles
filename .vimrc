@@ -88,8 +88,8 @@ map <leader>? <plug>NERDCommenterSexy
 noremap <leader>y "*y
 noremap <leader>p "*p
 
-" <leader>p to reformat the current paragraph, concatenating and splitting
-" lines as necessary to fit 80 characters. <leader>l for the current line.
+" <leader>m to reformat the current paragraph, concatenating and splitting
+" lines as necessary to fit 80 characters. <leader>w for the current line.
 nnoremap <leader>m gqip
 nnoremap <leader>w gqq
 
