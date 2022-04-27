@@ -34,7 +34,11 @@ call plug#end()
 
 " setup tree-sitter, virtual column
 lua << EOF
-require'nvim-treesitter.configs'.setup{ensure_installed = "maintained", highlight = {enable = true, additional_vim_regex_highlighting = true}}
+    require'nvim-treesitter.configs'.setup{
+        ensure_installed = "all", 
+        ignore_install = { "markdown" },
+        highlight = {enable = true, additional_vim_regex_highlighting = true}
+    }
     require('virt-column').setup{
         char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
