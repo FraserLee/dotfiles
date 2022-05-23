@@ -1,8 +1,8 @@
 " --------------- Auto-install vim-plug if not detected ----------------------
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -131,6 +131,16 @@ noremap <leader>T :call TabAlign(1)<cr>
 
 " <space>cc to centre the current buffer with 80 width by opening a scratchpad
 nnoremap <leader>cc <cmd>ScratchPad<cr>
+
+" <space>cd to set the working directory to the current buffer's directory
+nnoremap <leader>cd :cd %:p:h<cr>
+
+" <space>gg to jump to the definition of the symbol under the cursor
+nnoremap <leader>gg <cmd>call CocActionAsync('jumpDefinition')<cr>
+
+" <space>fffff to ascii-artify the current line
+nnoremap <leader>fffff <cmd>.!figlet<cr>
+
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -326,4 +336,9 @@ autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
 
-
+                   
+"                                                            _  __      ____ _ 
+"                                                           (_) \ \ /\ / / _` |
+"                                                            _   \ V  V / (_| |
+"                                                           (_)   \_/\_/ \__, |
+"                                                                           |_|
