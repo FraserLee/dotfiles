@@ -141,6 +141,27 @@ nnoremap <leader>gg <cmd>call CocActionAsync('jumpDefinition')<cr>
 " <space>fffff to ascii-artify the current line
 nnoremap <leader>fffff <cmd>.!figlet<cr>
 
+" <space>ct to toggle both cursorline and cursorcolumn to the opposite of what they are
+function! ToggleCursorCross()
+    " check current state (instead of just toggling variables individually,
+    " this'll keep stuff in sync)
+    if &cursorcolumn
+        :set nocursorcolumn
+        :set nocursorline
+        :set nolazyredraw
+    else
+        :set cursorcolumn
+        :set cursorline
+        " partial redraw when cross is active, otherwise it's unusable slow
+        " (this occasionally messes up and the screen is inaccurate until you
+        " move, so not on by default)
+        :set lazyredraw
+    endif
+endfunction
+
+nnoremap <leader>ct :call ToggleCursorCross()<cr>
+
+
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -191,10 +212,11 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
 " create folds based on indent-level, auto-open all when entering a file
-autocmd BufEnter * ++nested se fdm=indent foldlevel=100
+autocmd BufEnter * ++nested se fdm=indent
     " as an example, press 
     " "zc" over these lines 
     " to close, "zo" to open
+
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
@@ -304,8 +326,7 @@ set statusline+=%(%l,%c%V\ %=\ %P%)
 
 let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd', 
  \ 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 
- \ 'coc-godot', 'coc-html', 'coc-html', 'coc-html-css-support', 'coc-java', 
- \ 'coc-jedi', 'coc-json', 
+ \ 'coc-godot', 'coc-htmldjango', 'coc-java', 'coc-jedi', 'coc-json', 
  \ 'coc-rust-analyzer', 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 
  \ 'coc-toml', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
 
@@ -316,6 +337,12 @@ call coc#config('sumneko-lua.enableNvimLuaDev', 1)
 " TODO: disable dot only limitation when copilot is offline
 call coc#config('suggest', { 'autoTrigger': 'trigger' })
 call coc#config('signature', {'enable': 0})
+
+" Don't auto-close html tags
+" call coc#config('html.autoCloseTags', 0 )
+
+" Set the language of .html.tera files as html
+autocmd BufNewFile,BufRead *.html.tera set filetype=html
 
 " --------------- BASIC COMPILATION SHORTCUTS --------------------------------
 " --------------------- *very much WIP* --------------------------------------
