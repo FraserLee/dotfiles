@@ -36,6 +36,7 @@ Plug '~/Pinyin'                " Plug 'fraserlee/Pinyin'
 
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 
+Plug 'wellle/context.vim'
 " ----------------------------------------------------------------------------
 call plug#end()
 
