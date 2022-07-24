@@ -15,6 +15,7 @@ alias la='ls -A'
 alias 777='chmod -R 777'
 alias 755='chmod -R 755'
 alias v='nvim'
+alias e='nvim'
 alias mkdir='mkdir -p'
 mkdircd() { mkdir $1 ; cd $1 }
 alias mkcd='mkdircd'
