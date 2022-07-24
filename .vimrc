@@ -215,7 +215,7 @@ se smartcase  " ...unless the search contains an uppercase letter
               " (use /search\C to search case-sensitively)
 
 " Turn on spellcheck, set languages, make uncapitalized text not an error
-se spell spelllang=en_ca,ru spellcapcheck="" 
+se spell spelllang=en_ca,ru,fr spellcapcheck="" 
 
 " Command completion with <tab>
 se wildmenu
