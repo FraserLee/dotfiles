@@ -32,6 +32,7 @@ Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
 Plug 'vimsence/vimsence'
 
 Plug '~/ScratchPad'            " Plug 'fraserlee/ScratchPad'
+Plug '~/Pinyin'                " Plug 'fraserlee/Pinyin'
 
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 
@@ -167,6 +168,8 @@ endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
 
+" Pinyin input.
+let g:pinyin_keys=['d','h','t','n']
 
 
 " ---------------------------- BASIC SETUP -----------------------------------
