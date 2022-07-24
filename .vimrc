@@ -121,6 +121,13 @@ function! TabAlign(zs)
     " get the character under the cursor
     let c = matchstr(getline('.'), '\%' . col('.') . 'c.')
     let pos = getpos(".") " save the position of the cursor
+
+    " if the character needs to be escaped, put a backslash in front of it
+    " Todo: add more characters that need escaping
+    if matchstr(c, '[\\\/]') != ''
+        let c = '\' . c
+    endif
+
     " Tabularize with that character
     if a:zs | :execute ":Tabularize /" . c . "\\zs"
     else    | :execute ":Tabularize /" . c
