@@ -150,6 +150,9 @@ nnoremap <leader>cc <cmd>ScratchPad<cr>
 " <space>cd to set the working directory to the current buffer's directory
 nnoremap <leader>cd :cd %:p:h<cr>
 
+" <space>.. to go up a directory
+nnoremap <leader>.. :cd ..<cr>
+
 " <space>gg to jump to the definition of the symbol under the cursor
 nnoremap <leader>gg <cmd>call CocActionAsync('jumpDefinition')<cr>
 
