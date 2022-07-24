@@ -179,6 +179,9 @@ endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
 
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
 " Pinyin input.
 let g:pinyin_keys=['d','h','t','n']
 
