@@ -27,8 +27,10 @@ Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
 " colourscheme
 Plug 'morhetz/gruvbox'         
-" Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
+Plug 'chriskempson/base16-vim'
+
 
 " ----------------------------------------------------------------------------
 call plug#end()
@@ -107,7 +109,7 @@ function! TabAlign(zs)
 
     " if the character needs to be escaped, put a backslash in front of it
     " Todo: add more characters that need escaping
-    if matchstr(c, '[\\\/]') != ''
+    if matchstr(c, '[\\\/\.]') != ''
         let c = '\' . c
     endif
 
@@ -246,9 +248,20 @@ let g:vimsence_editing_state   = 'is in discord, eh?'
 
 se background=dark
 " se background=light
-" let g:gruvbox_contrast_dark = 'hard'
+
+let g:gruvbox_contrast_dark = 'hard'
+
 " colorscheme gruvbox 
 colorscheme oxocarbon
+
+" se termguicolors
+" colorscheme base16-black-metal-mayhem
+" colorscheme base16-grayscale-dark  
+" colorscheme base16-horizon-dark
+
+
+
+
 
 " set spelling highlighting to underscore
 hi SpellBad cterm=underline 
@@ -259,12 +272,21 @@ hi CopilotSuggestion ctermfg=6
 
 " Set the colourcolumn background to the background colour, foreground to
 " the same as the window split colour
-let g:background_colour = matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
-if g:background_colour != ''
-    execute "hi ColorColumn ctermbg=" . g:background_colour
+let g:c_background_colour = matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+if g:c_background_colour != ''
+    execute "hi ColorColumn ctermbg=" . g:c_background_colour
+    execute "hi LineNR ctermbg="      . g:c_background_colour
+    execute "hi VertSplit ctermbg="   . g:c_background_colour
+endif
+let g:gui_background_colour = matchstr(execute('hi Normal'), 'guibg=\zs\S*')
+if g:gui_background_colour != ''
+    execute "hi ColorColumn guibg=" . g:gui_background_colour
+    execute "hi LineNR guibg="      . g:gui_background_colour
+    execute "hi VertSplit guibg="   . g:gui_background_colour
 endif
 
 hi! link VirtColumn VertSplit
+
 
 " -------------------------- SUBMODES ----------------------------------------
              
