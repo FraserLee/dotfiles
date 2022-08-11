@@ -37,6 +37,8 @@ Plug '~/Pinyin'                " Plug 'fraserlee/Pinyin'
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 
 Plug 'wellle/context.vim'
+
+" Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
 " ----------------------------------------------------------------------------
 call plug#end()
 
@@ -290,6 +292,8 @@ let g:vimsence_editing_state   = 'is in discord, eh?'
 colorscheme gruvbox 
 let g:gruvbox_contrast_dark = 'hard'
 se background=dark
+" se background=light
+" colorscheme oxocarbon
 
 " set spelling highlighting to underscore
 hi SpellBad cterm=underline 
