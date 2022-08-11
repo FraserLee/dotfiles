@@ -17,7 +17,7 @@ Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'vimsence/vimsence'        " discord status from vim
@@ -37,11 +37,19 @@ call plug#end()
 
 " setup tree-sitter, virtual column
 lua << EOF
---    require'nvim-treesitter.configs'.setup{
---        ensure_installed = "all", 
---        ignore_install = { "markdown" },
---        highlight = {enable = true, additional_vim_regex_highlighting = true}
---    }
+    require'nvim-treesitter.configs'.setup{
+        auto_install = true,
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                -- <enter> to select and expand selection via syntax
+                -- <shift+enter> to shrink and deselect
+                init_selection = '<CR>',
+                node_incremental = '<CR>',
+                node_decremental = '<S-CR>',
+            },
+        },
+    }
     require('virt-column').setup{
         char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
