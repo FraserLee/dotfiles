@@ -28,8 +28,16 @@ Plug 'vimsence/vimsence'        " discord status from vim
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'ms-jpq/coq_nvim', { 'branch': 'coq', 'do': ':COQdeps'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
@@ -79,12 +87,62 @@ lua << EOF
  ------------------------ LANGUAGE SHORTCUTS ---------------------------------
 
 
+
+
+    -- Setup nvim-cmp.
+    local cmp = require'cmp'
+
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                vim.fn["vsnip#anonymous"](args.body)
+            end,
+        },
+        window = {
+            -- completion = cmp.config.window.bordered(),
+            -- documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'vsnip' },
+        }, {
+            { name = 'buffer' },
+        })
+    })
+
+    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+            { name = 'buffer' }
+        }
+    })
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+    cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+            { name = 'path' }
+        }, {
+            { name = 'cmdline' }
+        })
+    })
+
+    -- Setup lspconfig.
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     local on_attach = function(client, bufnr)
         local bufopts = { noremap=true, silent=true, buffer=bufnr }
         -- <leader>rn to rename current symbol
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-        -- K to view current documentation
-        -- vim.keymap.set('n', 'K', vim.lsp.buf.
+
+
     end
 
     local lsp_flags = {
@@ -93,61 +151,22 @@ lua << EOF
     }
     
     local lsp = require("lspconfig")
-    local coq = require("coq")
 
     for _, server in ipairs({
-        "arduino_language_server",	 -- Arduino
-        "asm_lsp",	 -- Assembly (GAS/NASM, GO)
-        "bashls",	 -- Bash
-        "clangd",	 -- C
-        "csharp_ls",	 -- C#
-        "omnisharp",	 -- C# (docs)
-        "clangd",	 -- C++
-        "cmake",	 -- CMake
-        "cssls",	 -- CSS
-        "cssmodules_ls",	 -- CSS
-        "diagnosticls",	 -- Diagnostic (general purpose server)
-        "elixirls",	 -- Elixir
-        "fortls",	 -- Fortran
-        "golangci_lint_ls",	 -- Go
-        "gopls",	 -- Go
-        "graphql",	 -- GraphQL
-        "groovyls",	 -- Groovy
-        "html",	 -- HTML
-        "hls",	 -- Haskell
-        "haxe_language_server",	 -- Haxe
-        "jsonls",	 -- JSON
-        "jdtls",	 -- Java
-        "quick_lint_js",	 -- JavaScript
-        "tsserver",	 -- JavaScript
-        "kotlin_language_server",	 -- Kotlin
-        "ltex",	 -- LaTeX
-        "texlab",	 -- LaTeX
-        "sumneko_lua",	 -- Lua
-        "nimls",	 -- Nim
-        "ocamllsp",	 -- OCaml
-        "pyright",	 -- Python
-        "pylsp",	 -- Python (docs)
-        "rust_analyzer",	 -- Rust
-        "sqlls",	 -- SQL
-        "sqls",	 -- SQL
-        "svelte",	 -- Svelte
-        "taplo",	 -- TOML
-        "tailwindcss",	 -- Tailwind CSS
-        "terraformls",	 -- Terraform
-        "tflint",	 -- Terraform (docs)
-        "tsserver",	 -- TypeScript
-        "vimls",	 -- VimL
-        "volar",	 -- Vue
-        "vuels",	 -- Vue
-        "lemminx",	 -- XML
-        "yamlls",	 -- YAML
-        "zls",	 -- Zig
+        "arduino_language_server", "asm_lsp", "bashls", "clangd", "csharp_ls",
+        "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
+        "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
+        "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js",
+        "tsserver", "kotlin_language_server", "ltex", "texlab", "sumneko_lua",
+        "nimls", "ocamllsp", "pyright", "pylsp", "rust_analyzer", "sqlls", "sqls",
+        "svelte", "taplo", "tailwindcss", "terraformls", "tflint", "tsserver",
+        "vimls", "volar", "vuels", "lemminx", "yamlls", "zls"
     }) do
-        lsp[server].setup(coq.lsp_ensure_capabilities({
+        lsp[server].setup{
             on_attach = on_attach,
             flags = lsp_flags,
-        }))
+            capabilities = capabilities
+        }
     end
 
 
