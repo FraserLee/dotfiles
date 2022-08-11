@@ -7,46 +7,39 @@ endif
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
-Plug 'arecarn/vim-crunch'      " compute math expressions with g={motion}
-Plug 'arecarn/vim-selection'   " required for vim-crunch
-Plug 'github/copilot.vim'      " vim-copilot
-Plug 'godlygeek/tabular'       " align stuff
-Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
-Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
-Plug 'mhinz/vim-startify'      " list recently used when starting vim without a file
-Plug 'morhetz/gruvbox'         " colourscheme
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'preservim/nerdcommenter' " comment and uncomment
-Plug 'tommcdo/vim-exchange'    " cx{motion} in normal or X in visual to swap stuff
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-telescope/telescope.nvim'  " run `:checkhealth telescope` after install
-Plug 'svban/YankAssassin.vim'  " move cursor back to where it was when yanked
-Plug 'lervag/vimtex'           " latex auto-compilation (still needs config work)
-Plug 'ChesleyTan/wordCount.vim'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do' : ':CocUpdate'} " autocomplete (used sparingly)
-Plug 'rodrigore/coc-tailwind-intellisense', {'do': 'npm install'}
-
-Plug 'vimsence/vimsence'
-
-Plug '~/ScratchPad'            " Plug 'fraserlee/ScratchPad'
-Plug '~/Pinyin'                " Plug 'fraserlee/Pinyin'
-
+Plug 'arecarn/vim-crunch'       " compute math expressions with g={motion}
+Plug 'arecarn/vim-selection'    " required for vim-crunch
+Plug 'ChesleyTan/wordCount.vim' " word-count function, used in status bar
+Plug 'github/copilot.vim'       " vim-copilot
+Plug 'godlygeek/tabular'        " align stuff
+Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
+Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
+Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
+Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
+Plug 'vimsence/vimsence'        " discord status from vim
+Plug 'wellle/context.vim'       " see context within large scope blocks (needs fast-ish terminal)
+Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
+Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
-Plug 'wellle/context.vim'
+" colourscheme
+Plug 'morhetz/gruvbox'         
+" Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
 
-" Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
 " ----------------------------------------------------------------------------
 call plug#end()
 
 " setup tree-sitter, virtual column
 lua << EOF
-    require'nvim-treesitter.configs'.setup{
-        ensure_installed = "all", 
-        ignore_install = { "markdown" },
-        highlight = {enable = true, additional_vim_regex_highlighting = true}
-    }
+--    require'nvim-treesitter.configs'.setup{
+--        ensure_installed = "all", 
+--        ignore_install = { "markdown" },
+--        highlight = {enable = true, additional_vim_regex_highlighting = true}
+--    }
     require('virt-column').setup{
         char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
@@ -81,7 +74,7 @@ nnoremap U g+
 
 " ------------------------- BASIC SHORTCUTS ---------------------------------
 
-" allow ctrl-z in insert mode to correct the most recent spelling mistake
+" allow <ctrl>z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " sort lines (case insensitive) with <leader>s
@@ -101,7 +94,7 @@ noremap <leader>p "*p
 nnoremap <leader>m gqip
 nnoremap <leader>w gqq
 
-" multi-cursor binds (for mac), <ctrl-j/k> to create up and down cursors
+" multi-cursor binds (for mac), <ctrl>j/k to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
 let g:VM_maps = {} 
 let g:VM_maps["Add Cursor Down"]   = '<C-j>'
@@ -143,13 +136,10 @@ nnoremap <leader>cd :cd %:p:h<cr>
 " <space>.. to go up a directory
 nnoremap <leader>.. :cd ..<cr>
 
-" <space>gg to jump to the definition of the symbol under the cursor
-nnoremap <leader>gg <cmd>call CocActionAsync('jumpDefinition')<cr>
-
 " <space>fffff to ascii-artify the current line
 nnoremap <leader>fffff <cmd>.!figlet<cr>
 
-" <space>ct to toggle both cursorline and cursorcolumn to the opposite of what they are
+" <space>ct to toggle both cursorline and cursorcolumn to create a cool cross-hair
 function! ToggleCursorCross()
     " check current state (instead of just toggling variables individually,
     " this'll keep stuff in sync)
@@ -169,31 +159,10 @@ endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
 
-
-
-" Pinyin input.
-let g:pinyin_keys=['d','h','t','n']
-
 " ------------------------ LANGUAGE SHORTCUTS --------------------------------
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
@@ -252,31 +221,14 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
+" Pinyin input.
+let g:pinyin_keys=['d','h','t','n']
+
 " Evaluate math expressions with g={motion}
 let g:crunch_result_type_append = 0
 
-"A whole whack of default commenting settings
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims           = 1
-let g:NERDCompactSexyComs       = 1
-let g:NERDCommentEmptyLines     = 1
-let g:NERDToggleCheckAllLines   = 1
-
 " disable start-screen cow
 let g:startify_custom_header    = []
-
-" setup latex stuff
-let g:vimtex_view_method = 'skim'
-
-let g:vimtex_compiler_latexmk = {
-    \ 'options' : [
-    \    '-shell-escape',
-    \    '-verbose',
-    \    '-file-line-error',
-    \    '-synctex=1',
-    \    '-interaction=nonstopmode',
-    \ ],
-\}
 
 " word count
 let g:wc_conservative_update = 1
@@ -290,14 +242,13 @@ let g:vimsence_small_image = 'neovim'
 let g:vimsence_editing_details = 'Kinda neat that this'
 let g:vimsence_editing_state   = 'is in discord, eh?'
 
-
 " -------------------------- COLOUR SCHEME -----------------------------------
 
-colorscheme gruvbox 
-let g:gruvbox_contrast_dark = 'hard'
 se background=dark
 " se background=light
-" colorscheme oxocarbon
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox 
+colorscheme oxocarbon
 
 " set spelling highlighting to underscore
 hi SpellBad cterm=underline 
@@ -308,8 +259,11 @@ hi CopilotSuggestion ctermfg=6
 
 " Set the colourcolumn background to the background colour, foreground to
 " the same as the window split colour
-execute "hi ColorColumn ctermbg=" . 
-            \matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+let g:background_colour = matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+if g:background_colour != ''
+    execute "hi ColorColumn ctermbg=" . g:background_colour
+endif
+
 hi! link VirtColumn VertSplit
 
 " -------------------------- SUBMODES ----------------------------------------
@@ -348,23 +302,6 @@ set statusline+=%=%{wordCount#WordCount()}\ words\ \
 set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
-
-let g:coc_global_extensions = [ 'coc-cmake', 'coc-css', 'coc-clangd', 
- \ 'coc-dlang', 'coc-glslx', 'coc-go', 'coc-go', 
- \ 'coc-godot', 'coc-htmldjango', 'coc-java', 'coc-jedi', 'coc-json', 
- \ 'coc-rust-analyzer', 'coc-sh', 'coc-sumneko-lua', 'coc-svg', 'coc-texlab', 
- \ 'coc-toml', 'coc-tsserver', 'coc-vetur', 'coc-yaml', 'coc-zig', ]
-
-call coc#config('sumneko-lua.enableNvimLuaDev', 1)
-
-
-" trigger completion in insert mode with '.'
-" TODO: disable dot only limitation when copilot is offline
-call coc#config('suggest', { 'autoTrigger': 'trigger' })
-call coc#config('signature', {'enable': 0})
-
-" Don't auto-close html tags
-" call coc#config('html.autoCloseTags', 0 )
 
 " Set the language of .html.tera files as html
 autocmd BufNewFile,BufRead *.html.tera set filetype=html
