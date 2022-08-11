@@ -50,5 +50,8 @@ export PATH="/usr/local/opt/node@16/bin:$PATH"
 export HAXE_STD_PATH="/usr/local/lib/haxe/std"
 export RUSTC_WRAPPER="/usr/local/bin/sccache"
 
+# use bat to make man pages more colourful
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 
 clear
