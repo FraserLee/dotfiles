@@ -329,19 +329,13 @@ let g:submode_timeoutlen = 2000
 " don't consume submode-leaving key
 let g:submode_keep_leaving_key = 1
 
-" <leader> plus a direction massively changes window size. Subsequent taps to
-" that a direction change it by 1 (though space can be re-pressed for another
-" large increment).
-"
-" s is also used in place of l
-call submode#enter_with('window_resize', 'n', '', '<leader>h', ':exe "vertical resize " . (winwidth (0) * 4/3)<CR>')
-call submode#enter_with('window_resize', 'n', '', '<leader>s', ':exe "vertical resize " . (winwidth (0) * 3/4)<CR>')
-call submode#enter_with('window_resize', 'n', '', '<leader>j', ':exe          "resize " . (winheight(0) * 4/3)<CR>')
-call submode#enter_with('window_resize', 'n', '', '<leader>k', ':exe          "resize " . (winheight(0) * 3/4)<CR>')
-call submode#map       ('window_resize', 'n', '', 'h', '<C-w>>')
-call submode#map       ('window_resize', 'n', '', 's', '<C-w><')
-call submode#map       ('window_resize', 'n', '', 'j', '<C-w>+')
-call submode#map       ('window_resize', 'n', '', 'k', '<C-w>-')
+" <leader>w enters a submode to resize the current window. From there, hjkl
+" will resize things.
+call submode#enter_with('window_resize', 'n', '', '<leader>w')
+call submode#map       ('window_resize', 'n', '', 'h', '2<C-w>>')
+call submode#map       ('window_resize', 'n', '', 'l', '2<C-w><')
+call submode#map       ('window_resize', 'n', '', 'j', '2<C-w>+')
+call submode#map       ('window_resize', 'n', '', 'k', '2<C-w>-')
 
 " ------------------------- FILETYPE JUNK ------------------------------------
 
