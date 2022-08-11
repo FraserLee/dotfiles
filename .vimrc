@@ -25,6 +25,10 @@ Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'vimsence/vimsence'        " discord status from vim
 
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+
 Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
@@ -60,9 +64,88 @@ lua << EOF
     require('virt-column').setup{
         char = '│', -- | ┃ |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
+    require("mason").setup()
+    require("mason-lspconfig").setup{
+        automatic_installation = true,
+    }
     require("Comment").setup{
         mappings = false, -- suppress default mappings
     }
+
+
+
+ ------------------------ LANGUAGE SHORTCUTS ---------------------------------
+
+
+    local on_attach = function(client, bufnr)
+        local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    end
+
+    local lsp_flags = {
+        -- This is the default in Nvim 0.7+
+        debounce_text_changes = 150,
+    }
+    
+    local lsp = require("lspconfig")
+    local coq = require("coq")
+
+    for _, server in ipairs({
+        "arduino_language_server",	 -- Arduino
+        "asm_lsp",	 -- Assembly (GAS/NASM, GO)
+        "bashls",	 -- Bash
+        "clangd",	 -- C
+        "csharp_ls",	 -- C#
+        "omnisharp",	 -- C# (docs)
+        "clangd",	 -- C++
+        "cmake",	 -- CMake
+        "cssls",	 -- CSS
+        "cssmodules_ls",	 -- CSS
+        "diagnosticls",	 -- Diagnostic (general purpose server)
+        "elixirls",	 -- Elixir
+        "fortls",	 -- Fortran
+        "golangci_lint_ls",	 -- Go
+        "gopls",	 -- Go
+        "graphql",	 -- GraphQL
+        "groovyls",	 -- Groovy
+        "html",	 -- HTML
+        "hls",	 -- Haskell
+        "haxe_language_server",	 -- Haxe
+        "jsonls",	 -- JSON
+        "jdtls",	 -- Java
+        "quick_lint_js",	 -- JavaScript
+        "tsserver",	 -- JavaScript
+        "kotlin_language_server",	 -- Kotlin
+        "ltex",	 -- LaTeX
+        "texlab",	 -- LaTeX
+        "sumneko_lua",	 -- Lua
+        "nimls",	 -- Nim
+        "ocamllsp",	 -- OCaml
+        "pyright",	 -- Python
+        "pylsp",	 -- Python (docs)
+        "rust_analyzer",	 -- Rust
+        "sqlls",	 -- SQL
+        "sqls",	 -- SQL
+        "svelte",	 -- Svelte
+        "taplo",	 -- TOML
+        "tailwindcss",	 -- Tailwind CSS
+        "terraformls",	 -- Terraform
+        "tflint",	 -- Terraform (docs)
+        "tsserver",	 -- TypeScript
+        "vimls",	 -- VimL
+        "volar",	 -- Vue
+        "vuels",	 -- Vue
+        "lemminx",	 -- XML
+        "yamlls",	 -- YAML
+        "zls",	 -- Zig
+    }) do
+        lsp[server].setup(coq.lsp_ensure_capabilities({
+            on_attach = on_attach,
+            flags = lsp_flags,
+        }))
+    end
+
+
+
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
