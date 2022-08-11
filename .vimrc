@@ -18,10 +18,11 @@ Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'vimsence/vimsence'        " discord status from vim
-Plug 'wellle/context.vim'       " see context within large scope blocks (needs fast-ish terminal)
+
 Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
@@ -49,6 +50,10 @@ lua << EOF
                 node_decremental = '<S-CR>',
             },
         },
+    }
+    require'treesitter-context'.setup{
+        patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, },
+        separator = '-',
     }
     require('virt-column').setup{
         char = '|' -- '┃', -- |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
@@ -283,13 +288,16 @@ if g:c_background_colour != ''
     execute "hi ColorColumn ctermbg=" . g:c_background_colour
     execute "hi LineNR ctermbg="      . g:c_background_colour
     execute "hi VertSplit ctermbg="   . g:c_background_colour
+    execute "hi TreesitterContext ctermbg="  . g:c_background_colour
 endif
 let g:gui_background_colour = matchstr(execute('hi Normal'), 'guibg=\zs\S*')
 if g:gui_background_colour != ''
     execute "hi ColorColumn guibg=" . g:gui_background_colour
     execute "hi LineNR guibg="      . g:gui_background_colour
-    execute "hi VertSplit guibg="   . g:gui_background_colour
+    execute "hi TreesitterContext guibg="   . g:gui_background_colour
 endif
+
+hi clear FloatBorder
 
 hi! link VirtColumn VertSplit
 
