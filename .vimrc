@@ -222,11 +222,9 @@ autocmd FileType * se formatoptions-=ro
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
-" create folds based on indent-level, auto-open all when entering a file
-autocmd BufEnter * ++nested se fdm=indent foldlevel=100
-    " as an example, press 
-    " "zc" over these lines 
-    " to close, "zo" to open
+" create folds based on syntax
+" (zc / zC to close folds, zo / zO to open)
+autocmd BufEnter * ++nested se foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
