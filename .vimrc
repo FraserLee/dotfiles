@@ -19,6 +19,7 @@ Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
+Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'vimsence/vimsence'        " discord status from vim
