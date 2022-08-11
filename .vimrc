@@ -30,14 +30,16 @@ Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-calc'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'neovim/nvim-lspconfig'
 
 Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
@@ -84,72 +86,57 @@ lua << EOF
 
 
 
- ------------------------ LANGUAGE SHORTCUTS ---------------------------------
 
-
-
-
-    -- Setup nvim-cmp.
+    -- nvim-cmp configuration
     local cmp = require'cmp'
 
     cmp.setup({
-        snippet = {
-            expand = function(args)
-                vim.fn["vsnip#anonymous"](args.body)
-            end,
-        },
         window = {
-            -- completion = cmp.config.window.bordered(),
-            -- documentation = cmp.config.window.bordered(),
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
         },
+
         mapping = cmp.mapping.preset.insert({
-            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-            ['<C-f>'] = cmp.mapping.scroll_docs(4),
-            ['<C-Space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            ['<C-j>'] = cmp.mapping.scroll_docs(4),
+            ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+            ['<cr>'] = cmp.mapping.confirm({ select = true }),
+            ['<tab>'] = cmp.mapping.confirm({ select = true }),
         }),
-        sources = cmp.config.sources({
+
+        sources = cmp.config.sources( { 
+            { name = 'calc' },
             { name = 'nvim_lsp' },
             { name = 'vsnip' },
-        }, {
-            { name = 'buffer' },
+            { name = 'emoji' },
+            { name = 'path' },
+            { name = 'buffer', keyword_length = 4  },
         })
+
     })
 
-    -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
             { name = 'buffer' }
         }
     })
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = 'path' }
-        }, {
-            { name = 'cmdline' }
-        })
+        sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
     })
 
-    -- Setup lspconfig.
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+
+    -- configure LSP stuff
 
     local on_attach = function(client, bufnr)
         local bufopts = { noremap=true, silent=true, buffer=bufnr }
         -- <leader>rn to rename current symbol
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-
-
     end
 
-    local lsp_flags = {
-        -- This is the default in Nvim 0.7+
-        debounce_text_changes = 150,
-    }
-    
     local lsp = require("lspconfig")
 
     for _, server in ipairs({
@@ -157,18 +144,16 @@ lua << EOF
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
         "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js",
-        "tsserver", "kotlin_language_server", "ltex", "texlab", "sumneko_lua",
+
         "nimls", "ocamllsp", "pyright", "pylsp", "rust_analyzer", "sqlls", "sqls",
         "svelte", "taplo", "tailwindcss", "terraformls", "tflint", "tsserver",
         "vimls", "volar", "vuels", "lemminx", "yamlls", "zls"
     }) do
         lsp[server].setup{
             on_attach = on_attach,
-            flags = lsp_flags,
             capabilities = capabilities
         }
     end
-
 
 
 EOF
