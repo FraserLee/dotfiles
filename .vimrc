@@ -202,6 +202,10 @@ function! ShowDocumentation()
   endif
 endfunction
 
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
