@@ -61,16 +61,6 @@ let mapleader=" "
 nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
 
-" Swap S and L to make dvorak easier
-nnoremap s l
-vnoremap s l
-nnoremap S L
-vnoremap S L
-nnoremap l s
-vnoremap l s
-nnoremap L S
-vnoremap L S
-
 " Make up and down work within wrapped lines
 nnoremap j           gj
 nnoremap k           gk
