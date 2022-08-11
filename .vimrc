@@ -203,9 +203,9 @@ noremap <leader>y "*y
 noremap <leader>p "*p
 
 " <leader>m to reformat the current paragraph, concatenating and splitting
-" lines as necessary to fit 80 characters. <leader>w for the current line.
+" lines as necessary to fit 80 characters. <leader>h for the current line.
 nnoremap <leader>m gqip
-nnoremap <leader>w gqq
+nnoremap <leader>h gqq
 
 " multi-cursor binds (for mac), <ctrl>j/k to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
