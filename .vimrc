@@ -181,11 +181,26 @@ endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+
 
 " Pinyin input.
 let g:pinyin_keys=['d','h','t','n']
+
+" ------------------------ LANGUAGE SHORTCUTS --------------------------------
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 
 " ---------------------------- BASIC SETUP -----------------------------------
@@ -237,7 +252,7 @@ autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
 " create folds based on indent-level, auto-open all when entering a file
-autocmd BufEnter * ++nested se fdm=indent
+autocmd BufEnter * ++nested se fdm=indent foldlevel=100
     " as an example, press 
     " "zc" over these lines 
     " to close, "zo" to open
