@@ -9,10 +9,8 @@ call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
 Plug 'arecarn/vim-crunch'      " compute math expressions with g={motion}
 Plug 'arecarn/vim-selection'   " required for vim-crunch
-Plug 'sheerun/vim-polyglot'    " languages
 Plug 'github/copilot.vim'      " vim-copilot
 Plug 'godlygeek/tabular'       " align stuff
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'kana/vim-submode'        " some more complex shortcuts, chord-style-ish
 Plug 'mg979/vim-visual-multi'  " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'      " list recently used when starting vim without a file
@@ -263,9 +261,6 @@ autocmd BufEnter * ++nested se fdm=indent foldlevel=100
 
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
-
-" Markdown settings
-let g:mkdp_command_for_global = 1 " Let :MarkdownPreview work on any file type 
 
 " Evaluate math expressions with g={motion}
 let g:crunch_result_type_append = 0
