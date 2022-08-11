@@ -48,6 +48,7 @@ set t_vb=
 # env things
 export PATH="/usr/local/opt/node@16/bin:$PATH"
 export HAXE_STD_PATH="/usr/local/lib/haxe/std"
+export RUSTC_WRAPPER="/usr/local/bin/sccache"
 
 
 clear
