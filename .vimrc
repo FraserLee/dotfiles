@@ -288,7 +288,7 @@ hi SpellBad cterm=underline
 
 " The default copilot colour is identical to comments in gruvbox,
 " both 6 and 7 look alright in reduced modes, 102 is decent in full
-hi CopilotSuggestion ctermfg=6
+hi CopilotSuggestion ctermfg=6 guifg=#00ffff
 
 " Set the colourcolumn background to the background colour, foreground to
 " the same as the window split colour
