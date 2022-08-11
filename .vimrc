@@ -28,6 +28,8 @@ Plug 'vimsence/vimsence'        " discord status from vim
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'ms-jpq/coq_nvim', { 'branch': 'coq', 'do': ':COQdeps'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
@@ -79,6 +81,10 @@ lua << EOF
 
     local on_attach = function(client, bufnr)
         local bufopts = { noremap=true, silent=true, buffer=bufnr }
+        -- <leader>rn to rename current symbol
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+        -- K to view current documentation
+        -- vim.keymap.set('n', 'K', vim.lsp.buf.
     end
 
     local lsp_flags = {
@@ -265,11 +271,6 @@ function! ToggleCursorCross()
 endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
-
-" ------------------------ LANGUAGE SHORTCUTS --------------------------------
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
