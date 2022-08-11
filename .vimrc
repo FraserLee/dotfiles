@@ -17,7 +17,8 @@ Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
 Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'numToStr/Comment.nvim'    " easier commenting
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
 Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
@@ -59,6 +60,9 @@ lua << EOF
     require('virt-column').setup{
         char = '│', -- | ┃ |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
+    require("Comment").setup{
+        mappings = false, -- suppress default mappings
+    }
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
 
@@ -93,13 +97,17 @@ nnoremap U g+
 " allow <ctrl>z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+" toggle normal comment
+nmap <leader>/ <Plug>(comment_toggle_current_linewise)
+vmap <leader>/ <Plug>(comment_toggle_linewise_visual)
+
+" toggle block comment
+nmap <leader>? <Plug>(comment_toggle_current_blockwise)
+vmap <leader>? <Plug>(comment_toggle_blockwise_visual)
+
+
 " sort lines (case insensitive) with <leader>s
 xnoremap <leader>s :sort i<CR>
-
-" toggle normal comment
-map <leader>/ <plug>NERDCommenterToggle 
-" fancy comment (whatever that means given language and context)
-map <leader>? <plug>NERDCommenterSexy 
 
 " <leader>y to yank to clipboard, <leader>p to paste from clipboard
 noremap <leader>y "*y
