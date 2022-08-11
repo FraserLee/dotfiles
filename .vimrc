@@ -54,7 +54,7 @@ Plug 'chriskempson/base16-vim'
 " ----------------------------------------------------------------------------
 call plug#end()
 
-" setup tree-sitter, virtual column
+" setup a whole bunch of lua stuff
 lua << EOF
     require'nvim-treesitter.configs'.setup{
         auto_install = true,
@@ -100,7 +100,6 @@ lua << EOF
             ['<C-j>'] = cmp.mapping.scroll_docs(4),
             ['<C-k>'] = cmp.mapping.scroll_docs(-4),
             ['<cr>'] = cmp.mapping.confirm({ select = true }),
-            ['<tab>'] = cmp.mapping.confirm({ select = true }),
         }),
 
         sources = cmp.config.sources( { 
@@ -109,8 +108,10 @@ lua << EOF
             { name = 'vsnip' },
             { name = 'emoji' },
             { name = 'path' },
-            { name = 'buffer', keyword_length = 4  },
+            -- 3 chars min before resorting to simple text-matching
+            { name = 'buffer', keyword_length = 3 }, 
         })
+    
 
     })
 
@@ -360,12 +361,12 @@ se background=dark
 let g:gruvbox_contrast_dark = 'hard'
 
 " colorscheme gruvbox 
-colorscheme oxocarbon
+" colorscheme oxocarbon
 
-" se termguicolors
+se termguicolors
 " colorscheme base16-black-metal-mayhem
 " colorscheme base16-grayscale-dark  
-" colorscheme base16-horizon-dark
+colorscheme base16-horizon-dark
 
 
 
