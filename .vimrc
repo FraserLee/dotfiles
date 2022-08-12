@@ -138,6 +138,8 @@ lua << EOF
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
         -- <leader>gg to jump to the definition of the current symbol
         vim.keymap.set('n', '<leader>gg', vim.lsp.buf.definition, bufopts)
+        -- K to hover some documentation for the current symbol
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     end
 
     local lsp = require("lspconfig")
