@@ -136,6 +136,8 @@ lua << EOF
         local bufopts = { noremap=true, silent=true, buffer=bufnr }
         -- <leader>rn to rename current symbol
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+        -- <leader>gg to jump to the definition of the current symbol
+        vim.keymap.set('n', '<leader>gg', vim.lsp.buf.definition, bufopts)
     end
 
     local lsp = require("lspconfig")
