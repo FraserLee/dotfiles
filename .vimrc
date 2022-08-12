@@ -25,9 +25,10 @@ Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'vimsence/vimsence'        " discord status from vim
 
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'williamboman/mason.nvim'
 
 
 Plug 'hrsh7th/cmp-buffer'
@@ -159,6 +160,10 @@ lua << EOF
             capabilities = capabilities
         }
     end
+
+
+    require("rust-tools").setup()
+        
 
 
 EOF
