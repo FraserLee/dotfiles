@@ -150,7 +150,7 @@ lua << EOF
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
         "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js",
-
+        "tsserver", "kotlin_language_server", "ltex", "texlab", "sumneko_lua",
         "nimls", "ocamllsp", "pyright", "pylsp", "rust_analyzer", "sqlls", "sqls",
         "svelte", "taplo", "tailwindcss", "terraformls", "tflint", "tsserver",
         "vimls", "volar", "vuels", "lemminx", "yamlls", "zls"
