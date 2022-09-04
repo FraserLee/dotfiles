@@ -26,7 +26,7 @@ Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap st
 Plug 'vimsence/vimsence'        " discord status from vim
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
+" Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
 
@@ -69,6 +69,10 @@ lua << EOF
                 node_decremental = '<S-CR>',
             },
         },
+        
+        -- highlight = {
+        --     enable = { "markdown" },
+        -- },
     }
     require'treesitter-context'.setup{
         patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, },
@@ -89,6 +93,7 @@ lua << EOF
 
 
     -- nvim-cmp configuration
+    -- TODO: disable on markdown
     local cmp = require'cmp'
 
     cmp.setup({
@@ -156,10 +161,11 @@ lua << EOF
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
         "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js",
-        "tsserver", "kotlin_language_server", "ltex", "texlab", "sumneko_lua",
-        "nimls", "ocamllsp", "pyright", "pylsp", --[[ "rust_analyzer", ]] "sqlls", "sqls",
-        "svelte", "taplo", "tailwindcss", "terraformls", "tflint", "tsserver",
-        "vimls", "volar", "vuels", "lemminx", "yamlls", "zls"
+        "tsserver", "kotlin_language_server", "texlab", "sumneko_lua",
+        "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo",
+        "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar",
+        "vuels", "lemminx", "yamlls", "zls",
+        "rust_analyzer",
     }) do
         lsp[server].setup{
             on_attach = on_attach,
@@ -167,11 +173,10 @@ lua << EOF
         }
     end
 
-    require("rust-tools").setup{ server = {
-        on_attach = on_attach,
-        capabilities = capabilities
-    } }
-        
+    -- require("rust-tools").setup{ server = {
+    --     on_attach = on_attach,
+    --     capabilities = capabilities
+    -- } }
 
 
 EOF
