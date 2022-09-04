@@ -383,12 +383,12 @@ se background=dark
 let g:gruvbox_contrast_dark = 'hard'
 
 " colorscheme gruvbox 
-" colorscheme oxocarbon
+colorscheme oxocarbon
 
-se termguicolors
+" se termguicolors
 " colorscheme base16-black-metal-mayhem
 " colorscheme base16-grayscale-dark  
-colorscheme base16-horizon-dark
+" colorscheme base16-horizon-dark
 
 
 
