@@ -14,7 +14,13 @@ alias ll='ls -aAlFG'
 alias 777='chmod -R 777'
 alias 755='chmod -R 755'
 alias e='nvim'
+alias crago='cargo' # inside joke
+alias krago='cargo'
 alias mkdir='mkdir -p'
+alias python='python3'
+alias py='python3'
+alias pip='pip3'
+
 mkdircd() { mkdir $1 ; cd $1 }
 alias mkcd='mkdircd'
 
@@ -29,6 +35,7 @@ a_echo mdscript '~/mdscript/mdwatch.py'
 a_echo school 'cd ~/school'
 a_echo gamedev 'cd ~/Documents/gamedev.nosync'
 a_echo keyboard 'cd ~/keyboard'
+a_echo chinese 'cd ~/Desktop/chinese'
 # for every directory in ~/school, create an alias
 for dir in $(ls -d ~/school/*/); do
     dir=${dir%*/}
@@ -48,10 +55,9 @@ set t_vb=
 # env things
 export PATH="/usr/local/opt/node@16/bin:$PATH"
 export HAXE_STD_PATH="/usr/local/lib/haxe/std"
-export RUSTC_WRAPPER="/usr/local/bin/sccache"
+# export RUSTC_WRAPPER="/usr/local/bin/sccache"
 
 # use bat to make man pages more colourful
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
 
 clear
