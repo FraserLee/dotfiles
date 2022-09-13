@@ -93,7 +93,6 @@ lua << EOF
 
 
     -- nvim-cmp configuration
-    -- TODO: disable on markdown
     local cmp = require'cmp'
 
     cmp.setup({
@@ -114,7 +113,7 @@ lua << EOF
             ['<cr>'] = cmp.mapping.confirm({ select = true }),
         }),
 
-        sources = cmp.config.sources( { 
+        sources = cmp.config.sources({ 
             { name = 'calc' },
             { name = 'nvim_lsp' },
             { name = 'vsnip' },
@@ -125,6 +124,15 @@ lua << EOF
         })
     
 
+    })
+
+    -- mostly disable on markdown
+    cmp.setup.filetype('markdown', {
+        sources = cmp.config.sources({ 
+            { name = 'calc' },
+            { name = 'emoji' },
+            { name = 'path' },
+        })
     })
 
     cmp.setup.cmdline('/', {
@@ -349,7 +357,7 @@ autocmd BufWinEnter *.* silent! loadview
 
 " create folds based on syntax
 " (zc / zC to close folds, zo / zO to open)
-autocmd BufEnter * ++nested se foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+autocmd BufEnter * ++nested se foldlevel=100 foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
