@@ -403,6 +403,10 @@ let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1 }
 " let g:vimsence_editing_details = 'Kinda neat that this'
 " let g:vimsence_editing_state   = 'is in discord, eh?'
 
+
+" ocaml slight config thing
+set rtp^="/Users/fraser/.opam/default/share/ocp-indent/vim"
+
 " -------------------------- COLOUR SCHEME -----------------------------------
 
 se background=dark
