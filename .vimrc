@@ -23,7 +23,7 @@ Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope 
 Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
-Plug 'vimsence/vimsence'        " discord status from vim
+" Plug 'vimsence/vimsence'        " discord status from vim
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -377,11 +377,12 @@ let g:wc_conservative_update = 1
 " copilot
 let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1 }
 
-" discord stuff. This is very dumb, but I really like it.
-let g:vimsence_small_text = 'NeoVim'
-let g:vimsence_small_image = 'neovim'
-let g:vimsence_editing_details = 'Kinda neat that this'
-let g:vimsence_editing_state   = 'is in discord, eh?'
+" (disabled for the moment)
+" " discord stuff. This is very dumb, but I really like it.
+" let g:vimsence_small_text = 'NeoVim'
+" let g:vimsence_small_image = 'neovim'
+" let g:vimsence_editing_details = 'Kinda neat that this'
+" let g:vimsence_editing_state   = 'is in discord, eh?'
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
