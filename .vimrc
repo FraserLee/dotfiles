@@ -389,16 +389,16 @@ let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1 }
 se background=dark
 " se background=light
 
+se termguicolors
+
 let g:gruvbox_contrast_dark = 'hard'
 
-" colorscheme gruvbox 
-colorscheme oxocarbon
+colorscheme gruvbox 
+" colorscheme oxocarbon
 
-" se termguicolors
 " colorscheme base16-black-metal-mayhem
 " colorscheme base16-grayscale-dark  
 " colorscheme base16-horizon-dark
-
 
 
 
@@ -409,6 +409,12 @@ hi SpellBad cterm=underline
 " The default copilot colour is identical to comments in gruvbox,
 " both 6 and 7 look alright in reduced modes, 102 is decent in full
 hi CopilotSuggestion ctermfg=6 guifg=#00ffff
+
+" map all nvim-cmp colours to normal text
+hi link CmpItemAbbr normal
+hi link CmpItemAbbrMatch normal
+hi link CmpItemKind normal
+hi link CmpItemMenu normal
 
 " Set the colourcolumn background to the background colour, foreground to
 " the same as the window split colour
