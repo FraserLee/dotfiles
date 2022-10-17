@@ -31,6 +31,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
 
+Plug 'nvim-lua/plenary.nvim'    " required for telescope
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
+
+
 
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
@@ -287,7 +291,7 @@ nnoremap <leader>cd :cd %:p:h<cr>
 nnoremap <leader>.. :cd ..<cr>
 
 " <space>fffff to ascii-artify the current line
-nnoremap <leader>fffff <cmd>.!figlet<cr>
+nnoremap <leader>FFFFF <cmd>.!figlet<cr>
 
 " <space>ct to toggle both cursorline and cursorcolumn to create a cool cross-hair
 function! ToggleCursorCross()
@@ -308,6 +312,14 @@ function! ToggleCursorCross()
 endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
+
+
+
+" Find using Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope old_files<cr>
+
 
 " ---------------------------- BASIC SETUP -----------------------------------
 
