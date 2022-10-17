@@ -24,6 +24,7 @@ Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 " Plug 'vimsence/vimsence'        " discord status from vim
+Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -198,17 +199,17 @@ let mapleader=" "
 nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
 
-" Make up and down work within wrapped lines
-nnoremap j           gj
-nnoremap k           gk
+" Make up and down work within wrapped lines (gj and gk) with acceleration (the plugin)
+nnoremap j           <Plug>(accelerated_jk_gj)
+nnoremap k           <Plug>(accelerated_jk_gk)
 vnoremap j           gj
 vnoremap k           gk
-nnoremap <Down>      gj
-nnoremap <Up>        gk
+nnoremap <Down>      <Plug>(accelerated_jk_gj)
+nnoremap <Up>        <Plug>(accelerated_jk_gk)
 vnoremap <Down>      gj
 vnoremap <Up>        gk
-inoremap <Down> <C-o>gj
-inoremap <Up>   <C-o>gk
+inoremap <Down> <C-o><Plug>(accelerated_jk_gj)
+inoremap <Up>   <C-o><Plug>(accelerated_jk_gk)
 
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -241,6 +242,7 @@ noremap <leader>p "*p
 " lines as necessary to fit 80 characters. <leader>h for the current line.
 nnoremap <leader>m gqip
 nnoremap <leader>h gqq
+
 
 " multi-cursor binds (for mac), <ctrl>j/k to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
