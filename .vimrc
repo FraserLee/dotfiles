@@ -329,7 +329,11 @@ nnoremap <leader>fb <cmd>Telescope old_files<cr>
 " ---------------------------- BASIC SETUP -----------------------------------
 
 se nu           " Turn on line numbers
-se scrolloff=12 " Keep 12 lines of context around cursor
+se rnu          " Disable this on a slower terminal (mac default, etc)
+                " since it creates a lot of latency moving around
+
+se scrolloff=16 " Keep some lines of context around cursor
+
 syntax on       " Turn on syntax highlighting (default in nvim)
 
 " Fix backspace to work more rationally (crikey that's a strange default)
@@ -341,8 +345,8 @@ se expandtab tabstop=4 shiftwidth=4
 " Wrap lines at current indent level, don't split words
 se bri lbr 
 
-" Set the colour-column to 80
-se colorcolumn=80
+" Set the colour-column to fit 80 characters
+se colorcolumn=81
 
 " Don't wrap text when writing
 se textwidth=0
