@@ -223,6 +223,9 @@ inoremap <Up>   <C-o><Plug>(accelerated_jk_gk)
 " remap U to redo
 nnoremap U g+
 
+" map <esc> in normal mode to close help windows and clear search highlights
+nnoremap <silent> <esc> :noh<CR> :helpclose<CR>
+
 " ------------------------- BASIC SHORTCUTS ---------------------------------
 
 " allow <ctrl>z in insert mode to correct the most recent spelling mistake
