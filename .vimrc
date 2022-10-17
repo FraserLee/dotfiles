@@ -152,7 +152,7 @@ lua << EOF
         sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } })
     })
 
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
     -- configure LSP stuff
@@ -227,11 +227,11 @@ nnoremap U g+
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " toggle normal comment
-nmap <leader>/ <Plug>(comment_toggle_current_linewise)
+nmap <leader>/ <Plug>(comment_toggle_linewise_current)
 vmap <leader>/ <Plug>(comment_toggle_linewise_visual)
 
 " toggle block comment
-nmap <leader>? <Plug>(comment_toggle_current_blockwise)
+nmap <leader>? <Plug>(comment_toggle_blockwise_current)
 vmap <leader>? <Plug>(comment_toggle_blockwise_visual)
 
 
