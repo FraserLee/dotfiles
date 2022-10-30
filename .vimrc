@@ -320,6 +320,8 @@ endfunction
 
 nnoremap <leader>ct :call ToggleCursorCross()<cr>
 
+" ensure default lazyredraw is off
+set nolazyredraw
 
 
 " Find using Telescope
