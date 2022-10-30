@@ -23,8 +23,10 @@ Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope 
 Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
-" Plug 'vimsence/vimsence'        " discord status from vim
+" Plug 'vimsence/vimsence'      " discord status from vim
 Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
+" Plug 'tpope/vim-sleuth'         " automatically detect indentation
+
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -365,6 +367,9 @@ se spell spelllang=en_ca,ru,fr,cjk spellcapcheck=""
 se wildmenu
 se wildmode=longest:full,full " First <tab> fills the longest common string, 
                               " further <tab>s cycle through matches 
+
+set undofile 
+set undodir=~/.vim/undodir
 
 " escape terminal with <esc>
 tnoremap <Esc> <C-\><C-n>
