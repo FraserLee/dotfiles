@@ -65,7 +65,7 @@ call plug#end()
 " setup a whole bunch of lua stuff
 lua << EOF
     require'nvim-treesitter.configs'.setup{
-        auto_install = true,
+        ensure_installed = "all",
         incremental_selection = {
             enable = true,
             keymaps = {
@@ -129,8 +129,6 @@ lua << EOF
             -- 3 chars min before resorting to simple text-matching
             { name = 'buffer', keyword_length = 3 }, 
         })
-    
-
     })
 
     -- mostly disable on markdown
@@ -174,15 +172,16 @@ lua << EOF
     local lsp = require("lspconfig")
 
     for _, server in ipairs({
+
         "arduino_language_server", "asm_lsp", "bashls", "clangd", "csharp_ls",
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
-        "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js",
-        "tsserver", "kotlin_language_server", "texlab", "sumneko_lua",
-        "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo",
-        "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar",
-        "vuels", "lemminx", "yamlls", "zls",
-        "rust_analyzer",
+        "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js", 
+        "prismals", "tsserver", "kotlin_language_server", "texlab", "sumneko_lua", 
+        "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo", 
+        "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar", 
+        "vuels", "lemminx", "yamlls", "zls", "rust_analyzer",
+
     }) do
         lsp[server].setup{
             on_attach = on_attach,
