@@ -25,7 +25,7 @@ Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 " Plug 'vimsence/vimsence'      " discord status from vim
 Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
-" Plug 'tpope/vim-sleuth'         " automatically detect indentation
+Plug 'tpope/vim-sleuth'         " automatically detect indentation
 
 
 Plug 'neovim/nvim-lspconfig'
