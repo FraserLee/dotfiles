@@ -77,9 +77,10 @@ lua << EOF
             },
         },
         
-        -- highlight = {
-        --     enable = { "markdown" },
-        -- },
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false
+        },
     }
     require'treesitter-context'.setup{
         patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, },
