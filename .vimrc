@@ -208,10 +208,8 @@ nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
 
 " Make up and down work within wrapped lines (gj and gk) with acceleration (the plugin)
-nnoremap j           <Plug>(accelerated_jk_gj)
-nnoremap k           <Plug>(accelerated_jk_gk)
-vnoremap j           gj
-vnoremap k           gk
+nnoremap j           <Plug>(accelerated_jk_j)
+nnoremap k           <Plug>(accelerated_jk_k)
 nnoremap <Down>      <Plug>(accelerated_jk_gj)
 nnoremap <Up>        <Plug>(accelerated_jk_gk)
 vnoremap <Down>      gj
