@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'arecarn/vim-crunch'       " compute math expressions with g={motion}
 Plug 'arecarn/vim-selection'    " required for vim-crunch
-Plug 'ChesleyTan/wordCount.vim' " word-count function, used in status bar
 Plug 'github/copilot.vim'       " vim-copilot
 Plug 'godlygeek/tabular'        " align stuff
 Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
@@ -20,7 +19,6 @@ Plug 'mhinz/vim-startify'       " list recently used when starting vim without a
 Plug 'numToStr/Comment.nvim'    " easier commenting
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
-Plug 'sheerun/vim-polyglot'     " many different languages
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 " Plug 'vimsence/vimsence'      " discord status from vim
@@ -79,7 +77,24 @@ lua << EOF
         
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = false
+            additional_vim_regex_highlighting = false,
+            disable = function(lang, bufnr)
+                -- When opening a markdown file with more than ~700 lines (at least on this laptop),
+                -- Treesitter syntax highlighting and a word-count in the statusline are both
+                -- excruciatingly slow (though, admittedly, I'm pretty sensitive to this -
+                -- typing speed being the reason I ditched an IDE in the first place).
+                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 700 then
+                    -- possibly mess with the statusline here?
+
+                    -- link `markdownError` syntax group to normal, since that gets thrown
+                    -- incorrectly by vim's default markdown syntax
+
+                    vim.cmd('hi link markdownError Normal')
+
+                    return true
+                end
+                return false
+            end
         },
     }
     require'treesitter-context'.setup{
@@ -227,6 +242,10 @@ nnoremap U g+
 nnoremap <silent> <esc> :noh<CR> :helpclose<CR>
 
 " ------------------------- BASIC SHORTCUTS ---------------------------------
+
+" note to self (since I've had to google this multiple times): ctrl+o doesn't
+" really work between files if you've used motions to navigate between files.
+" Use ctrl+t instead.
 
 " allow <ctrl>z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
@@ -399,11 +418,8 @@ let g:crunch_result_type_append = 0
 " disable start-screen cow
 let g:startify_custom_header    = []
 
-" word count
-let g:wc_conservative_update = 1
-
 " copilot
-let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1 }
+let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1 }
 
 " (disabled for the moment)
 " " discord stuff. This is very dumb, but I really like it.
@@ -490,6 +506,9 @@ call submode#map       ('window_resize', 'n', '', 'k', '2<C-w>-')
 au BufRead,BufNewFile *.asm set ft=asm
 " au BufRead,BufNewFile *.asm set ft=mips
 
+" Prisma filetype
+au BufRead,BufNewFile *.prisma set ft=prisma
+
 " ------------------------ STATUS LINE ---------------------------------------
 " modified from https://unix.stackexchange.com/a/243667
 " start of default statusline (trailing space)
@@ -498,9 +517,6 @@ set statusline=%f\ %h%w%m%r\
 " current byte / bytes in file
 " set statusline+=%#lite#\ %o/%{wordcount().bytes}
 
-" word count (trailing space)
-set statusline+=%=%{wordCount#WordCount()}\ words\ \ 
-
 " end of default statusline (row, col, percentage)
 set statusline+=%(%l,%c%V\ %=\ %P%)
 
@@ -508,6 +524,8 @@ set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " Set the language of .html.tera files as html
 autocmd BufNewFile,BufRead *.html.tera set filetype=html
+
+
 
 " --------------- BASIC COMPILATION SHORTCUTS --------------------------------
 " --------------------- *very much WIP* --------------------------------------
