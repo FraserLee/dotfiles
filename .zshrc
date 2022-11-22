@@ -44,6 +44,20 @@ for dir in $(ls -d ~/school/*/); do
     a_echo "${dir##*/}" "cd $dir"
 done
 
+# single command to update everything
+update_all() {
+    echo "---- Update all: Brew ----"
+    brew update
+    brew upgrade
+    echo "---- Update all: Rust ----"
+    rustup self update
+    rustup update
+    echo "---- Update all: done ----"
+    # possibly add more here
+}
+a_echo update_all update_all
+
+
 # colours
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 
