@@ -513,7 +513,46 @@ au BufRead,BufNewFile *.asm set ft=asm
 " Prisma filetype
 au BufRead,BufNewFile *.prisma set ft=prisma
 
-" ------------------------ STATUS LINE ---------------------------------------
+" ---------------------------- WRITE CENTRED LINE ------------------------------
+" I really like a certain style of comment where, from the cursor's position,
+" a number of dashes are written to fill up to 80 characters, with some phrase
+" centred in the middle. This is a function to do that.
+
+lua << EOF
+    function _G.write_centred_line( text )
+        local c = vim.fn.col('.')
+        local line = vim.fn.getline('.')
+
+        -- make the text either an empty string, or pad it with spaces
+        text = (text == nil or text == '') and '' or ' ' .. text .. ' '
+        -- if the line doesn't end in a space, add one
+        if line:sub(-1) ~= ' ' and line:len() > 0 then
+            line = line .. ' '
+        end
+        
+        local line_length = string.len(line)
+        local dash_length = 80 - line_length
+
+        local left = math.floor(dash_length / 2) - math.floor(string.len(text) / 2)
+        local right = dash_length - left - string.len(text)
+
+        local new_line = line .. string.rep('-', left) .. text .. string.rep('-', right)
+        vim.fn.setline('.', new_line)
+        vim.fn.col(c) -- restore cursor position
+    end
+EOF
+
+function! WriteCentredLine()
+    let text = input('Comment Text: ')
+    execute ':lua write_centred_line("' . text . '")'
+endfunction
+
+" <leader>l in normal mode, <ctrl>l in insert mode
+nnoremap <leader>l :call WriteCentredLine()<CR>
+inoremap <c-l> <c-\><c-o>:call WriteCentredLine()<CR>
+
+
+" -------------------------------- STATUS LINE ---------------------------------
 " modified from https://unix.stackexchange.com/a/243667
 " start of default statusline (trailing space)
 set statusline=%f\ %h%w%m%r\ 
