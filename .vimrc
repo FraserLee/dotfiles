@@ -222,13 +222,17 @@ let mapleader=" "
 nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
 
-" Make up and down work within wrapped lines (gj and gk) with acceleration (the plugin)
-nnoremap j           <Plug>(accelerated_jk_j)
-nnoremap k           <Plug>(accelerated_jk_k)
-nnoremap <Down>      <Plug>(accelerated_jk_gj)
-nnoremap <Up>        <Plug>(accelerated_jk_gk)
-vnoremap <Down>      gj
-vnoremap <Up>        gk
+" Make up and down work within wrapped lines (gj and gk) with 
+" acceleration (the plugin). In insert and visual, jk works within wrapped lines
+" while <up> and <down> respect line-numbers. In normal mode, <up> and <down>
+" also work within wrapped lines.
+
+nnoremap j           <Plug>(accelerated_jk_gj)
+nnoremap k           <Plug>(accelerated_jk_gk)
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down>      <Plug>(accelerated_jk_j)
+nnoremap <Up>        <Plug>(accelerated_jk_k)
 inoremap <Down> <C-o><Plug>(accelerated_jk_gj)
 inoremap <Up>   <C-o><Plug>(accelerated_jk_gk)
 
