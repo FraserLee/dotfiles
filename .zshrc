@@ -38,6 +38,7 @@ a_echo gamedev 'cd ~/gamedev'
 a_echo keyboard 'cd ~/keyboard'
 a_echo resume 'cd ~/resume'
 a_echo chinese 'cd ~/Desktop/chinese'
+a_echo aoc 'cd ~/Desktop/aoc2022'
 # for every directory in ~/school, create an alias
 for dir in $(ls -d ~/school/*/); do
     dir=${dir%*/}
@@ -71,8 +72,9 @@ set t_vb=
 # env things
 export PATH="/usr/local/opt/node@16/bin:$PATH"
 export PATH="/Users/fraser/.nimble/bin:$PATH"
-export HAXE_STD_PATH="/usr/local/lib/haxe/std"
+export PATH="$HOME/.ghcup/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export HAXE_STD_PATH="/usr/local/lib/haxe/std"
 # export RUSTC_WRAPPER="/usr/local/bin/sccache"
 eval $(opam env)
 

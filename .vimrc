@@ -28,12 +28,12 @@ Plug 'tpope/vim-sleuth'         " automatically detect indentation
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
+" Plug 'MrcJkb/haskell-tools.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
 
 Plug 'nvim-lua/plenary.nvim'    " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
-
 
 
 Plug 'hrsh7th/cmp-buffer'
@@ -45,9 +45,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/vim-vsnip'
-Plug 'neovim/nvim-lspconfig'
 
-Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
+" Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
 " colourscheme
@@ -192,7 +191,7 @@ lua << EOF
         "arduino_language_server", "asm_lsp", "bashls", "clangd", "csharp_ls",
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
-        "html", "hls", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js", 
+        "html", "haxe_language_server", "jsonls", "jdtls", "quick_lint_js", 
         "prismals", "tsserver", "kotlin_language_server", "texlab", "sumneko_lua", 
         "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo", 
         "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar", 
@@ -206,6 +205,12 @@ lua << EOF
     end
 
     -- require("rust-tools").setup{ server = {
+    --     on_attach = on_attach,
+    --     capabilities = capabilities
+    -- } }
+
+    -- require('haskell-tools').setup {
+    --   hls = {
     --     on_attach = on_attach,
     --     capabilities = capabilities
     -- } }
