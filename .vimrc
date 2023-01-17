@@ -182,7 +182,12 @@ lua << EOF
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
         -- F to open a floating window with any inline diagnostics
         vim.keymap.set('n', 'F', vim.diagnostic.open_float, bufopts)
+
+        if client.config.flags then
+            client.config.flags.allow_incremental_sync = true
+        end
     end
+
 
     local lsp = require("lspconfig")
 
@@ -195,6 +200,7 @@ lua << EOF
         "prismals", "tsserver", "kotlin_language_server", "texlab", "sumneko_lua", 
         "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo", 
         "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar", 
+        "elmls",
         "vuels", "lemminx", "yamlls", "zls", "rust_analyzer",
 
     }) do
