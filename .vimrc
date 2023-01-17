@@ -51,6 +51,8 @@ Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
 " colourscheme
 Plug 'morhetz/gruvbox'         
+Plug 'jamespwilliams/bat.vim'
+Plug 'sickill/vim-monokai'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
 Plug 'chriskempson/base16-vim'
@@ -457,11 +459,19 @@ se termguicolors
 let g:gruvbox_contrast_dark = 'hard'
 
 colorscheme gruvbox 
+
 " colorscheme oxocarbon
 
 " colorscheme base16-black-metal-mayhem
 " colorscheme base16-grayscale-dark  
 " colorscheme base16-horizon-dark
+
+" colorscheme monokai
+" colorscheme bat
+
+" hi Normal guibg=NONE ctermbg=NONE
+
+
 
 
 
