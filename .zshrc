@@ -31,6 +31,7 @@ a_echo() {
 }
 # - my scripts
 a_echo mdscript '~/mdscript/mdwatch.py'
+a_echo dungeon '~/dungeon-note-3/dungeon.py'
 a_echo dw '~/dungeon-note-3/target/debug/dungeon-watch'
 # - my directories
 a_echo school 'cd ~/school'
@@ -74,6 +75,7 @@ export PATH="/usr/local/opt/node@16/bin:$PATH"
 export PATH="/Users/fraser/.nimble/bin:$PATH"
 export PATH="$HOME/.ghcup/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export HAXE_STD_PATH="/usr/local/lib/haxe/std"
 # export RUSTC_WRAPPER="/usr/local/bin/sccache"
 eval $(opam env)
