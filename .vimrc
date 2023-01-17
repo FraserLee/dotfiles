@@ -534,6 +534,9 @@ au BufRead,BufNewFile *.asm set ft=asm
 " Prisma filetype
 au BufRead,BufNewFile *.prisma set ft=prisma
 
+" Dungeon filetype
+au BufRead,BufNewFile *.dn set ft=markdown
+
 " ---------------------------- WRITE CENTRED LINE ------------------------------
 " I really like a certain style of comment where, from the cursor's position,
 " a number of dashes are written to fill up to 80 characters, with some phrase
@@ -588,6 +591,9 @@ set statusline+=%(%l,%c%V\ %=\ %P%)
 
 " Set the language of .html.tera files as html
 autocmd BufNewFile,BufRead *.html.tera set filetype=html
+
+" wgsl filetype
+autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 
 
 
