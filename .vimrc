@@ -23,12 +23,12 @@ Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 " Plug 'vimsence/vimsence'      " discord status from vim
 Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
-Plug 'tpope/vim-sleuth'         " automatically detect indentation
-
+" Plug 'tpope/vim-sleuth'         " automatically detect indentation
+Plug 'jansedivy/jai.vim'
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
-" Plug 'MrcJkb/haskell-tools.nvim'
+" Plug 'mrcjkb/haskell-tools.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'williamboman/mason.nvim'
 
@@ -107,7 +107,8 @@ lua << EOF
     }
     require("mason").setup()
     require("mason-lspconfig").setup{
-        automatic_installation = true,
+        -- automatic_installation = true,
+        automatic_installation = false,
     }
     require("Comment").setup{
         mappings = false, -- suppress default mappings
@@ -184,10 +185,6 @@ lua << EOF
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
         -- F to open a floating window with any inline diagnostics
         vim.keymap.set('n', 'F', vim.diagnostic.open_float, bufopts)
-
-        if client.config.flags then
-            client.config.flags.allow_incremental_sync = true
-        end
     end
 
 
@@ -203,6 +200,8 @@ lua << EOF
         "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo", 
         "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar", 
         "elmls",
+        "rust_analyzer", 
+        "hls",
         "vuels", "lemminx", "yamlls", "zls", "rust_analyzer",
 
     }) do
