@@ -575,17 +575,6 @@ nnoremap <leader>l :call WriteCentredLine()<CR>
 inoremap <c-l> <c-\><c-o>:call WriteCentredLine()<CR>
 
 
-" -------------------------------- STATUS LINE ---------------------------------
-" modified from https://unix.stackexchange.com/a/243667
-" start of default statusline (trailing space)
-set statusline=%f\ %h%w%m%r\ 
-
-" current byte / bytes in file
-" set statusline+=%#lite#\ %o/%{wordcount().bytes}
-
-" end of default statusline (row, col, percentage)
-set statusline+=%(%l,%c%V\ %=\ %P%)
-
 " -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
 " Set the language of .html.tera files as html
