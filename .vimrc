@@ -53,9 +53,10 @@ Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 Plug 'morhetz/gruvbox'         
 Plug 'jamespwilliams/bat.vim'
 Plug 'sickill/vim-monokai'
+Plug 'ayu-theme/ayu-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
 
 
 " ----------------------------------------------------------------------------
@@ -456,8 +457,10 @@ se background=dark
 se termguicolors
 
 let g:gruvbox_contrast_dark = 'hard'
+let ayucolor="dark"
 
-colorscheme gruvbox 
+" colorscheme gruvbox 
+colorscheme ayu
 
 " colorscheme oxocarbon
 
@@ -467,19 +470,15 @@ colorscheme gruvbox
 
 " colorscheme monokai
 " colorscheme bat
-
 " hi Normal guibg=NONE ctermbg=NONE
 
 
+" set spelling highlighting to underscore, no text colour
+hi clear SpellBad
+hi SpellBad cterm=underline gui=underline
 
-
-
-
-" set spelling highlighting to underscore
-hi SpellBad cterm=underline 
-
-" The default copilot colour is identical to comments in gruvbox,
-" both 6 and 7 look alright in reduced modes, 102 is decent in full
+" The default copilot colour is identical to comments in gruvbox - hard to
+" read. Both 6 and 7 look alright in reduced modes, 102 is decent in full.
 hi CopilotSuggestion ctermfg=6 guifg=#00ffff
 
 " map all nvim-cmp colours to normal text
@@ -488,31 +487,51 @@ hi link CmpItemAbbrMatch normal
 hi link CmpItemKind normal
 hi link CmpItemMenu normal
 
-" Set the colourcolumn background to the background colour, foreground to
-" the same as the window split colour
+" I have vim setup with a few visual demarcations around the editable area.
+" - ColourColumn: a vertical line at 81 characters
+" - LineNR: the line numbers
+" - VertSplit: the vertical line between the two panes
+" - TreesitterContext: the horizontal line between scope context and the rest
+"                      if the start of the scope is off-screen
+"
+" I want these all to have the same background colour as normal text, and the
+" same foreground colour as LineNR.
 let g:c_background_colour = matchstr(execute('hi Normal'), 'ctermbg=\zs\S*')
+let g:g_background_colour = matchstr(execute('hi Normal'), 'guibg=\zs\S*')
+let g:c_line_nr_colour = matchstr(execute('hi LineNR'), 'ctermfg=\zs\S*')
+let g:g_line_nr_colour = matchstr(execute('hi LineNR'), 'guifg=\zs\S*')
 if g:c_background_colour != ''
-    execute "hi ColorColumn ctermbg=" . g:c_background_colour
-    execute "hi LineNR ctermbg="      . g:c_background_colour
-    execute "hi VertSplit ctermbg="   . g:c_background_colour
-    execute "hi TreesitterContext ctermbg="  . g:c_background_colour
+    execute "hi ColorColumn ctermbg="       . g:c_background_colour
+    execute "hi LineNR ctermbg="            . g:c_background_colour
+    execute "hi VertSplit ctermbg="         . g:c_background_colour
+    execute "hi TreesitterContext ctermbg=" . g:c_background_colour
 endif
-let g:gui_background_colour = matchstr(execute('hi Normal'), 'guibg=\zs\S*')
-if g:gui_background_colour != ''
-    execute "hi ColorColumn guibg=" . g:gui_background_colour
-    execute "hi LineNR guibg="      . g:gui_background_colour
-    execute "hi TreesitterContext guibg="   . g:gui_background_colour
+if g:g_background_colour != ''
+    execute "hi ColorColumn guibg="       . g:g_background_colour
+    execute "hi LineNR guibg="            . g:g_background_colour
+    execute "hi VertSplit guibg="         . g:g_background_colour
+    execute "hi TreesitterContext guibg=" . g:g_background_colour
+endif
+if g:c_line_nr_colour != ''
+    execute "hi ColorColumn ctermfg="       . g:c_line_nr_colour
+    execute "hi VertSplit ctermfg="         . g:c_line_nr_colour
+    execute "hi TreesitterContext ctermfg=" . g:c_line_nr_colour
+endif
+if g:g_line_nr_colour != ''
+    execute "hi ColorColumn guifg="       . g:g_line_nr_colour
+    execute "hi VertSplit guifg="         . g:g_line_nr_colour
+    execute "hi TreesitterContext guifg=" . g:g_line_nr_colour
 endif
 
+
+hi! link VirtColumn ColorColumn
 hi clear FloatBorder
-
-hi! link VirtColumn VertSplit
-
 
 " -------------------------- SUBMODES ----------------------------------------
              
 let g:submode_timeout = 1 " timeout after 2 seconds
 let g:submode_timeoutlen = 2000
+
 " don't consume submode-leaving key
 let g:submode_keep_leaving_key = 1
 
