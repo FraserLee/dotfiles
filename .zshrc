@@ -6,6 +6,9 @@ PROMPT='%n: %F{blue}%~%f %# '
 # vim style editing
 set -o vi
 
+# if command not found, try to cd to it
+setopt auto_cd
+
 # some useful aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -19,7 +22,7 @@ alias krago='cargo'
 alias mkdir='mkdir -p'
 alias python='python3'
 alias py='python3'
-alias pip='pip3'
+alias pip='python3 -m pip'
 
 mkdircd() { mkdir $1 ; cd $1 }
 alias mkcd='mkdircd'
