@@ -55,9 +55,9 @@ Plug 'jamespwilliams/bat.vim'
 Plug 'sickill/vim-monokai'
 Plug 'ayu-theme/ayu-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'shaunsingh/oxocarbon.nvim', { 'do': './install.sh' }
+Plug 'shaunsingh/oxocarbon.nvim'
 " Plug 'chriskempson/base16-vim'
-
+Plug 'hardselius/warlock'
 
 " ----------------------------------------------------------------------------
 call plug#end()
@@ -467,6 +467,7 @@ let g:gruvbox_contrast_dark = 'hard'
 let ayucolor="dark"
 
 " colorscheme gruvbox 
+
 colorscheme ayu
 
 " colorscheme oxocarbon
@@ -533,6 +534,19 @@ endif
 
 hi! link VirtColumn ColorColumn
 hi clear FloatBorder
+
+hi! link markdownItalic Normal
+
+
+" https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+nnoremap <c-s> :call SynStack()<cr>
 
 " -------------------------- SUBMODES ----------------------------------------
              
