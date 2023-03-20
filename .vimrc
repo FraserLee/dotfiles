@@ -380,7 +380,7 @@ se nu           " Turn on line numbers
 se rnu          " Disable this on a slower terminal (mac default, etc)
                 " since it creates a lot of latency moving around
 
-se scrolloff=16 " Keep some lines of context around cursor
+se scrolloff=10 " Keep some lines of context around cursor
 
 syntax on       " Turn on syntax highlighting (default in nvim)
 
@@ -446,7 +446,7 @@ let g:crunch_result_type_append = 0
 let g:startify_custom_header    = []
 
 " copilot
-let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1 }
+let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1, '' : 1 }
 
 " (disabled for the moment)
 " " discord stuff. This is very dumb, but I really like it.
