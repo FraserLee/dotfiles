@@ -79,6 +79,10 @@ eval $(thefuck --alias)
 # better cd
 eval "$(zoxide init zsh)"
 alias cd='z'
+
+# set i "inspect" to be ls if target is a directory, otherwise bat
+i() { if [ -d "$1" ]; then ls -aAlFG "$1"; else bat "$1"; fi }
+
 # never make a noise ever please
 set visualbell
 set t_vb=
