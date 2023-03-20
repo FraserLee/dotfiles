@@ -53,6 +53,9 @@ for dir in $(ls -d ~/school/*/); do
     a_echo "${dir##*/}" "cd $dir"
 done
 
+# I always forget what tokei is called
+a_echo loc 'tokei'
+
 # single command to update everything
 update_all() {
     echo "---- Update all: Brew ----"
@@ -61,11 +64,11 @@ update_all() {
     echo "---- Update all: Rust ----"
     rustup self update
     rustup update
+    echo "---- Update all: ghcup ----"
+    ghcup upgrade
     echo "---- Update all: done ----"
-    # possibly add more here
+    # possibly add more
 }
-a_echo update_all update_all
-
 
 # colours
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
