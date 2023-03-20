@@ -24,8 +24,9 @@ alias python='python3'
 alias py='python3'
 alias pip='python3 -m pip'
 
-mkdircd() { mkdir $1 ; cd $1 }
-alias mkcd='mkdircd'
+# rotate screen
+alias rot0='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:0"'
+alias rot90='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:90"'
 
 # make alias echo what it's aliasing
 a_echo() {
