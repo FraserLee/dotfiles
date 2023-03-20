@@ -66,16 +66,6 @@ call plug#end()
 lua << EOF
     require'nvim-treesitter.configs'.setup{
         ensure_installed = "all",
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                -- <enter> to select and expand selection via syntax
-                -- <shift+enter> to shrink and deselect
-                init_selection = '<CR>',
-                node_incremental = '<CR>',
-                node_decremental = '<S-CR>',
-            },
-        },
         
         highlight = {
             enable = true,
@@ -85,7 +75,7 @@ lua << EOF
                 -- Treesitter syntax highlighting and a word-count in the statusline are both
                 -- excruciatingly slow (though, admittedly, I'm pretty sensitive to this -
                 -- typing speed being the reason I ditched an IDE in the first place).
-                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 700 then
+                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 1200 then
                     -- possibly mess with the statusline here?
 
                     -- link `markdownError` syntax group to normal, since that gets thrown
@@ -93,6 +83,23 @@ lua << EOF
 
                     vim.cmd('hi link markdownError Normal')
 
+                    return true
+                end
+                return false
+            end
+        },
+
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                -- <enter> to select and expand selection via syntax
+                -- <shift+enter> to shrink and deselect
+                init_selection = '<CR>',
+                node_incremental = '<CR>',
+                node_decremental = '<S-CR>',
+            },
+            disable = function(lang, bufnr)
+                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 1200 then
                     return true
                 end
                 return false
