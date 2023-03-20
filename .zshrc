@@ -1,3 +1,6 @@
+xonsh
+# ----------------------------- fallback: old zshrc ----------------------------
+
 # Note to self: keep this fairly minimal
 
 # setup a good default prompt

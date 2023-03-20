@@ -1,0 +1,47 @@
+# Note to self: keep this fairly minimal
+
+$XONSH_COLOR_STYLE = 'nord-darker'
+
+# setup a good prompt
+$PROMPT = '{cwd}{branch_color}{curr_branch: {}}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
+
+# vim style editing (set -o vi)
+$VI_MODE = True
+
+
+
+# better cd
+xontrib load zoxide
+aliases['cd'] = 'z'
+
+# if command not found, try to cd to it (setopt auto_cd)
+$AUTO_CD = True
+
+
+
+# -------------------------- setup some useful aliases -------------------------
+
+# mkdir and cd in one
+aliases['mkcd'] = lambda d: ![mkdir @(d)] and ![cd @(d)]
+
+aliases['..'] = 'cd ..'
+for i in range(1, 10):
+    # ... doesn't work, I think because it's a python keyword
+    aliases['...' + '.' * i] = f"cd {'../' * (i + 1)}"
+
+aliases['ll']     = 'ls -aAlFG'
+aliases['777']    = 'chmod -R 777'
+aliases['755']    = 'chmod -R 755'
+aliases['e']      = 'nvim'
+aliases['crago']  = 'cargo' # inside joke
+aliases['krago']  = 'cargo'
+aliases['mkdir']  = 'mkdir -p' # why would this not be the default
+aliases['python'] = 'python3'
+aliases['py']     = 'python3'
+aliases['pip']    = 'python3 -m pip'
+aliases['loc']    = 'tokei' # I always forget what tokei is called
+
+
+# rotate screen
+aliases['rot0']  = 'displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:0"'
+aliases['rot90'] = 'displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:90"'
