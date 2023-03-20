@@ -433,6 +433,9 @@ autocmd BufWinEnter *.* silent! loadview
 " (zc / zC to close folds, zo / zO to open)
 autocmd BufEnter * ++nested se foldlevel=100 foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
 
+" fix issue with autoread not working in neovide
+autocmd FocusGained * checktime
+
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
