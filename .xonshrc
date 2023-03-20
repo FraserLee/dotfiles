@@ -45,3 +45,24 @@ aliases['loc']    = 'tokei' # I always forget what tokei is called
 # rotate screen
 aliases['rot0']  = 'displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:0"'
 aliases['rot90'] = 'displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:90"'
+
+
+
+# -------------------------------- local aliases -------------------------------
+
+# my scripts
+aliases['mdscript'] = '~/mdscript/mdwatch.py'
+aliases['dungeon'] = '~/dungeon-note-3/dungeon.py'
+
+# my directories
+aliases['school']   = 'cd ~/school'
+aliases['gamedev']  = 'cd ~/gamedev'
+aliases['keyboard'] = 'cd ~/keyboard'
+aliases['resume']   = 'cd ~/resume'
+aliases['chinese']  = 'cd ~/Desktop/chinese'
+aliases['aoc']      = 'cd ~/Desktop/aoc2022'
+
+# for every directory in ~/school, create an alias
+for dir in $(ls -d ~/school/*/).split('\n'):
+    if len(dir) == 0: continue
+    aliases[dir.split('/')[-2]] = f'cd {dir}'
