@@ -28,6 +28,9 @@ alias pip='python3 -m pip'
 alias rot0='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:0"'
 alias rot90='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:90"'
 
+# mkdir and cd in one
+mkcd() { mkdir $1 ; cd $1 }
+
 # make alias echo what it's aliasing
 a_echo() {
     echo "alias $1='$2'"
