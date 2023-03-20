@@ -76,6 +76,9 @@ source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 # allow "fuck" to correct typos
 eval $(thefuck --alias)
 
+# better cd
+eval "$(zoxide init zsh)"
+alias cd='z'
 # never make a noise ever please
 set visualbell
 set t_vb=
