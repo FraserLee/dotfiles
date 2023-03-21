@@ -8,7 +8,12 @@ $PROMPT = '{cwd}{branch_color}{curr_branch: {}}{RESET} {RED}{last_return_code_if
 # vim style editing (set -o vi)
 $VI_MODE = True
 
-
+# completion settings
+# $UPDATE_COMPLETIONS_ON_KEYPRESS = True
+$AUTO_SUGGEST_IN_COMPLETIONS = True  # populate first completion with autosuggest result
+$COMPLETIONS_CONFIRM         = False # <enter> runs command (doesn't need to confirm completion first)
+$COMPLETION_MODE             = 'menu-complete' # first <tab> completes to longest, 
+                                               # subsequent cycles through options
 
 # better cd
 xontrib load zoxide
@@ -66,3 +71,4 @@ aliases['aoc']      = 'cd ~/Desktop/aoc2022'
 for dir in $(ls -d ~/school/*/).split('\n'):
     if len(dir) == 0: continue
     aliases[dir.split('/')[-2]] = f'cd {dir}'
+
