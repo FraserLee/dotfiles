@@ -1,4 +1,5 @@
 # Note to self: keep this fairly minimal
+source-bash $(/usr/libexec/path_helper -s) # load default apple $PATH
 
 $XONSH_COLOR_STYLE = 'nord-darker'
 
@@ -16,7 +17,7 @@ $COMPLETION_MODE             = 'menu-complete' # first <tab> completes to longes
                                                # subsequent cycles through options
 
 # better cd
-xontrib load zoxide
+execx($(zoxide init xonsh), 'exec', __xonsh__.ctx, filename='zoxide')
 aliases['cd'] = 'z'
 
 # if command not found, try to cd to it (setopt auto_cd)
@@ -31,7 +32,7 @@ aliases['mkcd'] = lambda d: ![mkdir @(d)] and ![cd @(d)]
 
 aliases['..'] = 'cd ..'
 for i in range(1, 10):
-    # ... doesn't work, I think because it's a python keyword
+    # "..." doesn't work, I think because it's a python keyword
     aliases['...' + '.' * i] = f"cd {'../' * (i + 1)}"
 
 aliases['ll']     = 'ls -aAlFG'

@@ -1,4 +1,5 @@
-# README
+A repo containing some config files, along with a quick script to easily
+symlink them onto a new machine.
 
-A repo containing some config files, along with a quick script to easily symlink them onto a new machine. I'm really just keeping this public for a friend, but if you want to have a look around be my guest :)
-
+Xonsh is incredible, all hail xonsh. Nvim is pretty alright too (at least
+whenever LSPs choose to work).
