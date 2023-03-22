@@ -1,9 +1,12 @@
 # Note to self: keep this fairly minimal
-source-bash $(/usr/libexec/path_helper -s) # load default apple $PATH
 
-$XONSH_COLOR_STYLE = 'nord-darker'
+# load default path stuff
+source-bash $(/usr/libexec/path_helper -s)
+source-bash ~/.zshenv
 
 # setup a good prompt
+$XONSH_COLOR_STYLE = 'nord-darker'
+
 $PROMPT = '{cwd}{branch_color}{curr_branch: {}}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
 
 # vim style editing (set -o vi)
