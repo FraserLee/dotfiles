@@ -27,6 +27,8 @@ Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
 Plug 'jansedivy/jai.vim'
 Plug 'abhishekmukherg/xonsh-vim'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
+Plug 'mrshmllow/document-color'
+
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -127,6 +129,11 @@ lua << EOF
         mappings = false, -- suppress default mappings
     }
 
+    require('document-color').setup{
+        mode = 'background',
+    }
+
+
 
 
 
@@ -185,6 +192,8 @@ lua << EOF
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+    capabilities.textDocument.colorProvider = { dynamicRegistration = true, }
+
 
     -- configure LSP stuff
 
@@ -227,6 +236,16 @@ lua << EOF
             capabilities = capabilities
         }
     end
+
+    lsp["tailwindcss"].setup{
+        on_attach = function(client, bufnr)
+            if client.server_capabilities.colorProvider then
+                require("document-color").buf_attach(bufnr)
+            end
+            on_attach(client, bufnr)
+        end,
+        capabilities = capabilities,
+    }
 
     -- require("rust-tools").setup{ server = {
     --     on_attach = on_attach,
