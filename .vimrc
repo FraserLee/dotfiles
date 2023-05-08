@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'arecarn/vim-crunch'       " compute math expressions with g={motion}
 Plug 'arecarn/vim-selection'    " required for vim-crunch
-Plug 'github/copilot.vim'       " vim-copilot
 Plug 'godlygeek/tabular'        " align stuff
 Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
@@ -21,7 +20,6 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
-" Plug 'vimsence/vimsence'      " discord status from vim
 Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
 " Plug 'tpope/vim-sleuth'         " automatically detect indentation
 Plug 'jansedivy/jai.vim'
@@ -29,6 +27,9 @@ Plug 'abhishekmukherg/xonsh-vim'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 Plug 'mrshmllow/document-color'
 
+" AI stuff
+Plug 'github/copilot.vim'       " vim-copilot
+Plug 'madox2/vim-ai'
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
