@@ -26,6 +26,7 @@ Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
 " Plug 'tpope/vim-sleuth'         " automatically detect indentation
 Plug 'jansedivy/jai.vim'
 Plug 'abhishekmukherg/xonsh-vim'
+Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -114,6 +115,9 @@ lua << EOF
     require('virt-column').setup{
         char = '│', -- | ┃ |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
+
+    require('mini.indentscope').setup()
+
     require("mason").setup()
     require("mason-lspconfig").setup{
         -- automatic_installation = true,
@@ -504,6 +508,9 @@ hi link CmpItemAbbr normal
 hi link CmpItemAbbrMatch normal
 hi link CmpItemKind normal
 hi link CmpItemMenu normal
+
+" map scope line to comment
+hi link MiniIndentscopeSymbol Comment
 
 " I have vim setup with a few visual demarcations around the editable area.
 " - ColourColumn: a vertical line at 81 characters
