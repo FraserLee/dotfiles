@@ -25,6 +25,7 @@ Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap st
 Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
 " Plug 'tpope/vim-sleuth'         " automatically detect indentation
 Plug 'jansedivy/jai.vim'
+Plug 'abhishekmukherg/xonsh-vim'
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
