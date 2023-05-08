@@ -9,6 +9,9 @@ $XONSH_COLOR_STYLE = 'nord-darker'
 
 $PROMPT = '{cwd}{branch_color}{curr_branch: {}}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}{BOLD_BLUE}{prompt_end}{RESET} '
 
+# make ls not blue for directories (not really readable by default)
+$LSCOLORS = "Axfxcxdxbxegedabagacad"
+
 # vim style editing (set -o vi)
 $VI_MODE = True
 
