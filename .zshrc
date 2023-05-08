@@ -1,4 +1,3 @@
-xonsh
 # ----------------------------- fallback: old zshrc ----------------------------
 
 # Note to self: keep this fairly minimal
