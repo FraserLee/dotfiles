@@ -50,7 +50,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
 
 " colourscheme
-Plug 'morhetz/gruvbox'         
+Plug 'morhetz/gruvbox'
 Plug 'jamespwilliams/bat.vim'
 Plug 'sickill/vim-monokai'
 Plug 'ayu-theme/ayu-vim'
@@ -66,7 +66,7 @@ call plug#end()
 lua << EOF
     require'nvim-treesitter.configs'.setup{
         ensure_installed = "all",
-        
+
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
@@ -146,20 +146,20 @@ lua << EOF
             ['<cr>'] = cmp.mapping.confirm({ select = true }),
         }),
 
-        sources = cmp.config.sources({ 
+        sources = cmp.config.sources({
             { name = 'calc' },
             { name = 'nvim_lsp' },
             { name = 'vsnip' },
             { name = 'emoji' },
             { name = 'path' },
             -- 3 chars min before resorting to simple text-matching
-            { name = 'buffer', keyword_length = 3 }, 
+            { name = 'buffer', keyword_length = 3 },
         })
     })
 
     -- mostly disable on markdown
     cmp.setup.filetype('markdown', {
-        sources = cmp.config.sources({ 
+        sources = cmp.config.sources({
             { name = 'calc' },
             { name = 'emoji' },
             { name = 'path' },
@@ -203,15 +203,16 @@ lua << EOF
         "arduino_language_server", "asm_lsp", "bashls", "clangd", "csharp_ls",
         "omnisharp", "clangd", "cmake", "cssls", "cssmodules_ls", "diagnosticls",
         "elixirls", "fortls", "golangci_lint_ls", "gopls", "graphql", "groovyls",
-        "html", "haxe_language_server", "jsonls", 
-        -- "jdtls", 
+        "html", "haxe_language_server", "jsonls",
+        -- "jdtls",
         -- "java_language_server",
-        "quick_lint_js", 
-        "prismals", "tsserver", "kotlin_language_server", "texlab", "lua_ls", 
-        "nimls", "ocamllsp", "pyright", "sqlls", "sqls", "svelte", "taplo", 
-        "tailwindcss", "terraformls", "tflint", "tsserver", "vimls", "volar", 
-        -- "elmls",
-        "rust_analyzer", 
+        "quick_lint_js",
+        "prismals", "tsserver", "kotlin_language_server", "texlab", "lua_ls",
+        "nimls", "ocamllsp", "pyright", "sqlls", "svelte", "taplo",
+        -- "tailwindcss", 
+        "terraformls", "tflint", "tsserver", "vimls", "volar",
+        "elmls",
+        "rust_analyzer",
         "hls",
         "vuels", "lemminx", "yamlls", "zls", "rust_analyzer",
 
@@ -241,11 +242,11 @@ EOF
 noremap <SPACE> <Nop>
 let mapleader=" "
 
-" Unmap some keys I accidentally hit too much because of dvorak 
+" Unmap some keys I accidentally hit too much because of dvorak
 nnoremap <S-q> <Nop>
 nnoremap <C-z> <Nop>
 
-" Make up and down work within wrapped lines (gj and gk) with 
+" Make up and down work within wrapped lines (gj and gk) with
 " acceleration (the plugin). In insert and visual, jk works within wrapped lines
 " while <up> and <down> respect line-numbers. In normal mode, <up> and <down>
 " also work within wrapped lines.
@@ -298,10 +299,12 @@ noremap <leader>p "*p
 nnoremap <leader>m gqip
 nnoremap <leader>h gqq
 
+" <leader>S to remove all trailing whitespace from the current buffer
+nnoremap <leader>S :%s/\s\+$//e<CR>
 
 " multi-cursor binds (for mac), <ctrl>j/k to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
-let g:VM_maps = {} 
+let g:VM_maps = {}
 let g:VM_maps["Add Cursor Down"]   = '<C-j>'
 let g:VM_maps["Add Cursor Up"]     = '<C-k>'
 
@@ -388,10 +391,10 @@ syntax on       " Turn on syntax highlighting (default in nvim)
 se backspace=indent,eol,start
 
 " Set tabs to 4 spaces
-se expandtab tabstop=4 shiftwidth=4 
+se expandtab tabstop=4 shiftwidth=4
 
 " Wrap lines at current indent level, don't split words
-se bri lbr 
+se bri lbr
 
 " Set the colour-column to fit 80 characters
 se colorcolumn=81
@@ -403,18 +406,18 @@ se textwidth=0
 se hlsearch   " Highlight search matches
 se incsearch  " Display partial matches while searching
 se ignorecase " Ignore case when searching...
-se smartcase  " ...unless the search contains an uppercase letter 
+se smartcase  " ...unless the search contains an uppercase letter
               " (use /search\C to search case-sensitively)
 
 " Turn on spellcheck, set languages, make uncapitalized text not an error
-se spell spelllang=en_ca,ru,fr,cjk spellcapcheck="" 
+se spell spelllang=en_ca,ru,fr,cjk spellcapcheck=""
 
 " Command completion with <tab>
 se wildmenu
-se wildmode=longest:full,full " First <tab> fills the longest common string, 
-                              " further <tab>s cycle through matches 
+se wildmode=longest:full,full " First <tab> fills the longest common string,
+                              " further <tab>s cycle through matches
 
-set undofile 
+set undofile
 set undodir=~/.vim/undodir
 
 " escape terminal with <esc>
@@ -427,7 +430,7 @@ autocmd FileType * se formatoptions-=ro
 " re-open files at the same line as closed
 " (mkdir ~/.vim/view/ if it doesn't already exist)
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent! loadview 
+autocmd BufWinEnter *.* silent! loadview
 
 " create folds based on syntax
 " (zc / zC to close folds, zo / zO to open)
@@ -472,14 +475,14 @@ se termguicolors
 let g:gruvbox_contrast_dark = 'hard'
 let ayucolor="dark"
 
-" colorscheme gruvbox 
+" colorscheme gruvbox
 
 colorscheme ayu
 
 " colorscheme oxocarbon
 
 " colorscheme base16-black-metal-mayhem
-" colorscheme base16-grayscale-dark  
+" colorscheme base16-grayscale-dark
 " colorscheme base16-horizon-dark
 
 " colorscheme monokai
@@ -555,7 +558,7 @@ endfunc
 nnoremap <c-s> :call SynStack()<cr>
 
 " -------------------------- SUBMODES ----------------------------------------
-             
+
 let g:submode_timeout = 1 " timeout after 2 seconds
 let g:submode_timeoutlen = 2000
 
@@ -598,7 +601,7 @@ lua << EOF
         if line:sub(-1) ~= ' ' and line:len() > 0 then
             line = line .. ' '
         end
-        
+
         local line_length = string.len(line)
         local dash_length = 80 - line_length
 
@@ -635,12 +638,12 @@ autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 " --------------------- *very much WIP* --------------------------------------
 " <F4> runs the current file assuming it's standalone, <F5> assumes there's
 " some language-specific makefile equivalent.
-" 
+"
 " TODO: add more language type supports
 " TODO: replace current terminal window instead of creating a new one if one
 " exists
 " TODO: auto-shift focus back away from terminal-window if input isn't required
-" 
+"
 " modified majorly from https://stackoverflow.com/a/18296266/
 " <F4>
 autocmd filetype python nnoremap <F4> :w <bar> :vs <bar> te python3 "%:p"<CR>
@@ -650,8 +653,8 @@ autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:
 " <F5>
 autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
 
-                   
-"                                                            _  __      ____ _ 
+
+"                                                            _  __      ____ _
 "                                                           (_) \ \ /\ / / _` |
 "                                                            _   \ V  V / (_| |
 "                                                           (_)   \_/\_/ \__, |
