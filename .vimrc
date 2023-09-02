@@ -8,8 +8,6 @@ endif
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
 
-Plug 'arecarn/vim-crunch'       " compute math expressions with g={motion}
-Plug 'arecarn/vim-selection'    " required for vim-crunch
 Plug 'godlygeek/tabular'        " align stuff
 Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
