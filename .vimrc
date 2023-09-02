@@ -477,7 +477,7 @@ let g:crunch_result_type_append = 0
 let g:startify_custom_header    = []
 
 " copilot
-let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1, '' : 1 }
+let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1, 'zen' : 1, '' : 1 }
 
 " (disabled for the moment)
 " " discord stuff. This is very dumb, but I really like it.
@@ -659,6 +659,9 @@ autocmd BufNewFile,BufRead *.html.tera set filetype=html
 
 " wgsl filetype
 autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
+
+" Set filetype to haskell and disable lsp for .zen files
+autocmd BufNewFile,BufRead *.zen set filetype=haskell | LspStop
 
 
 
