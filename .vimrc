@@ -628,7 +628,7 @@ lua << EOF
 
         local new_line = line .. string.rep('-', left) .. text .. string.rep('-', right)
         vim.fn.setline('.', new_line)
-        vim.fn.col(c) -- restore cursor position
+        vim.fn.cursor(0, c) -- restore cursor position
     end
 EOF
 
