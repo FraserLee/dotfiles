@@ -25,9 +25,7 @@ Plug 'abhishekmukherg/xonsh-vim'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 Plug 'mrshmllow/document-color'
 
-" AI stuff
 Plug 'github/copilot.vim'       " vim-copilot
-Plug 'madox2/vim-ai'
 
 Plug 'neovim/nvim-lspconfig'
 " Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
@@ -37,7 +35,6 @@ Plug 'williamboman/mason.nvim'
 
 Plug 'nvim-lua/plenary.nvim'    " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
-
 
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
@@ -128,12 +125,7 @@ lua << EOF
         mappings = false, -- suppress default mappings
     }
 
-    require('document-color').setup{
-        mode = 'background',
-    }
-
-
-
+    require('document-color').setup{ mode = 'background', }
 
 
     -- nvim-cmp configuration
@@ -222,7 +214,7 @@ lua << EOF
         "quick_lint_js",
         "prismals", "tsserver", "kotlin_language_server", "texlab", "lua_ls",
         "nimls", "ocamllsp", "pyright", "sqlls", "svelte", "taplo",
-        -- "tailwindcss", 
+        -- "tailwindcss",
         "terraformls", "tflint", "tsserver", "vimls", "volar",
         "elmls",
         "rust_analyzer",
