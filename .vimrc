@@ -18,7 +18,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
-Plug 'rhysd/accelerated-jk'     " better acceleration for j/k
+Plug 'PHSix/faster.nvim'        " better acceleration for j/k
 " Plug 'tpope/vim-sleuth'         " automatically detect indentation
 Plug 'jansedivy/jai.vim'
 Plug 'abhishekmukherg/xonsh-vim'
@@ -274,14 +274,14 @@ nnoremap <C-z> <Nop>
 " while <up> and <down> respect line-numbers. In normal mode, <up> and <down>
 " also work within wrapped lines.
 
-nnoremap j           <Plug>(accelerated_jk_gj)
-nnoremap k           <Plug>(accelerated_jk_gk)
+nnoremap j           <Plug>(faster_move_gj)
+nnoremap k           <Plug>(faster_move_gk)
 vnoremap j gj
 vnoremap k gk
-nnoremap <Down>      <Plug>(accelerated_jk_j)
-nnoremap <Up>        <Plug>(accelerated_jk_k)
-inoremap <Down> <C-o><Plug>(accelerated_jk_gj)
-inoremap <Up>   <C-o><Plug>(accelerated_jk_gk)
+nnoremap <Down>      <Plug>(faster_move_j)
+nnoremap <Up>        <Plug>(faster_move_k)
+inoremap <Down> <C-o><Plug>(faster_move_gj)
+inoremap <Up>   <C-o><Plug>(faster_move_gk)
 
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
