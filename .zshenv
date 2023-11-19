@@ -9,3 +9,6 @@ PATH="$HOME/.cabal/bin:$PATH"
 
 PATH="/usr/local/opt/icu4c/bin:$PATH"
 PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+# opam configuration
+test -r /Users/fraser/.opam/opam-init/init.sh && . /Users/fraser/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
