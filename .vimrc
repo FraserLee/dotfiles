@@ -1,3 +1,16 @@
+" ------------------------- FILETYPE JUNK ------------------------------------
+" this needs to be at the start of the file to work properly
+
+" Toggle depending on if I'm working more with x86 or mips
+au BufRead,BufNewFile *.asm set ft=asm
+" au BufRead,BufNewFile *.asm set ft=mips
+
+" Prisma filetype
+au BufRead,BufNewFile *.prisma set ft=prisma
+
+" Dungeon filetype
+au BufRead,BufNewFile *.dn set ft=markdown
+
 " --------------- Auto-install vim-plug if not detected ----------------------
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -449,9 +462,17 @@ autocmd FileType * se formatoptions-=ro
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
 
-" create folds based on syntax
+" create folds based on syntax (disable on markdown because treesitter is
+" currently somewhat broken for it).
 " (zc / zC to close folds, zo / zO to open)
-autocmd BufEnter * ++nested se foldlevel=100 foldmethod=expr foldexpr=nvim_treesitter#foldexpr()
+fun! SetFoldMethod()
+    if &filetype != 'markdown'
+        set foldlevel=100
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+    endif
+endfun
+autocmd BufEnter * call SetFoldMethod()
 
 " fix issue with autoread not working in neovide
 autocmd FocusGained * checktime
@@ -592,18 +613,6 @@ call submode#map       ('window_resize', 'n', '', 'h', '2<C-w>>')
 call submode#map       ('window_resize', 'n', '', 'l', '2<C-w><')
 call submode#map       ('window_resize', 'n', '', 'j', '2<C-w>+')
 call submode#map       ('window_resize', 'n', '', 'k', '2<C-w>-')
-
-" ------------------------- FILETYPE JUNK ------------------------------------
-
-" Toggle depending on if I'm working more with x86 or mips
-au BufRead,BufNewFile *.asm set ft=asm
-" au BufRead,BufNewFile *.asm set ft=mips
-
-" Prisma filetype
-au BufRead,BufNewFile *.prisma set ft=prisma
-
-" Dungeon filetype
-au BufRead,BufNewFile *.dn set ft=markdown
 
 " ---------------------------- WRITE CENTRED LINE ------------------------------
 " I really like a certain style of comment where, from the cursor's position,
