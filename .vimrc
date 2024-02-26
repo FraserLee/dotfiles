@@ -176,7 +176,7 @@ lua << EOF
     })
 
     -- mostly disable on markdown
-    cmp.setup.filetype('markdown', {
+    cmp.setup.filetype({'markdown', 'text'}, {
         sources = cmp.config.sources({
             { name = 'calc' },
             { name = 'emoji' },
