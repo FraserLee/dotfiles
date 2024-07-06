@@ -64,17 +64,6 @@ source <(fzf --zsh)
 set visualbell
 set t_vb=
 
-# env things
-export PATH="/usr/local/opt/node@16/bin:$PATH"
-export PATH="/Users/fraser/.nimble/bin:$PATH"
-export PATH="$HOME/.ghcup/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/opt/openjdk@17/bin:$PATH" 
-export HAXE_STD_PATH="/usr/local/lib/haxe/std"
-# export RUSTC_WRAPPER="/usr/local/bin/sccache"
-eval $(opam env)
-
 # use bat to make man pages more colourful
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 

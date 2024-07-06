@@ -15,3 +15,13 @@ test -r /Users/fraser/.opam/opam-init/init.sh && . /Users/fraser/.opam/opam-init
 
 # add scripts folder to path
 PATH=$HOME/dotfiles/scripts:$PATH
+
+PATH="/Users/fraser/.nimble/bin:$PATH"
+
+PATH="/usr/local/sbin:$PATH"
+
+HAXE_STD_PATH="/usr/local/lib/haxe/std"
+
+# RUSTC_WRAPPER="/usr/local/bin/sccache"
+
+# eval $(opam env)
