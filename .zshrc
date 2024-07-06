@@ -78,4 +78,13 @@ eval $(opam env)
 # use bat to make man pages more colourful
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+# autocomplete to history when pressing up
+# https://unix.stackexchange.com/a/672892
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
 clear
