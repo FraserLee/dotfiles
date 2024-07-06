@@ -1,0 +1,10 @@
+[user]
+	email = tomatoesneverlie@gmail.com
+	name = Fraser
+[credential]
+	helper = osxkeychain
+[core]
+	editor = nvim
+[http]
+	postBuffer = 1500M
+	maxRequestBuffer = 500M
