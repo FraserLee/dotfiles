@@ -11,7 +11,9 @@ export PS1="%n: %F{cyan}%~%f \$(parse_git_branch)%# "
 export LSCOLORS="gxfxcxdxbxegedabagacad"
 
 # vim style editing
-set -o vi
+# set -o vi
+# bindkey -v
+bindkey -v '^?' backward-delete-char # fix backspace behaviour
 
 # if command not found, try to cd to it
 setopt auto_cd
