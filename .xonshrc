@@ -81,6 +81,8 @@ for dir in $(ls -d ~/school/*/).split('\n'):
     if len(dir) == 0: continue
     aliases[dir.split('/')[-2]] = f'cd {dir}'
 
+# create a good shorthand for Clang, with the usual flags I want to use
+aliases['c'] = 'clang++ -std=c++11 -Wall -Wextra -Wpedantic -Werror'
 
 # ----------------------------------- scripts ----------------------------------
 
