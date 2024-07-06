@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# https://stackoverflow.com/a/33249416/7602154
+# https://stackoverflow.com/a/4824637
+
+if [[ $1 == '--diff' ]] ; then
+    cmd="diff -u ${@:2}"
+else
+    cmd="git diff $@"
+fi
+
+eval $cmd | gawk '
+  match($0,"^@@ -([0-9]+),([0-9]+) [+]([0-9]+),([0-9]+) @@",a){
+    left=a[1]
+    ll=length(a[2])
+    right=a[3]
+    rl=length(a[4])
+  }
+  /^(---|\+\+\+|[^-+ ])/{ print;next }
+  { line=substr($0,2) }
+  /^[-]/{ padding = right;
+          gsub(/./, " ", padding);
+          printf "-%"ll"s %"rl"s:%s\n",left++,padding,line; next }
+  /^[+]/{ padding = left;
+          gsub(/./, " ", padding);
+          printf "+%"ll"s %"rl"s:%s\n",padding,right++,line; next }
+        { printf " %"ll"s %"rl"s:%s\n",left++,right++,line }
+' | bat
