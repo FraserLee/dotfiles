@@ -47,28 +47,6 @@ alias glf='git log --name-status --pretty=format:"%h --- %ae --- %s"'
 # mkdir and cd in one
 mkcd() { mkdir $1 ; cd $1 }
 
-# make alias echo what it's aliasing
-a_echo() {
-    echo "alias $1='$2'"
-    alias $1="$2"
-}
-# - my scripts
-a_echo mdscript '~/mdscript/mdwatch.py'
-a_echo dungeon '~/dungeon-note-3/dungeon.py'
-a_echo dw '~/dungeon-note-3/target/debug/dungeon-watch'
-# - my directories
-a_echo school 'cd ~/school'
-a_echo gamedev 'cd ~/gamedev'
-a_echo keyboard 'cd ~/keyboard'
-a_echo resume 'cd ~/resume'
-a_echo chinese 'cd ~/Desktop/chinese'
-a_echo aoc 'cd ~/Desktop/aoc2022'
-# for every directory in ~/school, create an alias
-for dir in $(ls -d ~/school/*/); do
-    dir=${dir%*/}
-    a_echo "${dir##*/}" "cd $dir"
-done
-
 # I always forget what tokei is called
 a_echo loc 'tokei'
 
