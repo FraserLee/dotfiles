@@ -48,24 +48,7 @@ alias glf='git log --name-status --pretty=format:"%h --- %ae --- %s"'
 mkcd() { mkdir $1 ; cd $1 }
 
 # I always forget what tokei is called
-a_echo loc 'tokei'
-
-# single command to update everything
-update_all() {
-    echo "---- Update all: Brew ----"
-    brew update
-    brew upgrade
-    echo "---- Update all: Rust ----"
-    rustup self update
-    rustup update
-    echo "---- Update all: ghcup ----"
-    ghcup upgrade
-    echo "---- Update all: done ----"
-    # possibly add more
-}
-
-# colours
-source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+alias loc 'tokei'
 
 # allow "fuck" to correct typos
 eval $(thefuck --alias)
