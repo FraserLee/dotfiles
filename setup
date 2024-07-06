@@ -12,3 +12,13 @@ for item in $(ls -a | grep '^\.' | grep -x -v '.\|..\|.DS_Store\|.git\|.gitignor
 	echo linking $item...
 	ln -s $src $dest # this'll fail if $dest already exists 
 done
+
+# install standard brew packages
+IFS=$'\n'
+for i in $(cat brewlist.txt); do
+    # brew "$i"
+    if [[ $i != \#* ]] ; 
+    then
+        echo "$i" | xargs brew
+    fi
+done
