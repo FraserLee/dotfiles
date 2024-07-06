@@ -29,7 +29,9 @@ aliases['cd'] = 'z'
 # if command not found, try to cd to it (setopt auto_cd)
 $AUTO_CD = True
 
-
+# good fix, now that pip doesn't have global packages
+xontrib load vox
+vox activate global
 
 # -------------------------- setup some useful aliases -------------------------
 
@@ -94,6 +96,5 @@ for file in $(ls ~/scripts/).split('\n'):
         aliases[name] = f'stack ~/scripts/{file}'
     else:
         aliases[name] = f'~/scripts/{file}'
-
 
 
