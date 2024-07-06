@@ -1,9 +1,14 @@
-# ----------------------------- fallback: old zshrc ----------------------------
-
-# Note to self: keep this fairly minimal
-
 # setup a good default prompt
-PROMPT='%n: %F{blue}%~%f %# '
+# https://thucnc.medium.com/how-to-show-current-git-branch-with-colors-in-bash-prompt-380d05a24745
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[%F{cyan}\1%f] /'
+}
+setopt prompt_subst
+export PS1="%n: %F{cyan}%~%f \$(parse_git_branch)%# "
+# export PS1='%n: %F{cyan}%~%f %# '
+
+# make directories visible for ls
+export LSCOLORS="gxfxcxdxbxegedabagacad"
 
 # vim style editing
 set -o vi
