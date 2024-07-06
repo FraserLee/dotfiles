@@ -18,6 +18,12 @@ bindkey -v '^?' backward-delete-char # fix backspace behaviour
 # if command not found, try to cd to it
 setopt auto_cd
 
+# include .* in *
+set -s dotglob
+
+# don't worry about overwriting files with '>'
+set +o noclobber
+
 # some useful aliases
 alias ..='cd ..'
 alias ...='cd ../..'
