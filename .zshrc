@@ -75,10 +75,6 @@ export HAXE_STD_PATH="/usr/local/lib/haxe/std"
 # export RUSTC_WRAPPER="/usr/local/bin/sccache"
 eval $(opam env)
 
-export PATH="/usr/local/opt/openjdk@17/bin:$PATH" # manually drop java version
-JAVA_HOME=$(/usr/libexec/java_home -v 17)         # down to 17. Delete these lines
-export JAVA_HOME                                  # after finishing comp520.
-
 # use bat to make man pages more colourful
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
