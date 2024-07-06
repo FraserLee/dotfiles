@@ -39,9 +39,10 @@ alias python='python3'
 alias py='python3'
 alias pip='python3 -m pip'
 
-# rotate screen
-alias rot0='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:0"'
-alias rot90='displayplacer "id:295EFFCF-5579-DFC0-9543-25CA8492520A degree:90"'
+# git log but short
+alias gl='git log --pretty=format:"%h --- %ae --- %s"'
+# git log but short but with file names
+alias glf='git log --name-status --pretty=format:"%h --- %ae --- %s"'
 
 # mkdir and cd in one
 mkcd() { mkdir $1 ; cd $1 }
