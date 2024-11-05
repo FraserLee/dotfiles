@@ -694,6 +694,8 @@ autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 " Set filetype to haskell and disable lsp for .zen files
 autocmd BufNewFile,BufRead *.zen set filetype=haskell | LspStop
 
+" indent is broken in python, so disable it
+autocmd FileType python setlocal indentexpr=
 
 
 " --------------- BASIC COMPILATION SHORTCUTS --------------------------------
