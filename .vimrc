@@ -27,7 +27,6 @@ Plug 'godlygeek/tabular'        " align stuff
 Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
-Plug 'mhinz/vim-startify'       " list recently used when starting vim without a file
 Plug 'numToStr/Comment.nvim'    " easier commenting
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
@@ -39,7 +38,7 @@ Plug 'jansedivy/jai.vim'
 Plug 'abhishekmukherg/xonsh-vim'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 Plug 'mrshmllow/document-color'
-
+Plug 'stevearc/oil.nvim'        " edit filesystem like a buffer
 Plug 'github/copilot.vim'       " vim-copilot
 
 Plug 'neovim/nvim-lspconfig'
@@ -73,6 +72,7 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'shaunsingh/oxocarbon.nvim'
 " Plug 'chriskempson/base16-vim'
 Plug 'hardselius/warlock'
+
 
 " ----------------------------------------------------------------------------
 call plug#end()
@@ -291,6 +291,8 @@ lua << EOF
     --     capabilities = capabilities
     -- } }
 
+    require("oil").setup()
+
 
 EOF
 " ---------------------------- MAPPINGS --------------------------------------
@@ -394,6 +396,7 @@ noremap <leader>T :call TabAlign(1)<cr>
 
 " <space>cc to centre the current buffer with 80 width by opening a scratchpad
 nnoremap <leader>cc <cmd>ScratchPad<cr>
+let g:scratchpad_autostart = 0
 
 " <space>cd to set the working directory to the current buffer's directory
 nnoremap <leader>cd :cd %:p:h<cr>
@@ -515,9 +518,6 @@ let g:pinyin_keys=['d','h','t','n']
 
 " Evaluate math expressions with g={motion}
 let g:crunch_result_type_append = 0
-
-" disable start-screen cow
-let g:startify_custom_header    = []
 
 " copilot
 let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1, 'zen' : 1, '' : 1 }
