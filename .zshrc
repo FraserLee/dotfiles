@@ -38,6 +38,10 @@ alias mkdir='mkdir -p'
 alias python='python3'
 alias py='python3'
 alias pip='python3 -m pip'
+alias c='clang++ -std=c++11 -Wall -Wextra -Wpedantic -Werror'
+alias lg='lazygit'
+alias mdscript='~/mdscript/mdwatch.py'
+alias dungeon='~/dungeon-note-3/dungeon.py'
 
 # git log but short
 alias gl='git log --pretty=format:"%h --- %ae --- %s"'
