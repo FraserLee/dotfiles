@@ -262,6 +262,7 @@ lua << EOF
         "vuels",
         "yamlls",
         "zls",
+        "jdtls",
 
     }) do
         lsp[server].setup{
