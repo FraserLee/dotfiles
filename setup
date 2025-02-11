@@ -19,6 +19,6 @@ for i in $(cat install_list.txt); do
     if [[ $i != \#* ]] ; 
     then
         echo "executing: \"$i\""
-        $i
+        eval $i
     fi
 done
