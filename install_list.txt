@@ -82,3 +82,4 @@ brew install xonsh
 brew install yarn
 # brew install zola
 brew install zoxide
+go install github.com/arduino/arduino-language-server@0.7.6
