@@ -1,0 +1,84 @@
+brew install --cask anki
+brew install --cask db-browser-for-sqlite
+brew install --cask devdocs
+brew install --cask disk-inventory-x
+brew install --cask handbrake
+brew install --cask iterm2
+# brew install --cask macfuse
+# brew install --cask mars
+# brew install --cask neovide
+brew install --cask qmk-toolbox
+brew install --cask scroll-reverser
+# brew install --cask warp
+# brew install --cask wkhtmltopdf
+brew install aichat
+# brew install ant
+brew install bat
+brew install bat-extras
+# brew install bench
+# brew install brainfuck
+brew install docker
+brew install dosbox
+brew install dune
+brew install elixir
+brew install elm
+brew install emacs
+# brew install emscripten
+brew install fd
+brew install ffmpeg
+brew install figlet
+brew install fzf
+brew install gawk
+brew install gdb
+brew install gh
+brew install ghcup
+brew install git
+brew install git-lfs
+brew install glow
+brew install go
+brew install gource
+brew install gperftools
+brew install gradle
+brew install graphviz
+brew install grep
+brew install haxe
+brew install helix
+brew install httrack
+brew install jakehilborn/jakehilborn/displayplacer
+brew install jdtls
+brew install kotlin
+brew install llvm
+brew install lua-language-server
+brew install michaeleisel/zld/zld
+brew install mold
+brew install mono
+brew install mp3splt
+brew install nasm
+brew install neovim
+brew install nghttp2
+brew install node
+brew install ocaml
+brew install ollama
+brew install opam
+brew install openjdk
+brew install pari
+brew install qmk/qmk/qmk
+brew install rafaelgarrido/caveats/brew-caveats
+brew install railway
+brew install railwayapp/tap/nixpacks
+brew install ripgrep
+brew install rogue
+brew install rust-analyzer
+brew install sccache
+brew install tealdeer
+brew install thefuck
+brew install tokei
+brew install trash
+brew install tree
+# brew install trunk
+brew install viu
+brew install wget
+brew install xonsh
+brew install yarn
+# brew install zola
+brew install zoxide
