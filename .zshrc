@@ -84,8 +84,16 @@ bindkey "^[[B" down-line-or-beginning-search
 
 
 export HISTSIZE=1000000000
+export HISTFILE=~/.zsh_history
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
+
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
 
 clear
 
