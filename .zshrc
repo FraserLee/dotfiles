@@ -32,6 +32,7 @@ alias ll='ls -aAlFG'
 alias 777='chmod -R 777'
 alias 755='chmod -R 755'
 alias e='nvim'
+alias h='history'
 alias crago='cargo' # inside joke
 alias krago='cargo'
 alias mkdir='mkdir -p'
@@ -42,6 +43,7 @@ alias c='clang++ -std=c++11 -Wall -Wextra -Wpedantic -Werror'
 alias lg='lazygit'
 alias mdscript='~/mdscript/mdwatch.py'
 alias dungeon='~/dungeon-note-3/dungeon.py'
+alias synopsis='/Users/fraser/synopsis/synopsis.py'
 
 # git log but short
 alias gl='git log --pretty=format:"%h --- %ae --- %s"'
