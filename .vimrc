@@ -456,6 +456,8 @@ se backspace=indent,eol,start
 
 " Set tabs to 4 spaces
 se expandtab tabstop=4 shiftwidth=4
+set list
+set listchars=tab:>-
 
 " Wrap lines at current indent level, don't split words
 se bri lbr
