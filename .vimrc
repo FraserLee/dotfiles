@@ -72,6 +72,7 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'shaunsingh/oxocarbon.nvim'
 " Plug 'chriskempson/base16-vim'
 Plug 'hardselius/warlock'
+Plug 'vague2k/vague.nvim'
 
 
 " ----------------------------------------------------------------------------
@@ -128,6 +129,8 @@ lua << EOF
     require('virt-column').setup{
         char = '│', -- | ┃ |-x-| ╳││|‖ ⎸┃¦   :-: ┆ │  ┆┆┊  │⎥ ⎢⎪ ┊ouoeu',
     }
+
+    require("vague").setup({ transparent = true })
 
     require('mini.indentscope').setup()
 
@@ -536,17 +539,19 @@ set rtp^="/Users/fraser/.opam/default/share/ocp-indent/vim"
 
 " -------------------------- COLOUR SCHEME -----------------------------------
 
-se background=dark
-" se background=light
-
 se termguicolors
-
 let g:gruvbox_contrast_dark = 'hard'
+
+" se background=light
+" let ayucolor="light"
+
+se background=dark
 let ayucolor="dark"
 
 " colorscheme gruvbox
 
-colorscheme ayu
+" colorscheme ayu
+colorscheme vague
 
 " colorscheme oxocarbon
 
