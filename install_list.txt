@@ -85,9 +85,6 @@ brew install perl
 brew install pkgconf
 brew install pygments
 brew install pyright
-brew install python@3.11
-brew install python@3.8
-brew install python@3.9
 brew install qmk/qmk/qmk
 brew install rafaelgarrido/caveats/brew-caveats
 brew install railway
@@ -109,3 +106,4 @@ brew install xonsh
 brew install yarn
 # brew install zola
 brew install zoxide
+go install github.com/arduino/arduino-language-server@0.7.6
