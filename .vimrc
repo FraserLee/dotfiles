@@ -455,7 +455,10 @@ syntax on       " Turn on syntax highlighting (default in nvim)
 se backspace=indent,eol,start
 
 " Set tabs to 4 spaces
-se expandtab tabstop=4 shiftwidth=4
+se expandtab
+se tabstop=4
+se shiftwidth=4
+" se shiftwidth=2
 set list
 set listchars=tab:>-
 
