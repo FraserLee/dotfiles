@@ -231,7 +231,6 @@ lua << EOF
         "csharp_ls",
         "cssls",
         "cssmodules_ls",
-        "diagnosticls",
         "elixirls",
         "elmls",
         "fortls",
