@@ -307,7 +307,6 @@ let mapleader=" "
 
 " Unmap some keys I accidentally hit too much because of dvorak
 nnoremap <S-q> <Nop>
-nnoremap <C-z> <Nop>
 
 " Make up and down work within wrapped lines (gj and gk) with
 " acceleration (the plugin). In insert and visual, jk works within wrapped lines
