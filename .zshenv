@@ -3,7 +3,6 @@
 
 # add local bin to path
 PATH="$HOME/.local/bin:$PATH"
-
 PATH="$HOME/.ghcup/bin:$PATH"
 PATH="$HOME/.cabal/bin:$PATH"
 
@@ -24,4 +23,3 @@ HAXE_STD_PATH="/usr/local/lib/haxe/std"
 
 # RUSTC_WRAPPER="/usr/local/bin/sccache"
 
-# eval $(opam env)
