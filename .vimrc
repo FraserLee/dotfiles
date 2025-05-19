@@ -295,7 +295,19 @@ lua << EOF
     --     capabilities = capabilities
     -- } }
 
-    require("oil").setup()
+    require("oil").setup({
+      git = {
+        add = function(path)
+          return true
+        end,
+        mv = function(src_path, dest_path)
+          return true
+        end,
+        rm = function(path)
+          return true
+        end,
+      },
+    })
 
 
 EOF
