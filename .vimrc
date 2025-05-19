@@ -223,7 +223,7 @@ lua << EOF
 
     for _, server in ipairs({
 
-        "arduino_language_server",
+        "arduino_language_server", -- note: needs sketch.yaml to attach
         "asm_lsp",
         "bashls",
         "clangd",
