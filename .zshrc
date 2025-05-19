@@ -82,9 +82,6 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
-
-
-
 export HISTSIZE=1000000000
 export HISTFILE=~/.zsh_history
 export SAVEHIST=$HISTSIZE
@@ -96,6 +93,12 @@ setopt APPEND_HISTORY
 
 setopt HIST_FIND_NO_DUPS
 setopt HIST_REDUCE_BLANKS
+
+# automatically source .venv if we're starting in that directory
+
+if [[ -d ".venv" && "$VIRTUAL_ENV" != "$(pwd)/.venv" ]]; then
+    source .venv/bin/activate
+fi
 
 clear
 
