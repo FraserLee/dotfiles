@@ -372,6 +372,11 @@ noremap <leader>p "*p
 nnoremap <leader>m gqip
 nnoremap <leader>h gqq
 
+
+" <leader>o or <leader>O to add a new line above or below the current line
+nnoremap <silent> <leader>o :put _<CR>
+nnoremap <silent> <leader>O :put! _<CR>
+
 " <leader>S to remove all trailing whitespace from the current buffer
 nnoremap <leader>S :%s/\s\+$//e<CR>
 
