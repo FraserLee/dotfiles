@@ -1,9 +1,10 @@
 [user]
 	email = tomatoesneverlie@gmail.com
-	name = Fraser
+	name = Fraser Ross Lee
 [credential]
 	helper = osxkeychain
 [core]
+	excludesFile = ~/.excludesfile
 	editor = nvim
 [http]
 	postBuffer = 1500M

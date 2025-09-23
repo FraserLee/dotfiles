@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# search with ripgrep and open results in nvim
+rg --vimgrep "$@" | cut -d: -f1,2,3 | xargs nvim

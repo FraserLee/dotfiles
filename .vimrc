@@ -11,12 +11,19 @@ au BufRead,BufNewFile *.prisma set ft=prisma
 " Dungeon filetype
 au BufRead,BufNewFile *.dn set ft=markdown
 
-" --------------- Auto-install vim-plug if not detected ----------------------
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" Set the language of .html.tera files as html
+autocmd BufNewFile,BufRead *.html.tera set filetype=html
+
+" wgsl filetype
+autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
+
+" Set filetype to haskell and disable lsp for .zen files
+autocmd BufNewFile,BufRead *.zen set filetype=haskell | LspStop
+
+" ------------------------------- FILETYPE STUFF -------------------------------
+" best to have this at the top
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown syntax=markdown
+au BufNewFile,BufFilePre,BufRead *.metal set filetype=glsl
 
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
@@ -27,25 +34,20 @@ Plug 'godlygeek/tabular'        " align stuff
 Plug 'kana/vim-submode'         " some more complex shortcuts, chord-style-ish
 Plug 'lukas-reineke/virt-column.nvim' " thinner colour column
 Plug 'mg979/vim-visual-multi'   " sublime-text style multi-cursors
-Plug 'numToStr/Comment.nvim'    " easier commenting
+Plug 'bananartist/Comment.nvim', { 'branch': 'objc' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope blocks (needs fast-ish terminal)
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'PHSix/faster.nvim'        " better acceleration for j/k
-Plug 'tpope/vim-sleuth'         " automatically detect indentation
-Plug 'jansedivy/jai.vim'
-Plug 'abhishekmukherg/xonsh-vim'
+Plug 'conormcd/matchindent.vim' " automatically detect indentation
+Plug 'tpope/vim-abolish'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 Plug 'mrshmllow/document-color'
 Plug 'stevearc/oil.nvim'        " edit filesystem like a buffer
 Plug 'github/copilot.vim'       " vim-copilot
 
 Plug 'neovim/nvim-lspconfig'
-" Plug 'simrat39/rust-tools.nvim' " this is way overkill, I really only want COC-style inline type-info.
-" Plug 'mrcjkb/haskell-tools.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'williamboman/mason.nvim'
 
 Plug 'nvim-lua/plenary.nvim'    " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
@@ -62,6 +64,8 @@ Plug 'hrsh7th/vim-vsnip'
 
 " Plug '~/Pinyin'                 " Plug 'fraserlee/Pinyin'
 Plug '~/ScratchPad'             " Plug 'fraserlee/ScratchPad'
+Plug 'kopischke/vim-fetch' " open file:line_number
+
 
 " colourscheme
 Plug 'morhetz/gruvbox'
@@ -80,7 +84,9 @@ call plug#end()
 
 " setup a whole bunch of lua stuff
 lua << EOF
-    require'nvim-treesitter.configs'.setup{
+
+
+    require("nvim-treesitter.configs").setup{
         ensure_installed = "all",
 
         highlight = {
@@ -91,7 +97,7 @@ lua << EOF
                 -- Treesitter syntax highlighting and a word-count in the statusline are both
                 -- excruciatingly slow (though, admittedly, I'm pretty sensitive to this -
                 -- typing speed being the reason I ditched an IDE in the first place).
-                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 1200 then
+                if lang == "markdown" and vim.api.nvim_buf_line_count(bufnr) > 20000 then
                     -- possibly mess with the statusline here?
 
                     -- link `markdownError` syntax group to normal, since that gets thrown
@@ -134,11 +140,6 @@ lua << EOF
 
     require('mini.indentscope').setup()
 
-    require("mason").setup()
-    require("mason-lspconfig").setup{
-        -- automatic_installation = true,
-        automatic_installation = false,
-    }
     require("Comment").setup{
         mappings = false, -- suppress default mappings
     }
@@ -244,7 +245,6 @@ lua << EOF
         "jsonls",
         "kotlin_language_server",
         "lemminx",
-        "lua_ls",
         "nimls",
         "ocamllsp",
         "omnisharp",
@@ -283,16 +283,31 @@ lua << EOF
         capabilities = capabilities,
     }
 
-    -- require("rust-tools").setup{ server = {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities
-    -- } }
+    lsp['lua_ls'].setup {
+      on_init = function(client)
+        local path = client.workspace_folders[1].name
+        if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+          return
+        end
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+          runtime = { version = 'LuaJIT' },
+          workspace = {
+            checkThirdParty = false,
+            library = { vim.env.VIMRUNTIME }
+          }
+        })
+      end,
+      settings = { Lua = {} },
+      on_attach = on_attach,
+      capabilities = capabilities
+    }
 
-    -- require('haskell-tools').setup {
-    --   hls = {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities
-    -- } }
+    lsp['sourcekit'].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = { 'swift', 'cpp', 'objc', 'objcpp' }
+    }
+
 
     require("oil").setup({
       git = {
@@ -426,6 +441,8 @@ nnoremap <leader>.. :cd ..<cr>
 " <space>fffff to ascii-artify the current line
 nnoremap <leader>FFFFF <cmd>.!figlet<cr>
 
+set mouse=
+
 " <space>ct to toggle both cursorline and cursorcolumn to create a cool cross-hair
 function! ToggleCursorCross()
     " check current state (instead of just toggling variables individually,
@@ -450,6 +467,20 @@ nnoremap <leader>ct :call ToggleCursorCross()<cr>
 set nolazyredraw
 
 
+" <space>sb to scroll-bind the whole window
+function! ToggleScrollBind()
+    if &scrollbind
+        :windo set noscrollbind
+        :windo set rnu
+    else
+        :windo set scrollbind
+        :windo set nornu
+    endif
+endfunction
+
+nnoremap <leader>sb :call ToggleScrollBind()<cr>
+
+
 " Find using Telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -470,12 +501,13 @@ syntax on       " Turn on syntax highlighting (default in nvim)
 se backspace=indent,eol,start
 
 " Set tabs to 4 spaces
-se expandtab
+" se expandtab
 se tabstop=4
 se shiftwidth=4
 " se shiftwidth=2
+
 set list
-set listchars=tab:>-
+set listchars=tab:▸·,trail:×
 
 " Wrap lines at current indent level, don't split words
 se bri lbr
@@ -494,7 +526,7 @@ se smartcase  " ...unless the search contains an uppercase letter
               " (use /search\C to search case-sensitively)
 
 " Turn on spellcheck, set languages, make uncapitalized text not an error
-se spell spelllang=en_ca,ru,fr,cjk spellcapcheck=""
+se spell spelllang=en_ca,cjk spellcapcheck=""
 
 " Command completion with <tab>
 se wildmenu
@@ -520,20 +552,15 @@ autocmd BufWinEnter *.* silent! loadview
 " currently somewhat broken for it).
 " (zc / zC to close folds, zo / zO to open)
 fun! SetFoldMethod()
-    if &filetype != 'markdown'
-        set foldlevel=100
+    if &filetype != 'markdown' && &filetype != 'objcpp'
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
     else
         set foldmethod=indent
     endif
-
+    set foldlevel=100
 endfun
 autocmd BufEnter * call SetFoldMethod()
-
-" fix issue with autoread not working in neovide
-autocmd FocusGained * checktime
-
 
 " ---------------------- PLUGIN CONFIGURATION --------------------------------
 
@@ -709,39 +736,11 @@ nnoremap <leader>l :call WriteCentredLine()<CR>
 inoremap <c-l> <c-\><c-o>:call WriteCentredLine()<CR>
 
 
-" -------- LINTING, COMPLETION, OTHER LANGUAGE SPECIFIC IDE TYPE STUFF -------
 
-" Set the language of .html.tera files as html
-autocmd BufNewFile,BufRead *.html.tera set filetype=html
-
-" wgsl filetype
-autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
-
-" Set filetype to haskell and disable lsp for .zen files
-autocmd BufNewFile,BufRead *.zen set filetype=haskell | LspStop
 
 " indent is broken in python, so disable it
 autocmd FileType python setlocal indentexpr=
 
-
-" --------------- BASIC COMPILATION SHORTCUTS --------------------------------
-" --------------------- *very much WIP* --------------------------------------
-" <F4> runs the current file assuming it's standalone, <F5> assumes there's
-" some language-specific makefile equivalent.
-"
-" TODO: add more language type supports
-" TODO: replace current terminal window instead of creating a new one if one
-" exists
-" TODO: auto-shift focus back away from terminal-window if input isn't required
-"
-" modified majorly from https://stackoverflow.com/a/18296266/
-" <F4>
-autocmd filetype python nnoremap <F4> :w <bar> :vs <bar> te python3 "%:p"<CR>
-autocmd filetype c      nnoremap <F4> :w <bar> :vs <bar> te gcc     "%:p" -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype cpp    nnoremap <F4> :w <bar> :vs <bar> te g++     "%:p" -std=c++17 -o "%:p:r" && "%:p:r"<CR>
-autocmd filetype rust   nnoremap <F4> :w <bar> :vs <bar> te rustc   "%:p" -o "%:p:r" && "%:p:r"<CR>
-" <F5>
-autocmd filetype rust   nnoremap <F5> :w <bar> :vs <bar> te cargo run<CR>
 
 
 "                                                            _  __      ____ _

@@ -1,0 +1,518 @@
+# -------------------------------- link dotfiles -------------------------------
+
+[create-config-dir]
+test = "test -d ~/.config"
+install = "mkdir -p ~/.config"
+
+[create-nvim-config-dir]
+prereqs = ["create-config-dir"]
+test = "test -d ~/.config/nvim"
+install = "mkdir -p ~/.config/nvim"
+
+[create-ghostty-config-dir]
+prereqs = ["create-config-dir"]
+test = "test -d ~/.config/ghostty"
+install = "mkdir -p ~/.config/ghostty"
+
+[link-gitconfig]
+test = "test -L ~/.gitconfig"
+install = "ln -sf $(pwd)/.gitconfig ~/.gitconfig"
+
+[link-vimrc]
+test = "test -L ~/.vimrc"
+install = "ln -sf $(pwd)/.vimrc ~/.vimrc"
+
+[link-zshrc]
+test = "test -L ~/.zshrc"
+install = "ln -sf $(pwd)/.zshrc ~/.zshrc"
+
+[link-zshenv]
+test = "test -L ~/.zshenv"
+install = "ln -sf $(pwd)/.zshenv ~/.zshenv"
+
+[link-excludesfile]
+test = "test -L ~/.excludesfile"
+install = "ln -sf $(pwd)/excludesfile ~/.excludesfile"
+
+[link-nvim-config]
+prereqs = ["create-nvim-config-dir"]
+test = "test -L ~/.config/nvim/init.lua"
+install = "ln -sf $(pwd)/nvim_init.lua ~/.config/nvim/init.lua"
+
+[link-ghostty-config]
+prereqs = ["create-ghostty-config-dir"]
+test = "test -L ~/.config/ghostty/config"
+install = "ln -sf $(pwd)/ghostty_config ~/.config/ghostty/config"
+
+# ------------------------------------------------------------------------------
+
+[brew]
+test = "which brew"
+install = "echo \"Follow the Brew install instructions, then come back.\""
+
+# -------------------------------- brew packages -------------------------------
+
+[anki]
+prereqs = ["brew"]
+test = "brew list --cask anki >/dev/null 2>&1"
+install = "brew install --cask anki"
+description = "Memory training application"
+
+[db-browser-for-sqlite]
+prereqs = ["brew"]
+test = "brew list --cask db-browser-for-sqlite >/dev/null 2>&1"
+install = "brew install --cask db-browser-for-sqlite"
+description = "Browser for SQLite databases"
+
+[disk-inventory-x]
+prereqs = ["brew"]
+test = "brew list --cask disk-inventory-x >/dev/null 2>&1"
+install = "brew install --cask disk-inventory-x"
+description = "Disk usage utility"
+
+[ghostty]
+prereqs = ["brew"]
+test = "which ghostty"
+install = "brew install --cask ghostty"
+description = "Terminal emulator that uses platform-native UI and GPU acceleration"
+
+[devdocs]
+prereqs = ["brew"]
+test = "brew list --cask devdocs >/dev/null 2>&1"
+install = "brew install --cask devdocs"
+description = "Full-featured desktop app for DevDocs.io"
+
+[gimp]
+prereqs = ["brew"]
+test = "brew list --cask gimp >/dev/null 2>&1"
+install = "brew install --cask gimp"
+description = "Free and open-source image editor"
+
+[handbrake]
+prereqs = ["brew"]
+test = "brew list --cask handbrake >/dev/null 2>&1"
+install = "brew install --cask handbrake"
+description = "Open-source video transcoder"
+
+[qmk-toolbox]
+prereqs = ["brew"]
+test = "brew list --cask qmk-toolbox >/dev/null 2>&1"
+install = "brew install --cask qmk-toolbox"
+description = "Toolbox companion for QMK Firmware"
+
+[skim]
+prereqs = ["brew"]
+test = "brew list --cask skim >/dev/null 2>&1"
+install = "brew install --cask skim"
+description = "PDF reader and note-taking application"
+
+[bat]
+prereqs = ["brew"]
+test = "which bat"
+install = "brew install bat"
+description = "Clone of cat(1) with syntax highlighting and Git integration"
+
+[ccls]
+prereqs = ["brew"]
+test = "which ccls"
+install = "brew install ccls"
+description = "C/C++/ObjC language server"
+
+[colordiff]
+prereqs = ["brew"]
+test = "which colordiff"
+install = "brew install colordiff"
+description = "Color-highlighted diff(1) output"
+
+[fd]
+prereqs = ["brew"]
+test = "which fd"
+install = "brew install fd"
+description = "Simple, fast and user-friendly alternative to find"
+
+[figlet]
+prereqs = ["brew"]
+test = "which figlet"
+install = "brew install figlet"
+description = "Banner-like program prints strings as ASCII art"
+
+[fswatch]
+prereqs = ["brew"]
+test = "which fswatch"
+install = "brew install fswatch"
+description = "Monitor a directory for changes and run a shell command"
+
+[fzf]
+prereqs = ["brew"]
+test = "which fzf"
+install = "brew install fzf"
+description = "Command-line fuzzy finder written in Go"
+
+[gawk]
+prereqs = ["brew"]
+test = "which gawk"
+install = "brew install gawk"
+description = "GNU awk utility"
+
+[gh]
+prereqs = ["brew"]
+test = "which gh"
+install = "brew install gh"
+description = "GitHub command-line tool"
+
+[jdtls]
+prereqs = ["brew"]
+test = "brew list jdtls >/dev/null 2>&1"
+install = "brew install jdtls"
+description = "Java language specific implementation of the Language Server Protocol"
+
+[lazygit]
+prereqs = ["brew"]
+test = "which lazygit"
+install = "brew install lazygit"
+description = "Simple terminal UI for git commands"
+
+[lua-language-server]
+prereqs = ["brew"]
+test = "brew list lua-language-server >/dev/null 2>&1"
+install = "brew install lua-language-server"
+description = "Language Server for the Lua language"
+
+[neovim]
+prereqs = ["brew"]
+test = "which nvim"
+install = "brew install neovim"
+description = "Ambitious Vim-fork focused on extensibility and agility"
+
+[node]
+prereqs = ["brew"]
+test = "which node"
+install = "brew install node"
+description = "Platform built on V8 to build network applications"
+
+[ollama]
+prereqs = ["brew"]
+test = "which ollama"
+install = "brew install ollama"
+description = "Create, run, and share large language models (LLMs)"
+
+[pyright]
+prereqs = ["brew"]
+test = "which pyright"
+install = "brew install pyright"
+description = "Static type checker for Python"
+
+[ripgrep]
+prereqs = ["brew"]
+test = "which rg"
+install = "brew install ripgrep"
+description = "Search tool like grep and The Silver Searcher"
+
+[rust-analyzer]
+prereqs = ["brew"]
+test = "which rust-analyzer"
+install = "brew install rust-analyzer"
+description = "Experimental Rust compiler front-end for IDEs"
+
+[tokei]
+prereqs = ["brew"]
+test = "which tokei"
+install = "brew install tokei"
+description = "Program that allows you to count code, quickly"
+
+[tree]
+prereqs = ["brew"]
+test = "which tree"
+install = "brew install tree"
+description = "Display directories as trees (with optional color/HTML output)"
+
+[viu]
+prereqs = ["brew"]
+test = "which viu"
+install = "brew install viu"
+description = "Simple terminal image viewer written in Rust"
+
+[zoxide]
+prereqs = ["brew"]
+test = "which zoxide"
+install = "brew install zoxide"
+description = "Shell extension to navigate your filesystem faster"
+
+[uv]
+prereqs = ["brew"]
+test = "which uv"
+install = "brew install uv"
+description = "Extremely fast Python package installer and resolver, written in Rust"
+
+[taplo]
+prereqs = ["brew"]
+test = "which taplo"
+install = "brew install taplo"
+description = "TOML toolkit written in Rust"
+
+[git-lfs]
+prereqs = ["brew"]
+test = "which git-lfs"
+install = "brew install git-lfs"
+description = "Git extension for versioning large files"
+
+[cmake]
+prereqs = ["brew"]
+test = "which cmake"
+install = "brew install cmake"
+description = "Cross-platform make"
+
+[docker]
+prereqs = ["brew"]
+test = "which docker"
+install = "brew install docker"
+description = "Pack, ship and run any application as a lightweight container"
+
+[dosbox]
+prereqs = ["brew"]
+test = "which dosbox"
+install = "brew install dosbox"
+description = "Emulator for x86 with DOS"
+
+[dune]
+prereqs = ["brew"]
+test = "which dune"
+install = "brew install dune"
+description = "Composable build system for OCaml"
+
+[elixir]
+prereqs = ["brew"]
+test = "which elixir"
+install = "brew install elixir"
+description = "Functional metaprogramming aware language built on Erlang VM"
+
+[elm]
+prereqs = ["brew"]
+test = "which elm"
+install = "brew install elm"
+description = "Functional programming language for building browser-based GUIs"
+
+[emacs]
+prereqs = ["brew"]
+test = "which emacs"
+install = "brew install emacs"
+description = "GNU Emacs text editor"
+
+[gdb]
+prereqs = ["brew"]
+test = "which gdb"
+install = "brew install gdb"
+description = "GNU debugger"
+
+[gnu-time]
+prereqs = ["brew"]
+test = "which gnu-time"
+install = "brew install gnu-time"
+description = "GNU implementation of time utility"
+
+[go]
+prereqs = ["brew"]
+test = "which go"
+install = "brew install go"
+description = "Open source programming language to build simple/reliable/efficient software"
+
+[gource]
+prereqs = ["brew"]
+test = "which gource"
+install = "brew install gource"
+description = "Version Control Visualization Tool"
+
+[gperftools]
+prereqs = ["brew"]
+test = "which gperftools"
+install = "brew install gperftools"
+description = "Multi-threaded malloc() and performance analysis tools"
+
+[gpgme]
+prereqs = ["brew"]
+test = "which gpgme"
+install = "brew install gpgme"
+description = "Library access to GnuPG"
+
+[graphviz]
+prereqs = ["brew"]
+test = "which graphviz"
+install = "brew install graphviz"
+description = "Graph visualization software from AT&T and Bell Labs"
+
+[grep]
+prereqs = ["brew"]
+test = "which grep"
+install = "brew install grep"
+description = "GNU grep, egrep and fgrep"
+
+[gtk-3]
+prereqs = ["brew"]
+test = "which gtk3"
+install = "brew install gtk+3"
+description = "Toolkit for creating graphical user interfaces"
+
+[haxe]
+prereqs = ["brew"]
+test = "which haxe"
+install = "brew install haxe"
+description = "Multi-platform programming language"
+
+[helix]
+prereqs = ["brew"]
+test = "which helix"
+install = "brew install helix"
+description = "Post-modern modal text editor"
+
+[httrack]
+prereqs = ["brew"]
+test = "which httrack"
+install = "brew install httrack"
+description = "Website copier/offline browser"
+
+[jakehilborn-jakehilborn-displayplacer]
+prereqs = ["brew"]
+test = "brew list displayplacer >/dev/null 2>&1"
+install = "brew install jakehilborn/jakehilborn/displayplacer"
+description = "macOS command line utility to configure multi-display resolutions and arrangements. Essentially XRandR for macOS."
+
+[kotlin]
+prereqs = ["brew"]
+test = "which kotlin"
+install = "brew install kotlin"
+description = "Statically typed programming language for the JVM"
+
+[michaeleisel-zld-zld]
+prereqs = ["brew"]
+test = "brew list zld >/dev/null 2>&1"
+install = "brew install michaeleisel/zld/zld"
+description = "A faster version of ld, Apple's linker"
+
+[mold]
+prereqs = ["brew"]
+test = "which mold"
+install = "brew install mold"
+description = "Modern Linker"
+
+[mono]
+prereqs = ["brew"]
+test = "which mono"
+install = "brew install mono"
+description = "Cross platform, open source .NET development framework"
+
+[mp3splt]
+prereqs = ["brew"]
+test = "which mp3splt"
+install = "brew install mp3splt"
+description = "Command-line interface to split MP3 and Ogg Vorbis files"
+
+[mpv]
+prereqs = ["brew"]
+test = "which mpv"
+install = "brew install mpv"
+description = "Media player based on MPlayer and mplayer2"
+
+[nasm]
+prereqs = ["brew"]
+test = "which nasm"
+install = "brew install nasm"
+description = "Netwide Assembler (NASM) is an 80x86 assembler"
+
+[ocaml]
+prereqs = ["brew"]
+test = "which ocaml"
+install = "brew install ocaml"
+description = "General purpose programming language in the ML family"
+
+[opam]
+prereqs = ["brew"]
+test = "which opam"
+install = "brew install opam"
+description = "OCaml package manager"
+
+[pari]
+prereqs = ["brew"]
+test = "which pari"
+install = "brew install pari"
+description = "Computer algebra system designed for fast computations in number theory"
+
+[perl]
+prereqs = ["brew"]
+test = "which perl"
+install = "brew install perl"
+description = "Highly capable, feature-rich programming language"
+
+[qmk-qmk-qmk]
+prereqs = ["brew"]
+test = "brew list qmk >/dev/null 2>&1"
+install = "brew install qmk/qmk/qmk"
+description = "Quantum Mechanical Keyboard (QMK) Firmware"
+
+[rafaelgarrido-caveats-brew-caveats]
+prereqs = ["brew"]
+test = "brew list brew-caveats >/dev/null 2>&1"
+install = "brew install rafaelgarrido/caveats/brew-caveats"
+
+[railway]
+prereqs = ["brew"]
+test = "which railway"
+install = "brew install railway"
+description = "Develop and deploy code with zero configuration"
+
+[rogue]
+prereqs = ["brew"]
+test = "which rogue"
+install = "brew install rogue"
+description = "Dungeon crawling video game"
+
+[wget]
+prereqs = ["brew"]
+test = "which wget"
+install = "brew install wget"
+description = "Internet file retriever"
+
+
+
+# -------------------------------- npm packages --------------------------------
+
+[claude-code]
+prereqs = ["node"]
+test = "which claude"
+install = "npm install -g @anthropic-ai/claude-code"
+description = "Apple secured Claude Code for internal use"
+
+[vscode-json-languageserver]
+prereqs = ["node"]
+test = "npm list -g vscode-json-languageserver >/dev/null 2>&1"
+install = "npm install -g vscode-json-languageserver"
+description = "JSON language server"
+
+[bash-language-server]
+prereqs = ["node"]
+test = "npm list -g bash-language-server >/dev/null 2>&1"
+install = "npm install -g bash-language-server"
+description = "A language server for Bash"
+
+
+# --------------------------------- go packages --------------------------------
+
+[arduino-language-server]
+prereqs = ["go"]
+test = "which arduino-language-server"
+install = "go install github.com/arduino/arduino-language-server@0.7.6"
+
+
+
+# -------------------------------- system config -------------------------------
+
+[finder-show-all-files]
+prereqs = []
+test = "defaults read com.apple.Finder AppleShowAllFiles 2>/dev/null | grep -q true"
+install = "defaults write com.apple.Finder AppleShowAllFiles true"
+
+[finder-show-all-extensions]
+prereqs = []
+test = "defaults read NSGlobalDomain AppleShowAllExtensions 2>/dev/null | grep -q 1"
+install = "defaults write NSGlobalDomain \"AppleShowAllExtensions\" -bool \"true\""
+
+

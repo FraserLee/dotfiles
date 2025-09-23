@@ -1,0 +1,8 @@
+background = #000000
+theme = "Banana Blueberry"
+selection-foreground = #000000
+selection-background = #ffffff
+unfocused-split-opacity = 0.8
+scrollback-limit = 4294967295
+keybind = shift+enter=text:\x1b\r
+foreground = #ffffff
