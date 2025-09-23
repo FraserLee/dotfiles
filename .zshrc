@@ -56,9 +56,6 @@ mkcd() { mkdir $1 ; cd $1 }
 # I always forget what tokei is called
 alias loc 'tokei'
 
-# allow "fuck" to correct typos
-eval $(thefuck --alias)
-
 # better cd
 eval "$(zoxide init zsh)"
 alias cd='z'

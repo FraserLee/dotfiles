@@ -33,7 +33,7 @@ Plug 'nvim-treesitter/nvim-treesitter-context' " see context within large scope 
 Plug 'svban/YankAssassin.vim'   " move cursor back to where it was after a yank
 Plug 'tommcdo/vim-exchange'     " cx{motion} in normal or X in visual to swap stuff
 Plug 'PHSix/faster.nvim'        " better acceleration for j/k
-" Plug 'tpope/vim-sleuth'         " automatically detect indentation
+Plug 'tpope/vim-sleuth'         " automatically detect indentation
 Plug 'jansedivy/jai.vim'
 Plug 'abhishekmukherg/xonsh-vim'
 Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }

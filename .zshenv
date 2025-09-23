@@ -1,5 +1,4 @@
 # rust stuff
-. "$HOME/.cargo/env"
 
 # add local bin to path
 PATH="$HOME/.local/bin:$PATH"
@@ -24,3 +23,6 @@ HAXE_STD_PATH="/usr/local/lib/haxe/std"
 
 # RUSTC_WRAPPER="/usr/local/bin/sccache"
 
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/fraser/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+. "$HOME/.cargo/env"
