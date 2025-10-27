@@ -50,6 +50,10 @@ install = "ln -sf $(pwd)/ghostty_config ~/.config/ghostty/config"
 test = "which brew"
 install = "echo \"Follow the Brew install instructions, then come back.\""
 
+[rust]
+test = "which rustc && which cargo"
+install = "curl https://sh.rustup.rs -sSf | sh"
+
 # -------------------------------- brew packages -------------------------------
 
 [anki]
@@ -304,12 +308,6 @@ test = "which gdb"
 install = "brew install gdb"
 description = "GNU debugger"
 
-[gnu-time]
-prereqs = ["brew"]
-test = "which gnu-time"
-install = "brew install gnu-time"
-description = "GNU implementation of time utility"
-
 [go]
 prereqs = ["brew"]
 test = "which go"
@@ -470,6 +468,12 @@ prereqs = ["brew"]
 test = "which wget"
 install = "brew install wget"
 description = "Internet file retriever"
+
+
+[quick-lint-js]
+prereqs = ["brew"]
+test = "which quick-lint-js"
+install = "brew install quick-lint-js"
 
 
 
