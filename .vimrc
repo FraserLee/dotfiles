@@ -47,8 +47,6 @@ Plug 'mrshmllow/document-color'
 Plug 'stevearc/oil.nvim'        " edit filesystem like a buffer
 Plug 'github/copilot.vim'       " vim-copilot
 
-Plug 'neovim/nvim-lspconfig'
-
 Plug 'nvim-lua/plenary.nvim'    " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
 
@@ -220,8 +218,6 @@ lua << EOF
     end
 
 
-    local lsp = require("lspconfig")
-
     for _, server in ipairs({
 
         "arduino_language_server", -- note: needs sketch.yaml to attach
@@ -260,20 +256,16 @@ lua << EOF
         "tflint",
         "ts_ls",
         "vimls",
-        "volar",
-        "vuels",
         "yamlls",
         "zls",
         "jdtls",
 
     }) do
-        lsp[server].setup{
-            on_attach = on_attach,
-            capabilities = capabilities
-        }
+        vim.lsp.config(server, {on_attach = on_attach, capabilities = capabilities})
+        vim.lsp.enable(server)
     end
 
-    lsp["tailwindcss"].setup{
+    vim.lsp.config("tailwindcss", {
         on_attach = function(client, bufnr)
             if client.server_capabilities.colorProvider then
                 require("document-color").buf_attach(bufnr)
@@ -281,9 +273,10 @@ lua << EOF
             on_attach(client, bufnr)
         end,
         capabilities = capabilities,
-    }
+    })
+    vim.lsp.enable("tailwindcss")
 
-    lsp['lua_ls'].setup {
+    vim.lsp.config("lua_ls", {
       on_init = function(client)
         local path = client.workspace_folders[1].name
         if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
@@ -300,13 +293,15 @@ lua << EOF
       settings = { Lua = {} },
       on_attach = on_attach,
       capabilities = capabilities
-    }
+    })
+    vim.lsp.enable("lua_ls")
 
-    lsp['sourcekit'].setup {
+    vim.lsp.config('sourcekit', {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { 'swift', 'cpp', 'objc', 'objcpp' }
-    }
+    })
+    vim.lsp.enable('sourcekit')
 
 
     require("oil").setup({
