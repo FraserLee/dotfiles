@@ -1,4 +1,3 @@
-
 # add scripts folder to path
 PATH=$HOME/dotfiles/scripts:$PATH
 export PATH="/Users/fraser/.local/bin:$PATH"

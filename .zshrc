@@ -46,6 +46,10 @@ alias mdscript='~/mdscript/mdwatch.py'
 alias dungeon='~/dungeon-note-3/dungeon.py'
 alias synopsis='/Users/fraser/synopsis/synopsis.py'
 
+alias x86_brew='arch -x86_64 /usr/local/bin/brew'
+
+alias claude='SHELL="/bin/bash" claude'
+
 # git log but short
 alias gl='git log --pretty=format:"%h --- %ae --- %s"'
 # git log but short but with file names
@@ -98,5 +102,3 @@ setopt HIST_REDUCE_BLANKS
 if [[ -d ".venv" && "$VIRTUAL_ENV" != "$(pwd)/.venv" ]]; then
     source .venv/bin/activate
 fi
-
-
