@@ -46,6 +46,7 @@ Plug 'echasnovski/mini.indentscope', { 'branch': 'stable' }
 Plug 'mrshmllow/document-color'
 Plug 'stevearc/oil.nvim'        " edit filesystem like a buffer
 Plug 'github/copilot.vim'       " vim-copilot
+" Plug 'jacob411/Ollama-Copilot'
 
 Plug 'nvim-lua/plenary.nvim'    " required for telescope
 Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x', 'do': ':!brew install ripgrep' }
@@ -75,6 +76,7 @@ Plug 'shaunsingh/oxocarbon.nvim'
 " Plug 'chriskempson/base16-vim'
 Plug 'hardselius/warlock'
 Plug 'vague2k/vague.nvim'
+
 
 
 " ----------------------------------------------------------------------------
@@ -584,16 +586,16 @@ set rtp^="/Users/fraser/.opam/default/share/ocp-indent/vim"
 se termguicolors
 let g:gruvbox_contrast_dark = 'hard'
 
-" se background=light
-" let ayucolor="light"
+se background=light
+let ayucolor="light"
 
-se background=dark
-let ayucolor="dark"
+" se background=dark
+" let ayucolor="dark"
 
 " colorscheme gruvbox
 
-" colorscheme ayu
-colorscheme vague
+colorscheme ayu
+" colorscheme vague
 
 " colorscheme oxocarbon
 
