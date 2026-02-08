@@ -10,5 +10,7 @@ foreground = #ffffff
 font-thicken = true
 font-thicken-strength = 128
 
+clipboard-paste-protection = false
+
 auto-update-channel = stable
 # auto-update-channel = tip
