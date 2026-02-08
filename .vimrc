@@ -550,7 +550,11 @@ se wildmode=longest:full,full " First <tab> fills the longest common string,
                               " further <tab>s cycle through matches
 
 set undofile
+if has('nvim')
+set undodir=~/.vim/undodir-nvim
+else
 set undodir=~/.vim/undodir
+endif
 
 " escape terminal with <esc>
 tnoremap <Esc> <C-\><C-n>
