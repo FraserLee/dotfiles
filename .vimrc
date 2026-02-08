@@ -18,13 +18,16 @@ autocmd BufNewFile,BufRead *.html.tera set filetype=html
 autocmd BufNewFile,BufRead *.wgsl set filetype=wgsl
 
 " Set filetype to haskell and disable lsp for .zen files
+if has('nvim')
 autocmd BufNewFile,BufRead *.zen set filetype=haskell | LspStop
+endif
 
 " ------------------------------- FILETYPE STUFF -------------------------------
 " best to have this at the top
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown syntax=markdown
 au BufNewFile,BufFilePre,BufRead *.metal set filetype=glsl
 
+if has('nvim')
 call plug#begin('~/.vim/plugged')
 " ------------------------------- PLUGINS ------------------------------------
 
@@ -322,6 +325,7 @@ lua << EOF
 
 
 EOF
+endif
 " ---------------------------- MAPPINGS --------------------------------------
 
 " Space to <leader> for super convenient combos
@@ -336,14 +340,23 @@ nnoremap <S-q> <Nop>
 " while <up> and <down> respect line-numbers. In normal mode, <up> and <down>
 " also work within wrapped lines.
 
+if has('nvim')
 nnoremap j           <Plug>(faster_move_gj)
 nnoremap k           <Plug>(faster_move_gk)
-vnoremap j gj
-vnoremap k gk
 nnoremap <Down>      <Plug>(faster_move_j)
 nnoremap <Up>        <Plug>(faster_move_k)
 inoremap <Down> <C-o><Plug>(faster_move_gj)
 inoremap <Up>   <C-o><Plug>(faster_move_gk)
+else
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up>   gk
+inoremap <Down> <C-o>gj
+inoremap <Up>   <C-o>gk
+endif
+vnoremap j gj
+vnoremap k gk
 
 " A long line to test navigation within wrapping:
 " lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -363,6 +376,7 @@ nnoremap <silent> <esc> :noh<CR> :helpclose<CR>
 " allow <ctrl>z in insert mode to correct the most recent spelling mistake
 inoremap <C-z> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+if has('nvim')
 " toggle normal comment
 nmap <leader>/ <Plug>(comment_toggle_linewise_current)
 vmap <leader>/ <Plug>(comment_toggle_linewise_visual)
@@ -370,6 +384,7 @@ vmap <leader>/ <Plug>(comment_toggle_linewise_visual)
 " toggle block comment
 nmap <leader>? <Plug>(comment_toggle_blockwise_current)
 vmap <leader>? <Plug>(comment_toggle_blockwise_visual)
+endif
 
 
 " sort lines (case insensitive) with <leader>s
@@ -392,6 +407,7 @@ nnoremap <silent> <leader>O :put! _<CR>
 " <leader>S to remove all trailing whitespace from the current buffer
 nnoremap <leader>S :%s/\s\+$//e<CR>
 
+if has('nvim')
 " multi-cursor binds (for mac), <ctrl>j/k to create up and down cursors
 " C-n n n n to select a bunch of the same word, N goes backwards, q / Q skips one
 let g:VM_maps = {}
@@ -428,6 +444,7 @@ noremap <leader>T :call TabAlign(1)<cr>
 " <space>cc to centre the current buffer with 80 width by opening a scratchpad
 nnoremap <leader>cc <cmd>ScratchPad<cr>
 let g:scratchpad_autostart = 0
+endif
 
 " <space>cd to set the working directory to the current buffer's directory
 nnoremap <leader>cd :cd %:p:h<cr>
@@ -478,10 +495,12 @@ endfunction
 nnoremap <leader>sb :call ToggleScrollBind()<cr>
 
 
+if has('nvim')
 " Find using Telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope old_files<cr>
+endif
 
 
 " ---------------------------- BASIC SETUP -----------------------------------
@@ -549,7 +568,7 @@ autocmd BufWinEnter *.* silent! loadview
 " currently somewhat broken for it).
 " (zc / zC to close folds, zo / zO to open)
 fun! SetFoldMethod()
-    if &filetype != 'markdown' && &filetype != 'objcpp'
+    if has('nvim') && &filetype != 'markdown' && &filetype != 'objcpp'
         set foldmethod=expr
         set foldexpr=nvim_treesitter#foldexpr()
     else
@@ -582,8 +601,9 @@ let g:copilot_filetypes = { 'markdown': 1, 'scratchpad': 1, 'prisma': 1, 'zen' :
 set rtp^="/Users/fraser/.opam/default/share/ocp-indent/vim"
 
 " -------------------------- COLOUR SCHEME -----------------------------------
-
 se termguicolors
+
+if has('nvim')
 let g:gruvbox_contrast_dark = 'hard'
 
 se background=light
@@ -606,6 +626,7 @@ colorscheme ayu
 " colorscheme monokai
 " colorscheme bat
 " hi Normal guibg=NONE ctermbg=NONE
+endif
 
 
 " set spelling highlighting to underscore, no text colour
@@ -678,6 +699,7 @@ endfunc
 
 nnoremap <c-s> :call SynStack()<cr>
 
+if has('nvim')
 " -------------------------- SUBMODES ----------------------------------------
 
 let g:submode_timeout = 1 " timeout after 2 seconds
@@ -693,12 +715,14 @@ call submode#map       ('window_resize', 'n', '', 'h', '2<C-w>>')
 call submode#map       ('window_resize', 'n', '', 'l', '2<C-w><')
 call submode#map       ('window_resize', 'n', '', 'j', '2<C-w>+')
 call submode#map       ('window_resize', 'n', '', 'k', '2<C-w>-')
+endif
 
 " ---------------------------- WRITE CENTRED LINE ------------------------------
 " I really like a certain style of comment where, from the cursor's position,
 " a number of dashes are written to fill up to 80 characters, with some phrase
 " centred in the middle. This is a function to do that.
 
+if has('nvim')
 lua << EOF
     function _G.write_centred_line( text )
         local c = vim.fn.col('.')
@@ -731,6 +755,7 @@ endfunction
 " <leader>l in normal mode, <ctrl>l in insert mode
 nnoremap <leader>l :call WriteCentredLine()<CR>
 inoremap <c-l> <c-\><c-o>:call WriteCentredLine()<CR>
+endif
 
 
 
